@@ -6,6 +6,7 @@ import java.util.Date;
 public class Oficio {
     private Integer id_oficio;
     private String nome;
+    private String tipo;
     private Time hora_inicio;
     private Time hora_fim;
     private char dom;
@@ -24,6 +25,8 @@ public class Oficio {
     public String getNome(){
         return nome;
     }
+
+    public String getTipo() { return tipo; }
 
     public char getDom() {
         return dom;
@@ -72,6 +75,8 @@ public class Oficio {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public void setTipo(String tipo) { this.tipo = tipo; }
 
     public void setDom(char dom) {
         this.dom = dom;

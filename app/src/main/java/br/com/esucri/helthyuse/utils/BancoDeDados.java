@@ -23,7 +23,8 @@ public class BancoDeDados extends SQLiteOpenHelper {
         String create_table_Oficio =
                 "CREATE TABLE Oficio (" +
                     "  _id integer primary key autoincrement," +
-                    "  nome text not null,"+
+                    "  nome text not null," +
+                    "  tipo text,"+
                     "  hora_ini numeric not null,"+ 
                     "  hora_fim numeric not null,"+
                     "  dom text not null,"+

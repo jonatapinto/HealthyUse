@@ -1,5 +1,6 @@
 package br.com.esucri.helthyuse;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +17,11 @@ public class MainActivity extends AppCompatActivity {
 
         botaoOficios = (Button) findViewById(R.id.botaoOficios);
         botaoOficios.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                /*chamar outra tela*/
+                Intent intent = new Intent(getBaseContext(), OficioActivity.class);
+                startActivity(intent);
             }
         });
     }

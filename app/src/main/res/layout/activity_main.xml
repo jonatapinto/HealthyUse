@@ -6,28 +6,18 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Tela Inicial Healthy Use" />
-
     <Button
         android:id="@+id/botaoOficios"
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="Ofícios"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="37dp" />
+        android:text="Ofícios" />
 
     <Button
         android:id="@+id/botaoRelatorios"
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="Relatórios"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="143dp" />
+        android:text="Relatórios" />
 
 </LinearLayout>

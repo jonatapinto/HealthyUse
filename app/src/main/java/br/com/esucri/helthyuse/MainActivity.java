@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), OficioActivity.class);
+                Intent intent = new Intent(getBaseContext(), RotinaActivity.class);
                 startActivity(intent);
             }
         });

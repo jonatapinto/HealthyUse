@@ -1,8 +1,6 @@
 package br.com.esucri.helthyuse;
 
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -80,25 +78,15 @@ public class RotinaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+    public static class RotinaFragment extends Fragment {
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
+        public RotinaFragment() {
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static RotinaFragment newInstance(int sectionNumber) {
+            RotinaFragment fragment = new RotinaFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
@@ -109,8 +97,29 @@ public class RotinaActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_rotina, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            return rootView;
+        }
+    }
+
+    public static class AplicativosFragment extends Fragment {
+
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public AplicativosFragment() {
+        }
+
+        public static AplicativosFragment newInstance(int sectionNumber) {
+            AplicativosFragment fragment = new AplicativosFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_aplicativos, container, false);
             return rootView;
         }
     }
@@ -127,14 +136,23 @@ public class RotinaActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+
+            Fragment fragment;
+
+            switch (position) {
+                case 1:
+                    fragment = AplicativosFragment.newInstance(position);
+                    break;
+                default:
+                    fragment = RotinaFragment.newInstance(position);
+                    break;
+            }
+
+            return fragment;
         }
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
             return 2;
         }
     }

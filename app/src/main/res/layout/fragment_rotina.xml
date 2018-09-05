@@ -1,100 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RotinaActivity$PlaceholderFragment">
+    tools:context=".RotinaActivity$RotinaFragment">
 
-    <EditText
-        android:id="@+id/editNome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/editHoraInicio"
-        android:layout_width="122dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="93dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome:"/>
 
-    <EditText
-        android:id="@+id/editHoraFim"
-        android:layout_width="122dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="93dp" />
+        <EditText
+            android:id="@+id/editNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
 
-    <RadioButton
-        android:id="@+id/radioDomingo"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo:"/>
+
+        <EditText
+            android:id="@+id/editTipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora Início:"/>
+
+        <EditText
+            android:id="@+id/editHoraInicio"
+            android:layout_width="150px"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="time" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora Final:"/>
+
+        <EditText
+            android:id="@+id/editHoraFim"
+            android:layout_width="150px"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="time" />
+
+    </LinearLayout>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="D"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="182dp" />
+        android:text="Dias da Semana:"/>
 
-    <RadioButton
-        android:id="@+id/radioSegunda"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="S"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="182dp" />
+        android:orientation="horizontal">
 
-    <RadioButton
-        android:id="@+id/radioTerca"
-        android:layout_width="54dp"
-        android:layout_height="wrap_content"
-        android:text="T"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="182dp" />
+        <RadioButton
+            android:id="@+id/radioDomingo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D" />
 
-    <RadioButton
-        android:id="@+id/radioQuarta"
+        <RadioButton
+            android:id="@+id/radioSegunda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S" />
+
+        <RadioButton
+            android:id="@+id/radioTerca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T" />
+
+        <RadioButton
+            android:id="@+id/radioQuarta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q" />
+
+        <RadioButton
+            android:id="@+id/radioQuinta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q" />
+
+        <RadioButton
+            android:id="@+id/radioSexta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S" />
+
+        <RadioButton
+            android:id="@+id/radioSabado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Q"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="182dp" />
+        android:layout_height="wrap_content">
 
-    <RadioButton
-        android:id="@+id/radioQuinta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Q"
-        tools:layout_editor_absoluteX="215dp"
-        tools:layout_editor_absoluteY="182dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Final (Opcional):"/>
 
-    <RadioButton
-        android:id="@+id/radioSexta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="S"
-        tools:layout_editor_absoluteX="258dp"
-        tools:layout_editor_absoluteY="182dp" />
+        <EditText
+            android:id="@+id/editDataFinal"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
 
-    <RadioButton
-        android:id="@+id/radioSabado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="S"
-        tools:layout_editor_absoluteX="299dp"
-        tools:layout_editor_absoluteY="182dp" />
-
-    <EditText
-        android:id="@+id/editDataFinal"
-        android:layout_width="190dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date" />
+    </LinearLayout>
 
 </LinearLayout>

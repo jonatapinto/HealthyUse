@@ -4,11 +4,11 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Oficio {
-    private Integer id_oficio;
+    private Integer idOficio;
     private String nome;
     private String tipo;
-    private Time hora_inicio;
-    private Time hora_fim;
+    private Time horaInicio;
+    private Time horaFim;
     private char dom;
     private char seg;
     private char ter;
@@ -16,10 +16,10 @@ public class Oficio {
     private char quin;
     private char sex;
     private char sab;
-    private Date data_termino;
+    private Date dataTermino;
 
     public Integer getId_oficio(){
-        return id_oficio;
+        return idOficio;
     }
 
     public String getNome(){
@@ -57,19 +57,19 @@ public class Oficio {
     }
 
     public Date getData_termino() {
-        return data_termino;
+        return dataTermino;
     }
 
     public Time getHora_fim() {
-        return hora_fim;
+        return horaFim;
     }
 
     public Time getHora_inicio() {
-        return hora_inicio;
+        return horaInicio;
     }
 
-    public void setId_oficio(Integer id_oficio) {
-        this.id_oficio = id_oficio;
+    public void setId_oficio(Integer idOficio) {
+        this.idOficio = idOficio;
     }
 
     public void setNome(String nome) {
@@ -106,15 +106,15 @@ public class Oficio {
         this.sab = sab;
     }
 
-    public void setHora_inicio(Time hora_inicio) {
-        this.hora_inicio = hora_inicio;
+    public void setHora_inicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public void setHora_fim(Time hora_fim) {
-        this.hora_fim = hora_fim;
+    public void setHora_fim(Time horaFim) {
+        this.horaFim = horaFim;
     }
 
-    public void setData_termino(Date data_termino) {
-        this.data_termino = data_termino;
+    public void setData_termino(Date dataTermino) {
+        this.dataTermino = dataTermino;
     }
 }

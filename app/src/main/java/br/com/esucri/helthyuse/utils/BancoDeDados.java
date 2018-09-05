@@ -14,28 +14,45 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
+        String create_table_Oficio =
+                "CREATE TABLE Oficio (" +
+                        "  id_Oficio integer not null primary key autoincrement," +
+                        "  nome text not null," +
+                        "  tipo text,"+
+                        "  hora_Ini numeric not null,"+
+                        "  hora_Fim numeric not null,"+
+                        "  dom text not null,"+
+                        "  seg text not null,"+
+                        "  ter text not null,"+
+                        "  qua text not null,"+
+                        "  qui text not null,"+
+                        "  sex text not null,"+
+                        "  sab text not null,"+
+                        "  data_Termino numeric)";
+        db.execSQL(create_table_Oficio);
+
         String create_table_Aplicativo =
                 "CREATE TABLE Aplicativo (" +
-                    "  _id integer primary key autoincrement," +
+                    "  id_Aplicativo integer not null primary key autoincrement," +
                     "  nome text not null)";
         db.execSQL(create_table_Aplicativo);
 
-        String create_table_Oficio =
-                "CREATE TABLE Oficio (" +
-                    "  _id integer primary key autoincrement," +
-                    "  nome text not null," +
-                    "  tipo text,"+
-                    "  hora_ini numeric not null,"+ 
-                    "  hora_fim numeric not null,"+
-                    "  dom text not null,"+
-                    "  seg text not null,"+
-                    "  ter text not null,"+
-                    "  qua text not null,"+
-                    "  qui text not null,"+
-                    "  sex text not null,"+
-                    "  sab text not null,"+
-                    "  data_termino numeric)";
-        db.execSQL(create_table_Oficio);
+        String create_table_Aplicativo_Oficio =
+                "CREATE TABLE Aplicativo_Oficio(" +
+                        " id_AplicativoOficio integer not null primary key autoincrement," +
+                        " id_Oficio integer not null," +
+                        " id_Aplicativo integer not null)";
+        db.execSQL(create_table_Aplicativo_Oficio);
+
+        String create_table_Estatistica =
+                "CREATE TABLE Estatistica(" +
+                        " id_Estatistica integer not null primary key autoincrement," +
+                        " id_Aplicativo integer not null," +
+                        " data_Inicio date not null," +
+                        " hora_Inicio time not null," +
+                        " data_Final date not null," +
+                        " hora_Final time not null)";
+        db.execSQL(create_table_Estatistica);
     }
 
     @Override

@@ -6,10 +6,10 @@ import java.util.Date;
 public class Estatistica {
     private Integer id;
     private Integer idAplicativo;
-    private Date dtInicio;
-    private Time hrInicio;
-    private Date dtFinal;
-    private Time hrFinal;
+    private Date dataInicio;
+    private Time horaInicio;
+    private Date dataFinal;
+    private Time horaFinal;
 
     public Integer getId() {
         return id;
@@ -19,20 +19,20 @@ public class Estatistica {
         return idAplicativo;
     }
 
-    public Date getDtInicio() {
-        return dtInicio;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public Time getHrInicio() {
-        return hrInicio;
+    public Time getHoraInicio() {
+        return horaInicio;
     }
 
-    public Date getDtFinal() {
-        return dtFinal;
+    public Date getDataFinal() {
+        return dataFinal;
     }
 
-    public Time getHrFinal() {
-        return hrFinal;
+    public Time getHoraFinal() {
+        return horaFinal;
     }
 
     public void setId(Integer id) {
@@ -43,19 +43,19 @@ public class Estatistica {
         this.idAplicativo = idAplicativo;
     }
 
-    public void setDtInicio(Date dtInicio) {
-        this.dtInicio = dtInicio;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public void setHrInicio(Time hrInicio) {
-        this.hrInicio = hrInicio;
+    public void setHoraInicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public void setDtFinal(Date dtFinal) {
-        this.dtFinal = dtFinal;
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
 
-    public void setHrFinal(Time hrFinal) {
-        this.hrFinal = hrFinal;
+    public void setHoraFinal(Time horaFinal) {
+        this.horaFinal = horaFinal;
     }
 }

@@ -3,13 +3,13 @@ package br.com.esucri.helthyuse.model;
 import java.sql.Time;
 import java.util.Date;
 
-public class Oficio {
+public class Rotina {
     private Integer id;
     private String nome;
     private String tipo;
     private Time horaInicio;
-    private Time horaFim;
-    private Date dataFim;
+    private Time horaFinal;
+    private Date dataFinal;
     private Integer dom;
     private Integer seg;
     private Integer ter;
@@ -17,6 +17,9 @@ public class Oficio {
     private Integer qui;
     private Integer sex;
     private Integer sab;
+    private Integer instagram;
+    private Integer facebook;
+    private Integer whatsapp;
 
     public Integer getId(){
         return id;
@@ -58,12 +61,18 @@ public class Oficio {
         return sab;
     }
 
-    public Date getDataFim() {
-        return dataFim;
+    public Integer getInstagram() { return instagram; }
+
+    public Integer getFacebook() { return facebook; }
+
+    public Integer getWhatsapp() { return whatsapp; }
+
+    public Date getDataFinal() {
+        return dataFinal;
     }
 
-    public Time getHoraFim() {
-        return horaFim;
+    public Time getHoraFinal() {
+        return horaFinal;
     }
 
     public Time getHoraInicio() {
@@ -110,15 +119,21 @@ public class Oficio {
         this.sab = sab;
     }
 
+    public void setInstagram(Integer instagram) { this.instagram = instagram; }
+
+    public void setFacebook(Integer facebook) { this.facebook = facebook; }
+
+    public void setWhatsapp(Integer whatsapp) { this.whatsapp = whatsapp; }
+
     public void setHoraInicio(Time horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public void setHoraFim(Time horaFim) {
-        this.horaFim = horaFim;
+    public void setHoraFinal(Time horaFinal) {
+        this.horaFinal = horaFinal;
     }
 
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
 }

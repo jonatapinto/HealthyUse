@@ -15,34 +15,24 @@ public class BancoDeDados extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         String createTableOficio =
-                "CREATE TABLE OFICIO (" +
-                        "  ID_OFICIO integer not null primary key autoincrement," +
+                "CREATE TABLE ROTINA (" +
+                        "  ID_ROTINA integer not null primary key autoincrement," +
                         "  NOME text not null," +
                         "  TIPO text,"+
-                        "  HORA_INI text not null,"+
-                        "  HORA_FIM text not null,"+
+                        "  HORA_INICIO text not null,"+
+                        "  HORA_FINAL text not null,"+
                         "  DOM integer not null,"+
                         "  SEG integer not null,"+
                         "  TER integer not null,"+
                         "  QUA integer not null,"+
                         "  QUI integer not null,"+
                         "  SEX integer not null,"+
-                        "  SAB integer not null,"+
-                        "  DATA_FIM text)";
+                        "  SAB integer not null," +
+                        "  INSTAGRAM integer not null," +
+                        "  FACEBOOK integer not null," +
+                        "  WHATSAPP integer not null, "+
+                        "  DATA_FINAL text)";
         db.execSQL(createTableOficio);
-
-        String createTableAplicativo =
-                "CREATE TABLE APLICATIVO (" +
-                    "  ID_APLICATIVO integer not null primary key autoincrement," +
-                    "  NOME text not null)";
-        db.execSQL(createTableAplicativo);
-
-        String createTableAplicativoOficio =
-                "CREATE TABLE APLICATIVO_OFICIO(" +
-                        " ID_APLICATIVO_OFICIO integer not null primary key autoincrement," +
-                        " ID_OFICIO integer not null," +
-                        " ID_APLICATIVO integer not null)";
-        db.execSQL(createTableAplicativoOficio);
 
         String createTableEstatistica =
                 "CREATE TABLE ESTATISTICA(" +
@@ -50,8 +40,8 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         " ID_APLICATIVO integer not null," +
                         " DATA_INICIO text not null," +
                         " HORA_INICIO text not null," +
-                        " DATA_FIM text not null," +
-                        " HORA_FIM time not null)";
+                        " DATA_FINAL text not null," +
+                        " HORA_FINAL time not null)";
         db.execSQL(createTableEstatistica);
     }
 

@@ -4,15 +4,15 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Estatistica {
-    private Integer idEstatistica;
+    private Integer id;
     private Integer idAplicativo;
     private Date dtInicio;
     private Time hrInicio;
     private Date dtFinal;
     private Time hrFinal;
 
-    public Integer getIdEstatistica() {
-        return idEstatistica;
+    public Integer getId() {
+        return id;
     }
 
     public Integer getIdAplicativo() {
@@ -35,8 +35,8 @@ public class Estatistica {
         return hrFinal;
     }
 
-    public void setIdEstatistica(Integer idEstatistica) {
-        this.idEstatistica = idEstatistica;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setIdAplicativo(Integer idAplicativo) {

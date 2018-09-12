@@ -4,7 +4,7 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Oficio {
-    private Integer idOficio;
+    private Integer id;
     private String nome;
     private String tipo;
     private Time horaInicio;
@@ -18,8 +18,8 @@ public class Oficio {
     private char sab;
     private Date dataTermino;
 
-    public Integer getId_oficio(){
-        return idOficio;
+    public Integer getId(){
+        return id;
     }
 
     public String getNome(){
@@ -70,8 +70,8 @@ public class Oficio {
         return horaInicio;
     }
 
-    public void setId_oficio(Integer idOficio) {
-        this.idOficio = idOficio;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setNome(String nome) {

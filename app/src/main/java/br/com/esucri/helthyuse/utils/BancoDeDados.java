@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class BancoDeDados extends SQLiteOpenHelper {
-    private static final String DB_NOME = "HelthyUse";
+    private static final String DB_NOME = "HealthyUse";
     private static final int DB_VERSAO = 1;
 
     public BancoDeDados(Context context){
@@ -14,45 +14,45 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        String create_table_Oficio =
-                "CREATE TABLE Oficio (" +
-                        "  id_Oficio integer not null primary key autoincrement," +
-                        "  nome text not null," +
-                        "  tipo text,"+
-                        "  hora_Ini numeric not null,"+
-                        "  hora_Fim numeric not null,"+
-                        "  dom text not null,"+
-                        "  seg text not null,"+
-                        "  ter text not null,"+
-                        "  qua text not null,"+
-                        "  qui text not null,"+
-                        "  sex text not null,"+
-                        "  sab text not null,"+
-                        "  data_Termino numeric)";
-        db.execSQL(create_table_Oficio);
+        String createTableOficio =
+                "CREATE TABLE OFICIO (" +
+                        "  ID_OFICIO integer not null primary key autoincrement," +
+                        "  NOME text not null," +
+                        "  TIPO text,"+
+                        "  HORA_INI text not null,"+
+                        "  HORA_FIM text not null,"+
+                        "  DOM integer not null,"+
+                        "  SEG integer not null,"+
+                        "  TER integer not null,"+
+                        "  QUA integer not null,"+
+                        "  QUI integer not null,"+
+                        "  SEX integer not null,"+
+                        "  SAB integer not null,"+
+                        "  DATA_FIM text)";
+        db.execSQL(createTableOficio);
 
-        String create_table_Aplicativo =
-                "CREATE TABLE Aplicativo (" +
-                    "  id_Aplicativo integer not null primary key autoincrement," +
-                    "  nome text not null)";
-        db.execSQL(create_table_Aplicativo);
+        String createTableAplicativo =
+                "CREATE TABLE APLICATIVO (" +
+                    "  ID_APLICATIVO integer not null primary key autoincrement," +
+                    "  NOME text not null)";
+        db.execSQL(createTableAplicativo);
 
-        String create_table_Aplicativo_Oficio =
-                "CREATE TABLE Aplicativo_Oficio(" +
-                        " id_AplicativoOficio integer not null primary key autoincrement," +
-                        " id_Oficio integer not null," +
-                        " id_Aplicativo integer not null)";
-        db.execSQL(create_table_Aplicativo_Oficio);
+        String createTableAplicativoOficio =
+                "CREATE TABLE APLICATIVO_OFICIO(" +
+                        " ID_APLICATIVO_OFICIO integer not null primary key autoincrement," +
+                        " ID_OFICIO integer not null," +
+                        " ID_APLICATIVO integer not null)";
+        db.execSQL(createTableAplicativoOficio);
 
-        String create_table_Estatistica =
-                "CREATE TABLE Estatistica(" +
-                        " id_Estatistica integer not null primary key autoincrement," +
-                        " id_Aplicativo integer not null," +
-                        " data_Inicio date not null," +
-                        " hora_Inicio time not null," +
-                        " data_Final date not null," +
-                        " hora_Final time not null)";
-        db.execSQL(create_table_Estatistica);
+        String createTableEstatistica =
+                "CREATE TABLE ESTATISTICA(" +
+                        " ID_ESTATISTICA integer not null primary key autoincrement," +
+                        " ID_APLICATIVO integer not null," +
+                        " DATA_INICIO text not null," +
+                        " HORA_INICIO text not null," +
+                        " DATA_FIM text not null," +
+                        " HORA_FIM time not null)";
+        db.execSQL(createTableEstatistica);
     }
 
     @Override
@@ -61,11 +61,11 @@ public class BancoDeDados extends SQLiteOpenHelper {
             if (i==2){
                 upgradeVersao2(db);
             }
-        final String drop_table_Aplicativo = "DROP TABLE IF EXISTS Aplicativo";
-        db.execSQL(drop_table_Aplicativo);
+        final String dropTableAplicativo = "DROP TABLE IF EXISTS APLICATIVO";
+        db.execSQL(dropTableAplicativo);
 
-        final String drop_table_Oficio = "DROP TABLE IF EXISTS Oficio";
-        db.execSQL(drop_table_Oficio);
+        final String dropTableOficio = "DROP TABLE IF EXISTS OFICIO";
+        db.execSQL(dropTableOficio);
 
         onCreate(db);
     }

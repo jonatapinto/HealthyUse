@@ -4,117 +4,121 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Oficio {
-    private Integer idOficio;
+    private Integer id;
     private String nome;
     private String tipo;
     private Time horaInicio;
     private Time horaFim;
-    private char dom;
-    private char seg;
-    private char ter;
-    private char quar;
-    private char quin;
-    private char sex;
-    private char sab;
-    private Date dataTermino;
+    private Date dataFim;
+    private Integer dom;
+    private Integer seg;
+    private Integer ter;
+    private Integer qua;
+    private Integer qui;
+    private Integer sex;
+    private Integer sab;
 
-    public Integer getId_oficio(){
-        return idOficio;
+    public Integer getId(){
+        return id;
     }
 
     public String getNome(){
         return nome;
     }
 
-    public String getTipo() { return tipo; }
+    public String getTipo() {
+        return tipo;
+    }
 
-    public char getDom() {
+    public Integer getDom() {
         return dom;
     }
 
-    public char getSeg() {
+    public Integer getSeg() {
         return seg;
     }
 
-    public char getTer() {
+    public Integer getTer() {
         return ter;
     }
 
-    public char getQuar() {
-        return quar;
+    public Integer getQua() {
+        return qua;
     }
 
-    public char getQuin() {
-        return quin;
+    public Integer getQui() {
+        return qui;
     }
 
-    public char getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public char getSab() {
+    public Integer getSab() {
         return sab;
     }
 
-    public Date getData_termino() {
-        return dataTermino;
+    public Date getDataFim() {
+        return dataFim;
     }
 
-    public Time getHora_fim() {
+    public Time getHoraFim() {
         return horaFim;
     }
 
-    public Time getHora_inicio() {
+    public Time getHoraInicio() {
         return horaInicio;
     }
 
-    public void setId_oficio(Integer idOficio) {
-        this.idOficio = idOficio;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setTipo(String tipo) { this.tipo = tipo; }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-    public void setDom(char dom) {
+    public void setDom(Integer dom) {
         this.dom = dom;
     }
 
-    public void setSeg(char seg) {
+    public void setSeg(Integer seg) {
         this.seg = seg;
     }
 
-    public void setTer(char ter) {
+    public void setTer(Integer ter) {
         this.ter = ter;
     }
 
-    public void setQuar(char quar) {
-        this.quar = quar;
+    public void setQua(Integer qua) {
+        this.qua = qua;
     }
 
-    public void setQuin(char quin) {
-        this.quin = quin;
+    public void setQui(Integer qui) {
+        this.qui = qui;
     }
 
-    public void setSex(char sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public void setSab(char sab) {
+    public void setSab(Integer sab) {
         this.sab = sab;
     }
 
-    public void setHora_inicio(Time horaInicio) {
+    public void setHoraInicio(Time horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public void setHora_fim(Time horaFim) {
+    public void setHoraFim(Time horaFim) {
         this.horaFim = horaFim;
     }
 
-    public void setData_termino(Date dataTermino) {
-        this.dataTermino = dataTermino;
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
     }
 }

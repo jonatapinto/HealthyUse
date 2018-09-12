@@ -1,13 +1,22 @@
 package br.com.esucri.helthyuse.model;
 
 public class Aplicativo {
-    private Integer idApp;
+    private Integer id;
+    private String nome;
 
-    public Integer getId_app() {
-        return idApp;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_app(Integer idApp) {
-        this.idApp = idApp;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setId(Integer id) {
+        this.id= id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

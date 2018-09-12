@@ -18,32 +18,33 @@ public class AplicativoController {
     }
 
     public long create(final Aplicativo aplicativo){
+
         ContentValues dados = new ContentValues();
-        long resultadoCre;
+        long resultado;
 
         instanciaDB = db.getWritableDatabase();
         dados.put("nome", aplicativo.getNome());
 
-        resultadoCre = instanciaDB.insert("aplicativo",
+        resultado = instanciaDB.insert("aplicativo",
                 null, dados);
         instanciaDB.close();
-        return resultadoCre;
+        return resultado;
     }
 
     public long update(final Aplicativo aplicativo){
 
         ContentValues dados = new ContentValues();
-        long resultadoUp;
+        long resultado;
 
         instanciaDB = db.getWritableDatabase();
         dados.put("nome",aplicativo.getNome());
 
         String where = "_id = " + aplicativo.getId();
 
-        resultadoUp = instanciaDB.update("aplicativo", dados, where, null);
+        resultado = instanciaDB.update("aplicativo", dados, where, null);
         instanciaDB.close();
 
-        return resultadoUp;
+        return resultado;
     }
 
     public Aplicativo getById(int id){
@@ -53,7 +54,8 @@ public class AplicativoController {
         instanciaDB = db.getReadableDatabase();
 
         Cursor cursor = instanciaDB.query("aplicativo", campos,
-                null, null, null, null, null);
+                null, null, null,
+                null, null);
 
         if (cursor == null){
             return null;

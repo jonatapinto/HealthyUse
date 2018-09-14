@@ -1,10 +1,10 @@
-package br.com.esucri.helthyuse.controller;
+package br.com.esucri.healthyUse.controller;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
-import br.com.esucri.helthyuse.model.Estatistica;
-import br.com.esucri.helthyuse.utils.BancoDeDados;
+import br.com.esucri.healthyUse.model.Estatistica;
+import br.com.esucri.healthyUse.utils.BancoDeDados;
 
 public class EstatisticaController {
     private SQLiteDatabase instanciaDB;

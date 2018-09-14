@@ -1,4 +1,4 @@
-package br.com.esucri.helthyuse.utils;
+package br.com.esucri.healthyUse.utils;
 
 import android.widget.Toast;
 

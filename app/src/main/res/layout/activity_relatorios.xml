@@ -5,20 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".RelatoriosActivity">
 
     <Button
-        android:id="@+id/botaoRotinas"
+        android:id="@+id/botaoRelatorioA"
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="Rotinas" />
+        android:text="Relatório A" />
 
     <Button
-        android:id="@+id/botaoRelatorios"
+        android:id="@+id/botaoRelatorioB"
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="Relatórios" />
+        android:text="Relatório B" />
+
+    <Button
+        android:id="@+id/botaoRelatorioC"
+        android:layout_width="183dp"
+        android:layout_height="83dp"
+        android:layout_gravity="center"
+        android:text="Relatório C" />
 
 </LinearLayout>

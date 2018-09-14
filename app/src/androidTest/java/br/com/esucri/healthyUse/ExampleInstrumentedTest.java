@@ -1,4 +1,4 @@
-package br.com.esucri.helthyuse;
+package br.com.esucri.healthyUse;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

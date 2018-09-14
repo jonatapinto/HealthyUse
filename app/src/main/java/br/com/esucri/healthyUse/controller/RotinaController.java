@@ -1,4 +1,4 @@
-package br.com.esucri.helthyuse.controller;
+package br.com.esucri.healthyUse.controller;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -10,9 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import br.com.esucri.helthyuse.model.Rotina;
-import br.com.esucri.helthyuse.utils.BancoDeDados;
-import br.com.esucri.helthyuse.utils.Parsers;
+import br.com.esucri.healthyUse.model.Rotina;
+import br.com.esucri.healthyUse.utils.BancoDeDados;
+import br.com.esucri.healthyUse.utils.Parsers;
 
 public class RotinaController {
     private SQLiteDatabase instanciaDB;

@@ -1,11 +1,11 @@
-package br.com.esucri.helthyuse.utils;
+package br.com.esucri.healthyUse.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class BancoDeDados extends SQLiteOpenHelper {
-    private static final String DB_NOME = "HealthyUse";
+    private static final String DB_NOME = "HEALTHYUSE";
     private static final int DB_VERSAO = 1;
 
     public BancoDeDados(Context context){
@@ -35,7 +35,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
         db.execSQL(createTableOficio);
 
         String createTableEstatistica =
-                "CREATE TABLE ESTATISTICA(" +
+                "CREATE TABLE ESTATISTICA (" +
                         " ID_ESTATISTICA integer not null primary key autoincrement," +
                         " ID_APLICATIVO integer not null," +
                         " DATA_INICIO text not null," +
@@ -51,14 +51,16 @@ public class BancoDeDados extends SQLiteOpenHelper {
             if (i==2){
                 upgradeVersao2(db);
             }
-        final String dropTableAplicativo = "DROP TABLE IF EXISTS APLICATIVO";
+
+        final String dropTableAplicativo = "DROP TABLE IF EXISTS ESTATISTICA";
         db.execSQL(dropTableAplicativo);
 
-        final String dropTableOficio = "DROP TABLE IF EXISTS OFICIO";
+        final String dropTableOficio = "DROP TABLE IF EXISTS ROTINA";
         db.execSQL(dropTableOficio);
 
         onCreate(db);
     }
+
     public void upgradeVersao2(SQLiteDatabase db){
 
     }

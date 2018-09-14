@@ -1,4 +1,4 @@
-package br.com.esucri.helthyuse;
+package br.com.esucri.healthyUse;
 
 import org.junit.Test;
 

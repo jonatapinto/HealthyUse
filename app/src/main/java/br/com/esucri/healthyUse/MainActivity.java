@@ -1,4 +1,4 @@
-package br.com.esucri.helthyuse;
+package br.com.esucri.healthyUse;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,19 +8,30 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button botaoOficios;
+    Button botaoRotinas;
+    Button botaoRelatorios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        botaoOficios = (Button) findViewById(R.id.botaoOficios);
-        botaoOficios.setOnClickListener(new View.OnClickListener() {
+        botaoRotinas = (Button) findViewById(R.id.botaoRotinas);
+        botaoRotinas.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), RotinaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        botaoRelatorios = (Button) findViewById(R.id.botaoRelatorios);
+        botaoRelatorios.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), RelatoriosActivity.class);
                 startActivity(intent);
             }
         });

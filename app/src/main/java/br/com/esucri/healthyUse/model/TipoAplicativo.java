@@ -1,4 +1,4 @@
-package br.com.esucri.helthyuse.model;
+package br.com.esucri.healthyUse.model;
 
 public enum TipoAplicativo {
     WHATSAPP,FACEBOOK,INSTAGRAM;

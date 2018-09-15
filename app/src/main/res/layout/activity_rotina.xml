@@ -116,6 +116,7 @@
             android:inputType="date" />
 
         <TextView
+            android:id="@+id/textViewAplicativos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"

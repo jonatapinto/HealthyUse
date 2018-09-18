@@ -12,13 +12,13 @@
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="Rotinas" />
+        android:text="@string/rotinas" />
 
     <Button
         android:id="@+id/botaoRelatorios"
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="Relatórios" />
+        android:text="@string/relatorios" />
 
 </LinearLayout>

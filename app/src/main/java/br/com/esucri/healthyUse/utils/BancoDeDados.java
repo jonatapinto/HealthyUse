@@ -16,7 +16,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         String createTableOficio =
                 "CREATE TABLE ROTINA (" +
-                        "  ID_ROTINA integer not null primary key autoincrement," +
+                        "  _id integer not null primary key autoincrement," +
                         "  NOME text not null," +
                         "  TIPO text,"+
                         "  HORA_INICIO text not null,"+
@@ -36,7 +36,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
         String createTableEstatistica =
                 "CREATE TABLE ESTATISTICA (" +
-                        " ID_ESTATISTICA integer not null primary key autoincrement," +
+                        " _id integer not null primary key autoincrement," +
                         " ID_APLICATIVO integer not null," +
                         " DATA_INICIO text not null," +
                         " HORA_INICIO text not null," +

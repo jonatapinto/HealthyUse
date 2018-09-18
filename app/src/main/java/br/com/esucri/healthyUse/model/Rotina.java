@@ -1,9 +1,10 @@
 package br.com.esucri.healthyUse.model;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class Rotina {
+public class Rotina implements Serializable{
     private Integer id;
     private String nome;
     private String tipo;

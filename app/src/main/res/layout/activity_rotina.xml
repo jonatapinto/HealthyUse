@@ -37,14 +37,14 @@
 
             <EditText
                 android:id="@+id/editHoraInicio"
-                android:layout_width="match_parent"
+                android:layout_width="163dp"
                 android:layout_height="wrap_content"
                 android:hint="Hora Início"
                 android:inputType="time" />
 
             <EditText
                 android:id="@+id/editHoraFinal"
-                android:layout_width="match_parent"
+                android:layout_width="163dp"
                 android:layout_height="wrap_content"
                 android:hint="Hora Final"
                 android:inputType="time" />
@@ -52,6 +52,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/textViewDiasSemana"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -63,44 +64,46 @@
             android:layout_gravity="left"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioDomingo"
+            <CheckBox
+                android:id="@+id/checkBoxDomingo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="false"
                 android:text="D" />
 
-            <RadioButton
-                android:id="@+id/radioSegunda"
+            <CheckBox
+                android:id="@+id/checkBoxSegunda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="S" />
 
-            <RadioButton
-                android:id="@+id/radioTerca"
+            <CheckBox
+                android:id="@+id/checkBoxTerca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="T" />
 
-            <RadioButton
-                android:id="@+id/radioQuarta"
+            <CheckBox
+                android:id="@+id/checkBoxQuarta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Q" />
 
-            <RadioButton
-                android:id="@+id/radioQuinta"
+            <CheckBox
+                android:id="@+id/checkBoxQuinta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="false"
                 android:text="Q" />
 
-            <RadioButton
-                android:id="@+id/radioSexta"
+            <CheckBox
+                android:id="@+id/checkBoxSexta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="S" />
 
-            <RadioButton
-                android:id="@+id/radioSabado"
+            <CheckBox
+                android:id="@+id/checkBoxSabado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="S" />
@@ -127,20 +130,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/radioWhatsApp"
+            <CheckBox
+                android:id="@+id/checkBoxWhatsApp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="WhatsApp" />
 
-            <RadioButton
-                android:id="@+id/radioInstagram"
+            <CheckBox
+                android:id="@+id/checkBoxInstagram"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Instagram" />
 
-            <RadioButton
-                android:id="@+id/radioFacebook"
+            <CheckBox
+                android:id="@+id/checkBoxFacebook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Facebook" />

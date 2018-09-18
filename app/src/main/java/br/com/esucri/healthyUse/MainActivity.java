@@ -18,10 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
         botaoRotinas = (Button) findViewById(R.id.botaoRotinas);
         botaoRotinas.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), RotinaActivity.class);
+                Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
                 startActivity(intent);
             }
         });

@@ -21,14 +21,6 @@
             android:hint="Nome"
             android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/editTipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Tipo"
-            android:inputType="textPersonName" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,14 +102,6 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/editDataFinal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:hint="Data Final (Opcional)"
-            android:inputType="date" />
-
         <TextView
             android:id="@+id/textViewAplicativos"
             android:layout_width="wrap_content"
@@ -168,7 +152,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:enabled="true"
                 android:text="Excluir" />
+
+            <Button
+                android:id="@+id/buttonAlterarStatusRotina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Desativar Rotina" />
 
         </LinearLayout>
     </LinearLayout>

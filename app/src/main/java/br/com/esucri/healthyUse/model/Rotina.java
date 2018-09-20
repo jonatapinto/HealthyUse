@@ -7,10 +7,8 @@ import java.util.Date;
 public class Rotina implements Serializable{
     private Integer id;
     private String nome;
-    private String tipo;
     private Time horaInicio;
     private Time horaFinal;
-    private Date dataFinal;
     private Integer dom;
     private Integer seg;
     private Integer ter;
@@ -21,6 +19,7 @@ public class Rotina implements Serializable{
     private Integer instagram;
     private Integer facebook;
     private Integer whatsapp;
+    private Integer status;
 
     public Integer getId(){
         return id;
@@ -28,10 +27,6 @@ public class Rotina implements Serializable{
 
     public String getNome(){
         return nome;
-    }
-
-    public String getTipo() {
-        return tipo;
     }
 
     public Integer getDom() {
@@ -68,10 +63,6 @@ public class Rotina implements Serializable{
 
     public Integer getWhatsapp() { return whatsapp; }
 
-    public Date getDataFinal() {
-        return dataFinal;
-    }
-
     public Time getHoraFinal() {
         return horaFinal;
     }
@@ -80,16 +71,16 @@ public class Rotina implements Serializable{
         return horaInicio;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public void setDom(Integer dom) {
@@ -134,7 +125,7 @@ public class Rotina implements Serializable{
         this.horaFinal = horaFinal;
     }
 
-    public void setDataFinal(Date dataFinal) {
-        this.dataFinal = dataFinal;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

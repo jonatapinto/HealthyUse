@@ -43,8 +43,9 @@ public class ListRotinaActivity extends AppCompatActivity {
         RotinaController crud = new RotinaController(getBaseContext());
         final Cursor cursor = crud.retrieve();
 
-        String[] campos = {"NOME","TIPO","HORA_INICIO","HORA_FINAL"};
-        int[] componentes = { R.id.textViewNome, R.id.textViewTipo, R.id.textViewHoraInicio, R.id.textViewHoraFinal};
+
+        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","STATUS"};
+        int[] componentes = {R.id.textView_id, R.id.textViewNome, R.id.textViewHoraInicio, R.id.textViewHoraFinal, R.id.textViewStatus};
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),
                 R.layout.lista_rotinas, cursor, campos, componentes, 0);

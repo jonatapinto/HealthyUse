@@ -3,8 +3,7 @@
     <string name="novo">Novo</string>
     <string name="rotinas">Rotinas</string>
     <string name="relatorios">Relatórios</string>
-    <string name="nome">Nome:</string>
-    <string name="tipo">Tipo:</string>
+    <string name="nome">Nome: </string>
     <string name="hora_inicio">Hora Início:</string>
     <string name="hora_final">Hora Final:</string>
 </resources>

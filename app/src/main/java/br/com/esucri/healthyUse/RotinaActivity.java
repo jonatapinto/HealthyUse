@@ -29,10 +29,10 @@ import br.com.esucri.healthyUse.utils.Validations;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class RotinaActivity extends AppCompatActivity {
 
-    EditText editNome, editTipo, editHoraInicio, editHoraFinal, editDataFinal;
+    EditText editNome, editHoraInicio, editHoraFinal;
     CheckBox checkBoxDomingo, checkBoxSegunda, checkBoxTerca, checkBoxQuarta, checkBoxQuinta, checkBoxSexta,
              checkBoxSabado, checkBoxWhatsApp, checkBoxInstagram, checkBoxFacebook;
-    Button botaoGravarRotina;
+    Button botaoGravarRotina, botaoExcluirRotina, buttonAlterarStatusRotina;
     TextView textViewAplicativos, textViewDiasSemana;
     Rotina editarRotina = new Rotina();
     Parsers parsers = new Parsers();
@@ -44,15 +44,10 @@ public class RotinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rotina);
 
-        //Intent intent = getIntent();
-        //editarRotina = (Rotina) intent.getSerializableExtra("rotina_escolhida");
-
         //Buscar valores da activity por ID
         editNome = (EditText) findViewById(R.id.editNome);
-        editTipo = (EditText) findViewById(R.id.editTipo);
         editHoraInicio = (EditText) findViewById(R.id.editHoraInicio);
         editHoraFinal = (EditText) findViewById(R.id.editHoraFinal);
-        editDataFinal = (EditText) findViewById(R.id.editDataFinal);
         checkBoxDomingo = (CheckBox) findViewById(R.id.checkBoxDomingo);
         checkBoxSegunda = (CheckBox) findViewById(R.id.checkBoxSegunda);
         checkBoxTerca = (CheckBox) findViewById(R.id.checkBoxTerca);
@@ -64,37 +59,28 @@ public class RotinaActivity extends AppCompatActivity {
         checkBoxInstagram = (CheckBox) findViewById(R.id.checkBoxInstagram);
         checkBoxFacebook = (CheckBox) findViewById(R.id.checkBoxFacebook);
         botaoGravarRotina = (Button) findViewById(R.id.botaoGravarRotina);
+        botaoExcluirRotina = (Button) findViewById(R.id.botaoExcluirRotina);
+        buttonAlterarStatusRotina = (Button) findViewById(R.id.buttonAlterarStatusRotina);
         textViewAplicativos = (TextView) findViewById(R.id.textViewAplicativos);
         textViewDiasSemana = (TextView) findViewById(R.id.textViewDiasSemana);
 
         //Criando mascara para campos
-        SimpleMaskFormatter smfData = new SimpleMaskFormatter("NN/NN/NNNN");
-        MaskTextWatcher mtwData = new MaskTextWatcher(editDataFinal, smfData);
-        editDataFinal.addTextChangedListener(mtwData);
-
         SimpleMaskFormatter smfHora = new SimpleMaskFormatter("NN:NN");
         MaskTextWatcher mtwHoraInicio = new MaskTextWatcher(editHoraInicio, smfHora);
         editHoraInicio.addTextChangedListener(mtwHoraInicio);
         MaskTextWatcher mtwHoraFinal = new MaskTextWatcher(editHoraFinal, smfHora);
         editHoraFinal.addTextChangedListener(mtwHoraFinal);
 
-        //if(editarRotina !=null){
-        //    botaoGravarRotina.setText("Modificar");
-        //} else{
-        //    botaoGravarRotina.setText("Gravar");
-        //}
-
         //Se existir valor ao id em Intent, preenche os campos da tela tal como o objeto passado
         idRotina = this.getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(idRotina)) {
+            botaoGravarRotina.setText("Modificar");
             RotinaController crud = new RotinaController(getBaseContext());
             rotina = crud.getById(Integer.parseInt(idRotina));
 
             editNome.setText(rotina.getNome());
-            editTipo.setText(rotina.getTipo());
             editHoraInicio.setText(rotina.getHoraInicio().toString());
             editHoraFinal.setText(rotina.getHoraFinal().toString());
-            editDataFinal.setText(rotina.getDataFinal().toString().isEmpty()?"":rotina.getDataFinal().toString());
             checkBoxDomingo.setChecked(rotina.getDom() == 1?true:false);
             checkBoxSegunda.setChecked(rotina.getSeg() == 1?true:false);
             checkBoxTerca.setChecked(rotina.getTer() == 1?true:false);
@@ -105,6 +91,9 @@ public class RotinaActivity extends AppCompatActivity {
             checkBoxWhatsApp.setChecked(rotina.getInstagram() == 1?true:false);
             checkBoxInstagram.setChecked(rotina.getFacebook() == 1?true:false);
             checkBoxFacebook.setChecked(rotina.getWhatsapp() == 1?true:false);
+            buttonAlterarStatusRotina.setText(rotina.getStatus() == 0?"Ativar Rotina":"Desativar Rotina");
+        } else{
+            botaoGravarRotina.setText("Gravar");
         }
 
         botaoGravarRotina.setOnClickListener(new View.OnClickListener() {
@@ -113,15 +102,29 @@ public class RotinaActivity extends AppCompatActivity {
                 salvar(v);
             }
         });
+
+        botaoExcluirRotina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                excluir(v);
+            }
+        });
+
+        buttonAlterarStatusRotina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alterarStatusRotina(v);
+            }
+        });
     }
 
     public void salvar(View view) {
         if (!validaCampos()) {
             return;
         }
+
         Rotina rotina = new Rotina();
         rotina.setNome(editNome.getText().toString());
-        rotina.setTipo(editTipo.getText().toString());
         rotina.setHoraInicio(parsers.parserStringToTime(editHoraInicio.getText().toString()));
         rotina.setHoraFinal(parsers.parserStringToTime(editHoraFinal.getText().toString()));
         rotina.setDom(checkBoxDomingo.isChecked()?1:0);
@@ -134,13 +137,6 @@ public class RotinaActivity extends AppCompatActivity {
         rotina.setWhatsapp(checkBoxWhatsApp.isChecked()?1:0);
         rotina.setFacebook(checkBoxFacebook.isChecked()?1:0);
         rotina.setInstagram(checkBoxInstagram.isChecked()?1:0);
-        //Tratamento por não ser campo obrigatório
-        if (editDataFinal.getText().toString().isEmpty()) {
-            Date date = null;
-            rotina.setDataFinal(date);
-        } else{
-            rotina.setDataFinal(parsers.parserStringToDate(editDataFinal.getText().toString()));
-        }
 
         RotinaController crud = new RotinaController(getBaseContext());
 
@@ -158,6 +154,9 @@ public class RotinaActivity extends AppCompatActivity {
             Toast.makeText(RotinaActivity.this, "Registro salvo com sucesso!", Toast.LENGTH_LONG).show();
             limpar();
         }
+        //Volta para a tela de listagem de rotinas
+        Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
+        startActivity(intent);
     }
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -165,7 +164,6 @@ public class RotinaActivity extends AppCompatActivity {
     private boolean validaCampos() {
         Boolean result = true;
         String textoDescricao;
-        Boolean marcacaocheckBox;
         Validations validacao = new Validations();
 
         textoDescricao = editNome.getText().toString().trim();
@@ -184,7 +182,7 @@ public class RotinaActivity extends AppCompatActivity {
             if(!validacao.isTimeValid(editHoraInicio.getText().toString())){
                 //Toast.makeText(RotinaActivity.this, "Favor informar um horario válido!", Toast.LENGTH_LONG).show();
                 editHoraInicio.requestFocus();
-                editHoraInicio.setError("Hora Inicio inválida!");
+                editHoraInicio.setError("Hora Início inválida!");
                 return false;
             }
         }
@@ -225,12 +223,6 @@ public class RotinaActivity extends AppCompatActivity {
             return false;
         }
 
-        //if (!validacao.isDateValid(editDataFinal.getText().toString())){
-        //    Toast.makeText(RotinaActivity.this, "Favor informar uma data válida!", Toast.LENGTH_LONG).show();
-        //    editDataFinal.setError("Data inválida!");
-        //    return false;
-        //}
-
         return result;
     }
 
@@ -238,7 +230,7 @@ public class RotinaActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(idRotina)) {
             Toast.makeText(getBaseContext(),
-                    "Este produto ainda não está no banco de dados!", Toast.LENGTH_LONG).show();
+                    "Esta Rotina ainda não está no banco de dados!", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -248,18 +240,41 @@ public class RotinaActivity extends AppCompatActivity {
         limpar();
 
         if (resultado == -1) {
-            Toast.makeText(getBaseContext(),"Erro ao excluir produto!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(),"Erro ao excluir Rotina!", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getBaseContext(),"Produto excluído com sucesso!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(),"Rotina excluído com sucesso!", Toast.LENGTH_LONG).show();
         }
+        //Volta para a tela de listagem de rotinas
+        Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
+        startActivity(intent);
+    }
+
+    private void alterarStatusRotina(View v){
+        if (TextUtils.isEmpty(idRotina)) {
+            Toast.makeText(getBaseContext(),
+                    "Esta Rotina ainda não está no banco de dados!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        limpar();
+
+        RotinaController crud = new RotinaController(getBaseContext());
+        long resultado;
+        resultado = crud.changeStatus(rotina,rotina.getStatus() == 0 ? 1 : 0);
+
+        if (resultado == -1) {
+            Toast.makeText(getBaseContext(),"Erro ao alterar status da Rotina!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getBaseContext(),"Status da rotina atulizado com sucesso!", Toast.LENGTH_LONG).show();
+        }
+        //Volta para a tela de listagem de rotinas
+        Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
+        startActivity(intent);
     }
 
     private void limpar() {
         editNome.setText("");
-        editTipo.setText("");
         editHoraInicio.setText("");
         editHoraFinal.setText("");
-        editDataFinal.setText("");
         checkBoxDomingo.setChecked(false);
         checkBoxSegunda.setChecked(false);
         checkBoxTerca.setChecked(false);

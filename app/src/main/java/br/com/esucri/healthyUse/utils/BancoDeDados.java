@@ -18,7 +18,6 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 "CREATE TABLE ROTINA (" +
                         "  _id integer not null primary key autoincrement," +
                         "  NOME text not null," +
-                        "  TIPO text,"+
                         "  HORA_INICIO text not null,"+
                         "  HORA_FINAL text not null,"+
                         "  DOM integer not null,"+
@@ -30,8 +29,8 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         "  SAB integer not null," +
                         "  INSTAGRAM integer not null," +
                         "  FACEBOOK integer not null," +
-                        "  WHATSAPP integer not null, "+
-                        "  DATA_FINAL text)";
+                        "  WHATSAPP integer not null,"+
+                        "  STATUS integer not null)";
         db.execSQL(createTableOficio);
 
         String createTableEstatistica =

@@ -4,23 +4,28 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent" >
 
         <TextView
-            android:id="@+id/textViewTituloNome"
+            android:id="@+id/textView_id"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textViewTituloStatus"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/nome" />
+            android:layout_height="wrap_content"
+            android:text="Status: " />
 
         <TextView
-            android:id="@+id/textViewNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+            android:id="@+id/textViewStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"/>
+    </TableRow>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -31,11 +36,20 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/textViewTituloTipo"
-                android:layout_width="92dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tipo" />
+                android:id="@+id/textViewTituloNome"
+                android:layout_width="84dp"
+                android:layout_height="match_parent"
+                android:text="@string/nome" />
+
+            <TextView
+                android:id="@+id/textViewNome"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
             <TextView
                 android:id="@+id/textViewTituloHoraInicio"
@@ -45,11 +59,11 @@
                 android:text="@string/hora_inicio" />
 
             <TextView
-                android:id="@+id/textViewTituloHoraFinal"
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewHoraInicio"
+                android:layout_width="33dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/hora_final" />
+                android:layout_weight="1" />
+
         </TableRow>
 
         <TableRow
@@ -57,16 +71,11 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/textViewTipo"
-                android:layout_width="54dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/textViewHoraInicio"
-                android:layout_width="33dp"
+                android:id="@+id/textViewTituloHoraFinal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="@string/hora_final" />
 
             <TextView
                 android:id="@+id/textViewHoraFinal"

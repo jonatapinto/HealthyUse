@@ -28,7 +28,6 @@ public class RotinaController {
 
         instanciaDB = db.getWritableDatabase();
         dados.put("NOME", rotina.getNome());
-        dados.put("TIPO", rotina.getTipo());
         dados.put("HORA_INICIO", rotina.getHoraInicio().toString());
         dados.put("HORA_FINAL", rotina.getHoraFinal().toString());
         dados.put("DOM", rotina.getDom());
@@ -41,7 +40,7 @@ public class RotinaController {
         dados.put("INSTAGRAM", rotina.getInstagram());
         dados.put("FACEBOOK", rotina.getFacebook());
         dados.put("WHATSAPP", rotina.getWhatsapp());
-        dados.put("DATA_FINAL", rotina.getDataFinal().toString());
+        dados.put("STATUS", 1);
 
         resultado = instanciaDB.insert("ROTINA", null, dados);
         instanciaDB.close();
@@ -50,7 +49,7 @@ public class RotinaController {
     }
 
     public ArrayList<Rotina> getListaRotinas() throws ParseException {
-        String [] columns = {"_id","NOME","TIPO","HORA_INICIO","HORA_FINAL","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP","DATA_FINAL"};
+        String [] columns = {"_id","NOME","HORA_INICIO","HORA_FINAL","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP"};
         instanciaDB = db.getWritableDatabase();
         Cursor cursor = instanciaDB.query("ROTINA",columns,null,null,null,null,null);
         ArrayList<Rotina> rotinas = new ArrayList<Rotina>();
@@ -60,20 +59,18 @@ public class RotinaController {
             Rotina rotina = new Rotina();
             rotina.setId(cursor.getInt(0));
             rotina.setNome(cursor.getString(1));
-            rotina.setTipo(cursor.getString(2));
-            rotina.setHoraInicio(parsers.parserStringToTime(cursor.getString(3)));
-            rotina.setHoraFinal(parsers.parserStringToTime(cursor.getString(4)));
-            rotina.setDom(cursor.getInt(5));
-            rotina.setSeg(cursor.getInt(6));
-            rotina.setTer(cursor.getInt(7));
-            rotina.setQua(cursor.getInt(8));
-            rotina.setQui(cursor.getInt(9));
-            rotina.setSex(cursor.getInt(10));
-            rotina.setSab(cursor.getInt(11));
-            rotina.setInstagram(cursor.getInt(12));
-            rotina.setFacebook(cursor.getInt(13));
-            rotina.setWhatsapp(cursor.getInt(14));
-            rotina.setDataFinal(parsers.parserStringToTime(cursor.getString(15)));
+            rotina.setHoraInicio(parsers.parserStringToTime(cursor.getString(2)));
+            rotina.setHoraFinal(parsers.parserStringToTime(cursor.getString(3)));
+            rotina.setDom(cursor.getInt(4));
+            rotina.setSeg(cursor.getInt(5));
+            rotina.setTer(cursor.getInt(6));
+            rotina.setQua(cursor.getInt(7));
+            rotina.setQui(cursor.getInt(8));
+            rotina.setSex(cursor.getInt(9));
+            rotina.setSab(cursor.getInt(10));
+            rotina.setInstagram(cursor.getInt(11));
+            rotina.setFacebook(cursor.getInt(12));
+            rotina.setWhatsapp(cursor.getInt(13));
 
             rotinas.add(rotina);
         }
@@ -86,7 +83,6 @@ public class RotinaController {
 
         instanciaDB = db.getWritableDatabase();
         dados.put("NOME", rotina.getNome());
-        dados.put("TIPO", rotina.getTipo());
         dados.put("HORA_INICIO", rotina.getHoraInicio().toString());
         dados.put("HORA_FINAL", rotina.getHoraFinal().toString());
         dados.put("DOM", rotina.getDom());
@@ -99,8 +95,21 @@ public class RotinaController {
         dados.put("INSTAGRAM", rotina.getInstagram());
         dados.put("FACEBOOK", rotina.getFacebook());
         dados.put("WHATSAPP", rotina.getWhatsapp());
-        dados.put("DATA_FINAL", rotina.getDataFinal().toString());
 
+        String where = "_id = " + rotina.getId();
+
+        resutado = instanciaDB.update("ROTINA", dados, where, null);
+        instanciaDB.close();
+
+        return resutado;
+    }
+
+    public long changeStatus(final Rotina rotina,Integer status){
+        ContentValues dados = new ContentValues();
+        long resutado;
+
+        instanciaDB = db.getWritableDatabase();
+        dados.put("STATUS", status);
         String where = "_id = " + rotina.getId();
 
         resutado = instanciaDB.update("ROTINA", dados, where, null);
@@ -111,7 +120,7 @@ public class RotinaController {
 
     public Cursor retrieve() {
 
-        String[] campos = {"_id","NOME","TIPO","HORA_INICIO","HORA_FINAL"};
+        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","STATUS"};
         instanciaDB = db.getReadableDatabase();
 
         Cursor cursor = instanciaDB.query("ROTINA", campos,
@@ -126,12 +135,12 @@ public class RotinaController {
     }
 
     public Rotina getById(int id) {
-        String[] campos = {"_id","NOME","TIPO","HORA_INICIO","HORA_FINAL","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP","DATA_FINAL"};
+        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP","STATUS"};
         String where = "_id = " + id;
         instanciaDB = db.getReadableDatabase();
 
         Cursor cursor = instanciaDB.query("ROTINA", campos,
-                null, null,null,null,null);
+                where, null,null,null,null);
 
         if (cursor == null) {
             return null;
@@ -141,23 +150,17 @@ public class RotinaController {
         instanciaDB.close();
 
         Parsers parsers = new Parsers();
-        Date dateAux;
         Time timeAux;
         Rotina rotina = new Rotina();
 
         rotina.setId(cursor.getInt(cursor.getColumnIndexOrThrow("_id")));
         rotina.setNome(cursor.getString(cursor.getColumnIndexOrThrow("NOME")));
-        rotina.setTipo(cursor.getString(cursor.getColumnIndexOrThrow("TIPO")));
 
         timeAux = parsers.parserStringToTime(cursor.getString(cursor.getColumnIndexOrThrow("HORA_INICIO")));
         rotina.setHoraInicio(timeAux);
         timeAux = parsers.parserStringToTime(cursor.getString(cursor.getColumnIndexOrThrow("HORA_FINAL")));
         rotina.setHoraFinal(timeAux);
-        if(!cursor.getString(cursor.getColumnIndexOrThrow("DATA_FINAL")).isEmpty()){
-            dateAux = parsers.parserStringToDate(cursor.getString(cursor.getColumnIndexOrThrow("DATA_FINAL")));
-            //dateAux = parsers.testing(cursor.getString(cursor.getColumnIndexOrThrow("DATA_FINAL")));
-            rotina.setDataFinal(dateAux);
-        }
+
         rotina.setDom(cursor.getInt(cursor.getColumnIndexOrThrow("DOM")));
         rotina.setSeg(cursor.getInt(cursor.getColumnIndexOrThrow("SEG")));
         rotina.setTer(cursor.getInt(cursor.getColumnIndexOrThrow("TER")));
@@ -168,6 +171,7 @@ public class RotinaController {
         rotina.setInstagram(cursor.getInt(cursor.getColumnIndexOrThrow("INSTAGRAM")));
         rotina.setFacebook(cursor.getInt(cursor.getColumnIndexOrThrow("FACEBOOK")));
         rotina.setWhatsapp(cursor.getInt(cursor.getColumnIndexOrThrow("WHATSAPP")));
+        rotina.setStatus(cursor.getInt(cursor.getColumnIndexOrThrow("STATUS")));
 
         return rotina;
     }

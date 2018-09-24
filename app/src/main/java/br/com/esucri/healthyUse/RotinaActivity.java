@@ -201,15 +201,6 @@ public class RotinaActivity extends AppCompatActivity {
             }
         }
 
-        //Verifica se algum dos aplicativos foi selecionados
-        if (!checkBoxFacebook.isChecked() &&
-                !checkBoxWhatsApp.isChecked() &&
-                    !checkBoxInstagram.isChecked()){
-            Toast.makeText(RotinaActivity.this, "Favor selecionar algum aplicativo!", Toast.LENGTH_LONG).show();
-            textViewAplicativos.setError("Opção obrigatória!");
-            return false;
-        }
-
         //Verifica se algum dia foi selecionado
         if(!checkBoxDomingo.isChecked() &&
             !checkBoxSegunda.isChecked() &&
@@ -220,6 +211,15 @@ public class RotinaActivity extends AppCompatActivity {
                                 !checkBoxSabado.isChecked() ){
             Toast.makeText(RotinaActivity.this, "Favor selecionar algum dia da semana!", Toast.LENGTH_LONG).show();
             textViewDiasSemana.setError("Opção obrigatória!");
+            return false;
+        }
+
+        //Verifica se algum dos aplicativos foi selecionados
+        if (!checkBoxFacebook.isChecked() &&
+                !checkBoxWhatsApp.isChecked() &&
+                !checkBoxInstagram.isChecked()){
+            Toast.makeText(RotinaActivity.this, "Favor selecionar algum aplicativo!", Toast.LENGTH_LONG).show();
+            textViewAplicativos.setError("Opção obrigatória!");
             return false;
         }
 

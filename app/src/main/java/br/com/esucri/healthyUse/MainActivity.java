@@ -9,6 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button botaoRotinas;
+    Button botaoParametros;
     Button botaoRelatorios;
 
     @Override
@@ -25,7 +26,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        botaoRelatorios = (Button) findViewById(R.id.botaoRelatorios);
+        botaoParametros = (Button) findViewById(R.id.botaoParametros);
+        botaoParametros.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), ParametroActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        botaoRelatorios = (Button) findViewById(R.id.botaoRelatorio);
         botaoRelatorios.setOnClickListener(new View.OnClickListener() {
 
             @Override

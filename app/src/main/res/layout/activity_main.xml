@@ -12,13 +12,20 @@
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="@string/rotinas" />
+        android:text="Rotinas" />
 
     <Button
-        android:id="@+id/botaoRelatorios"
+        android:id="@+id/botaoParametros"
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="@string/relatorios" />
+        android:text="Parâmetro" />
+
+    <Button
+        android:id="@+id/botaoRelatorio"
+        android:layout_width="183dp"
+        android:layout_height="83dp"
+        android:layout_gravity="center"
+        android:text="Relatório" />
 
 </LinearLayout>

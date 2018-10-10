@@ -71,7 +71,7 @@ public class RotinaActivity extends AppCompatActivity {
         MaskTextWatcher mtwHoraFinal = new MaskTextWatcher(editHoraFinal, smfHora);
         editHoraFinal.addTextChangedListener(mtwHoraFinal);
 
-        //Se existir valor ao id em Intent, preenche os campos da tela tal como o objeto passado
+        //Se existir valor ao id em Intent, preenche os campos da tela tal com o objeto passado
         idRotina = this.getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(idRotina)) {
             botaoGravarRotina.setText("Modificar");

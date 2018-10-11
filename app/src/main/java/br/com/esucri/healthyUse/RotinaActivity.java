@@ -32,12 +32,13 @@ public class RotinaActivity extends AppCompatActivity {
     EditText editNome, editHoraInicio, editHoraFinal;
     CheckBox checkBoxDomingo, checkBoxSegunda, checkBoxTerca, checkBoxQuarta, checkBoxQuinta, checkBoxSexta,
              checkBoxSabado, checkBoxWhatsApp, checkBoxInstagram, checkBoxFacebook;
-    Button botaoGravarRotina, botaoExcluirRotina, buttonAlterarStatusRotina;
+    Button botaoGravarRotina, botaoExcluirRotina, botaoAlterarStatusRotina, botaoInicializar, botaoPausar;
     TextView textViewAplicativos, textViewDiasSemana;
     Rotina editarRotina = new Rotina();
     Parsers parsers = new Parsers();
     String idRotina;
     Rotina rotina;
+    Integer contador = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,9 @@ public class RotinaActivity extends AppCompatActivity {
         checkBoxFacebook = (CheckBox) findViewById(R.id.checkBoxFacebook);
         botaoGravarRotina = (Button) findViewById(R.id.botaoGravarRotina);
         botaoExcluirRotina = (Button) findViewById(R.id.botaoExcluirRotina);
-        buttonAlterarStatusRotina = (Button) findViewById(R.id.buttonAlterarStatusRotina);
+        botaoAlterarStatusRotina = (Button) findViewById(R.id.botaoAlterarStatusRotina);
+        botaoInicializar = (Button) findViewById(R.id.botaoInicializarRotina);
+        botaoPausar = (Button) findViewById(R.id.botaoPausarRotina);
         textViewAplicativos = (TextView) findViewById(R.id.textViewAplicativos);
         textViewDiasSemana = (TextView) findViewById(R.id.textViewDiasSemana);
 
@@ -91,7 +94,7 @@ public class RotinaActivity extends AppCompatActivity {
             checkBoxWhatsApp.setChecked(rotina.getInstagram() == 1?true:false);
             checkBoxInstagram.setChecked(rotina.getFacebook() == 1?true:false);
             checkBoxFacebook.setChecked(rotina.getWhatsapp() == 1?true:false);
-            buttonAlterarStatusRotina.setText(rotina.getStatus() == 0?"Ativar Rotina":"Desativar Rotina");
+            botaoAlterarStatusRotina.setText(rotina.getStatus() == 0?"Ativar Rotina":"Desativar Rotina");
         } else{
             botaoGravarRotina.setText("Gravar");
         }
@@ -110,10 +113,17 @@ public class RotinaActivity extends AppCompatActivity {
             }
         });
 
-        buttonAlterarStatusRotina.setOnClickListener(new View.OnClickListener() {
+        botaoAlterarStatusRotina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alterarStatusRotina(v);
+            }
+        });
+
+        botaoInicializar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inicializarThread(v);
             }
         });
     }
@@ -285,5 +295,13 @@ public class RotinaActivity extends AppCompatActivity {
         checkBoxWhatsApp.setChecked(false);
         checkBoxInstagram.setChecked(false);
         checkBoxFacebook.setChecked(false);
+    }
+
+    public void inicializarThread(View v){
+        new Thread(new Runnable() {
+            public void run(){
+                Toast.makeText(RotinaActivity.this, "Teste contador "+contador, Toast.LENGTH_SHORT).show();
+            }
+        }).start();
     }
 }

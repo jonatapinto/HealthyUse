@@ -74,7 +74,7 @@ public class RotinaActivity extends AppCompatActivity {
         MaskTextWatcher mtwHoraFinal = new MaskTextWatcher(editHoraFinal, smfHora);
         editHoraFinal.addTextChangedListener(mtwHoraFinal);
 
-        //Se existir valor ao id em Intent, preenche os campos da tela tal como o objeto passado
+        //Se existir valor ao id em Intent, preenche os campos da tela tal com o objeto passado
         idRotina = this.getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(idRotina)) {
             botaoGravarRotina.setText("Modificar");
@@ -211,15 +211,6 @@ public class RotinaActivity extends AppCompatActivity {
             }
         }
 
-        //Verifica se algum dos aplicativos foi selecionados
-        if (!checkBoxFacebook.isChecked() &&
-                !checkBoxWhatsApp.isChecked() &&
-                    !checkBoxInstagram.isChecked()){
-            Toast.makeText(RotinaActivity.this, "Favor selecionar algum aplicativo!", Toast.LENGTH_LONG).show();
-            textViewAplicativos.setError("Opção obrigatória!");
-            return false;
-        }
-
         //Verifica se algum dia foi selecionado
         if(!checkBoxDomingo.isChecked() &&
             !checkBoxSegunda.isChecked() &&
@@ -230,6 +221,15 @@ public class RotinaActivity extends AppCompatActivity {
                                 !checkBoxSabado.isChecked() ){
             Toast.makeText(RotinaActivity.this, "Favor selecionar algum dia da semana!", Toast.LENGTH_LONG).show();
             textViewDiasSemana.setError("Opção obrigatória!");
+            return false;
+        }
+
+        //Verifica se algum dos aplicativos foi selecionados
+        if (!checkBoxFacebook.isChecked() &&
+                !checkBoxWhatsApp.isChecked() &&
+                !checkBoxInstagram.isChecked()){
+            Toast.makeText(RotinaActivity.this, "Favor selecionar algum aplicativo!", Toast.LENGTH_LONG).show();
+            textViewAplicativos.setError("Opção obrigatória!");
             return false;
         }
 

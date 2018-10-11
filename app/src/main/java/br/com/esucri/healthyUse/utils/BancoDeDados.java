@@ -42,7 +42,18 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         " DATA_FINAL text not null," +
                         " HORA_FINAL time not null)";
         db.execSQL(createTableEstatistica);
+
+        String createTableParametro =
+                "CREATE TABLE PARAMETRO (" +
+                        "  _id integer not null primary key autoincrement," +
+                        "  ID_APLICATIVO text not null," +
+                        "  NOME text not null," +
+                        "  TEMPO_MINIMO text not null,"+
+                        "  TEMPO_MAXIMO text not null)";
+        db.execSQL(createTableParametro);
     }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -56,6 +67,9 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
         final String dropTableOficio = "DROP TABLE IF EXISTS ROTINA";
         db.execSQL(dropTableOficio);
+
+        final String dropTableParametro = "DROP TABLE IF EXISTS PARAMETRO";
+        db.execSQL(dropTableParametro);
 
         onCreate(db);
     }

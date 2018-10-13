@@ -1,5 +1,7 @@
 package br.com.esucri.healthyUse;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.esucri.healthyUse.controller.RotinaController;
 import br.com.esucri.healthyUse.model.Rotina;
@@ -32,6 +35,7 @@ public class ListRotinaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_rotina);
 
         botaoNovo = (Button) findViewById(R.id.botaoNovo);
+
         botaoNovo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

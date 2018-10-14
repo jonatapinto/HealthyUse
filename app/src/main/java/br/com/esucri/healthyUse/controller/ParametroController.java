@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ArrayAdapter;
 
 import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import br.com.esucri.healthyUse.R;
 import br.com.esucri.healthyUse.model.Parametro;
 import br.com.esucri.healthyUse.utils.BancoDeDados;
 import br.com.esucri.healthyUse.utils.Parsers;
@@ -26,7 +28,7 @@ public class ParametroController {
         long resultado;
 
         instanciaDB = db.getWritableDatabase();
-        dados.put("ID_APLICATIVO", parametro.getIdAplicativo());
+        dados.put("ROTINA", parametro.getRotina().toString());
         dados.put("NOME", parametro.getNome().toString());
         dados.put("TEMPO_MINIMO", parametro.getTempoMinimo().toString());
         dados.put("TEMPO_MAXIMO", parametro.getTempoMaximo().toString());
@@ -38,7 +40,7 @@ public class ParametroController {
     }
 
     public ArrayList<Parametro> getListaParametros() throws ParseException {
-        String [] columns = {"_id","ID_APLICATIVO","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
+        String [] columns = {"_id","ROTINA","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
         instanciaDB = db.getWritableDatabase();
         Cursor cursor = instanciaDB.query("PARAMETRO",columns,null,null,null,null,null);
         ArrayList<Parametro> parametros = new ArrayList<Parametro>();
@@ -47,7 +49,7 @@ public class ParametroController {
         while(cursor.moveToNext()){
             Parametro parametro = new Parametro();
             parametro.setId(cursor.getInt(0));
-            parametro.setIdAplicativo(cursor.getInt(1));
+            parametro.setRotina(cursor.getString(1));
             parametro.setNome(cursor.getString(2));
             parametro.setTempoMinimo(parsers.parserStringToTime(cursor.getString(3)));
             parametro.setTempoMaximo(parsers.parserStringToTime(cursor.getString(4)));
@@ -62,7 +64,7 @@ public class ParametroController {
         long resutado;
 
         instanciaDB = db.getWritableDatabase();
-        dados.put("ID_APLICATIVO", parametro.getIdAplicativo());
+        dados.put("ROTINA", parametro.getRotina());
         dados.put("NOME", parametro.getNome());
         dados.put("TEMPO_MINIMO", parametro.getTempoMinimo().toString());
         dados.put("TEMPO_MAXIMO", parametro.getTempoMaximo().toString());
@@ -77,7 +79,7 @@ public class ParametroController {
 
     public Cursor retrieve() {
 
-        String[] campos = {"_id","ID_APLICATIVO","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
+        String[] campos = {"_id","ROTINA","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
         instanciaDB = db.getReadableDatabase();
 
         Cursor cursor = instanciaDB.query("PARAMETRO", campos,
@@ -92,7 +94,7 @@ public class ParametroController {
     }
 
     public Parametro getById(int id) {
-        String[] campos = {"_id","ID_APLICATIVO","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
+        String[] campos = {"_id","ROTINA","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
         String where = "_id = " + id;
         instanciaDB = db.getReadableDatabase();
 
@@ -111,7 +113,7 @@ public class ParametroController {
         Parametro parametro = new Parametro();
 
         parametro.setId(cursor.getInt(cursor.getColumnIndexOrThrow("_id")));
-        parametro.setIdAplicativo(cursor.getInt(cursor.getColumnIndexOrThrow("ID_APLICATIVO")));
+        parametro.setRotina(cursor.getString(cursor.getColumnIndexOrThrow("ROTINA")));
         parametro.setNome(cursor.getString(cursor.getColumnIndexOrThrow("NOME")));
 
         timeAux = parsers.parserStringToTime(cursor.getString(cursor.getColumnIndexOrThrow("TEMPO_MINIMO")));

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), RelatoriosActivity.class);
+                Intent intent = new Intent(getBaseContext(), RelatorioActivity.class);
                 startActivity(intent);
             }
         });

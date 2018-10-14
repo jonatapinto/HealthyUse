@@ -8,10 +8,11 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,15 +20,16 @@ import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import br.com.esucri.healthyUse.controller.ParametroController;
+import br.com.esucri.healthyUse.controller.RotinaController;
 import br.com.esucri.healthyUse.model.Parametro;
+import br.com.esucri.healthyUse.model.Rotina;
 import br.com.esucri.healthyUse.utils.Parsers;
 import br.com.esucri.healthyUse.utils.Validations;
 
 public class ParametroActivity extends AppCompatActivity {
     EditText editNomeParametro, editTempoMinimo, editTempoMaximo;
     TextView textViewAplicativo;
-    RadioGroup radioGroup;
-    RadioButton radioWhatsApp, radioInstagram, radioFacebook;
+    //Spinner spinnerRotinas;
     Button botaoGravarParametro, botaoExcluirParametro;
     Parametro editarParametro = new Parametro();
     Parsers parsers = new Parsers();
@@ -37,17 +39,18 @@ public class ParametroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activiy_parametro);
+        setContentView(R.layout.activity_parametro);
 
         //Buscar valores da activity por ID
         editNomeParametro = (EditText) findViewById(R.id.editNomeParametro);
         editTempoMinimo = (EditText) findViewById(R.id.editTempoMinimo);
         editTempoMaximo = (EditText) findViewById(R.id.editTempoMaximo);
         textViewAplicativo = (TextView) findViewById(R.id.textViewAplicativo);
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        radioWhatsApp = (RadioButton) findViewById(R.id.radioWhatsApp);
-        radioInstagram = (RadioButton) findViewById(R.id.radioInstagram);
-        radioFacebook = (RadioButton) findViewById(R.id.radioFacebook);
+
+        //spinnerRotinas = (Spinner) findViewById(R.id.spinnerRotinas);
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.rotinas, android.R.layout.simple_spinner_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinnerRotinas.setAdapter(adapter);
 
         //Criando mascara para campos
         SimpleMaskFormatter smfTempo = new SimpleMaskFormatter("NN:NN");
@@ -66,14 +69,15 @@ public class ParametroActivity extends AppCompatActivity {
             editNomeParametro.setText(parametro.getNome());
             editTempoMinimo.setText(parametro.getTempoMinimo().toString());
             editTempoMaximo.setText(parametro.getTempoMaximo().toString());
-            radioWhatsApp.setChecked(parametro.getIdAplicativo() == 0?true:false);
-            radioInstagram.setChecked(parametro.getIdAplicativo() == 1?true:false);
-            radioFacebook.setChecked(parametro.getIdAplicativo() == 2?true:false);
+            //spinnerRotinas.setAdapter(spinnerRotinas.getAdapter());
+
         } else{
             botaoGravarParametro.setText("Gravar");
         }
 
         botaoGravarParametro.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.O)
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 salvar(v);
@@ -88,6 +92,7 @@ public class ParametroActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void salvar(View view) {
         if (!validaCampos()) {
             return;
@@ -97,7 +102,7 @@ public class ParametroActivity extends AppCompatActivity {
         parametro.setNome(editNomeParametro.getText().toString());
         parametro.setTempoMinimo(parsers.parserStringToTime(editTempoMinimo.getText().toString()));
         parametro.setTempoMaximo(parsers.parserStringToTime(editTempoMaximo.getText().toString()));
-        parametro.setIdAplicativo(radioGroup.getCheckedRadioButtonId());
+        //parametro.setRotina(spinnerRotinas.getAdapter().toString());
 
         ParametroController crud = new ParametroController(getBaseContext());
 
@@ -192,8 +197,6 @@ public class ParametroActivity extends AppCompatActivity {
         editNomeParametro.setText("");
         editTempoMinimo.setText("");
         editTempoMaximo.setText("");
-        radioWhatsApp.setChecked(false);
-        radioInstagram.setChecked(false);
-        radioFacebook.setChecked(false);
+        //spinnerRotinas.setAdapter(spinnerRotinas.getAdapter());
     }
 }

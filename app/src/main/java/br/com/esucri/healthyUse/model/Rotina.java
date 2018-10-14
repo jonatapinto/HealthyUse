@@ -1,8 +1,12 @@
 package br.com.esucri.healthyUse.model;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Rotina implements Serializable{
     private Integer id;
@@ -25,9 +29,7 @@ public class Rotina implements Serializable{
         return id;
     }
 
-    public String getNome(){
-        return nome;
-    }
+    public String getNome() { return nome; }
 
     public Integer getDom() {
         return dom;
@@ -128,4 +130,7 @@ public class Rotina implements Serializable{
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() { return nome; }
 }

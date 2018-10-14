@@ -46,14 +46,12 @@ public class BancoDeDados extends SQLiteOpenHelper {
         String createTableParametro =
                 "CREATE TABLE PARAMETRO (" +
                         "  _id integer not null primary key autoincrement," +
-                        "  ID_APLICATIVO text not null," +
+                        "  ROTINA text not null," +
                         "  NOME text not null," +
                         "  TEMPO_MINIMO text not null,"+
                         "  TEMPO_MAXIMO text not null)";
         db.execSQL(createTableParametro);
     }
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){

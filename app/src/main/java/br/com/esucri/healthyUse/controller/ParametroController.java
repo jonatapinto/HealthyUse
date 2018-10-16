@@ -78,12 +78,10 @@ public class ParametroController {
     }
 
     public Cursor retrieve() {
-
         String[] campos = {"_id","ROTINA","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
         instanciaDB = db.getReadableDatabase();
 
-        Cursor cursor = instanciaDB.query("PARAMETRO", campos,
-                null, null,null,null,null);
+        Cursor cursor = instanciaDB.query("PARAMETRO", campos, null, null,null,null,null);
 
         if (cursor != null) {
             cursor.moveToFirst();

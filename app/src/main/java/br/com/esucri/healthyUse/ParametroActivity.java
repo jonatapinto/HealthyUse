@@ -32,7 +32,7 @@ import br.com.esucri.healthyUse.utils.Validations;
 
 public class ParametroActivity extends AppCompatActivity {
     EditText editNomeParametro, editTempoMinimo, editTempoMaximo;
-    TextView textViewAplicativo;
+    TextView textViewRotinas;
     Spinner spinnerRotinas;
     Button botaoGravarParametro, botaoExcluirParametro;
     Parametro editarParametro = new Parametro();
@@ -49,10 +49,7 @@ public class ParametroActivity extends AppCompatActivity {
         editNomeParametro = (EditText) findViewById(R.id.editNomeParametro);
         editTempoMinimo = (EditText) findViewById(R.id.editTempoMinimo);
         editTempoMaximo = (EditText) findViewById(R.id.editTempoMaximo);
-        textViewAplicativo = (TextView) findViewById(R.id.textViewAplicativo);
-        botaoGravarParametro = (Button) findViewById(R.id.botaoGravarParametro);
-        botaoExcluirParametro = (Button) findViewById(R.id.botaoExcluirParametro);
-
+        textViewRotinas = (TextView) findViewById(R.id.textViewRotinas);
         try {
             ArrayList<Rotina> arrayList = new RotinaController(this).getListaRotinas();
             RotinaAdapter rotinaAdapter = new RotinaAdapter(this);
@@ -61,6 +58,8 @@ public class ParametroActivity extends AppCompatActivity {
             spinnerRotinas.setAdapter(arrayAdapter);
         } catch (Exception ex){
         }
+        botaoGravarParametro = (Button) findViewById(R.id.botaoGravarParametro);
+        botaoExcluirParametro = (Button) findViewById(R.id.botaoExcluirParametro);
 
         //Criando mascara para campos
         SimpleMaskFormatter smfTempo = new SimpleMaskFormatter("NN:NN");
@@ -93,7 +92,6 @@ public class ParametroActivity extends AppCompatActivity {
                 salvar(v);
             }
         });
-
         botaoExcluirParametro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +101,7 @@ public class ParametroActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        startActivity(new Intent(this, MainActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        startActivity(new Intent(this, ListaParametroActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
     }
@@ -136,8 +134,8 @@ public class ParametroActivity extends AppCompatActivity {
             Toast.makeText(ParametroActivity.this, "Registro salvo com sucesso!", Toast.LENGTH_LONG).show();
             limpar();
         }
-        //Volta para a tela de listagem de rotinas
-        Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
+        //Volta para a tela de listagem de parâmetros
+        Intent intent = new Intent(getBaseContext(), ListaParametroActivity.class);
         startActivity(intent);
     }
 
@@ -162,7 +160,6 @@ public class ParametroActivity extends AppCompatActivity {
             return false;
         } else {
             if(!validacao.isTimeValid(editTempoMinimo.getText().toString())){
-                //Toast.makeText(RotinaActivity.this, "Favor informar um horario válido!", Toast.LENGTH_LONG).show();
                 editTempoMinimo.requestFocus();
                 editTempoMinimo.setError("Tempo mínimo inválido!");
                 return false;
@@ -176,7 +173,6 @@ public class ParametroActivity extends AppCompatActivity {
             return false;
         } else {
             if(!validacao.isTimeValid(editTempoMaximo.getText().toString())){
-                //Toast.makeText(RotinaActivity.this, "Favor informar um horario válido!", Toast.LENGTH_LONG).show();
                 editTempoMaximo.requestFocus();
                 editTempoMaximo.setError("Tempo máximo inválido!");
                 return false;
@@ -204,9 +200,12 @@ public class ParametroActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getBaseContext(),"Parâmetro excluído com sucesso!", Toast.LENGTH_LONG).show();
         }
-        //Volta para a tela de listagem de rotinas
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+
+        //Volta para a tela de listagem de parâmetros
+        Intent intent = new Intent(getBaseContext(), ListaParametroActivity.class);
         startActivity(intent);
+
+        finishAffinity();
     }
 
     private void limpar() {

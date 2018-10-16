@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView_id"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textViewTituloRotina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotina: " />
+
+        <TextView
+            android:id="@+id/textViewRotina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"/>
+    </TableRow>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textViewTituloNome"
+                android:layout_width="84dp"
+                android:layout_height="match_parent"
+                android:text="@string/nome" />
+
+            <TextView
+                android:id="@+id/textViewNome"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textViewTituloTempoMinimo"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tempo mínimo: " />
+
+            <TextView
+                android:id="@+id/textViewTempoMinimo"
+                android:layout_width="33dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textViewTituloTempoMaximo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tempo máximo: " />
+
+            <TextView
+                android:id="@+id/textViewTempoMaximo"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

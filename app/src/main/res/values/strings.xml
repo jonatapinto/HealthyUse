@@ -4,10 +4,4 @@
     <string name="nome">Nome: </string>
     <string name="hora_inicio">Hora Início:</string>
     <string name="hora_final">Hora Final:</string>
-    <string-array name="rotinas">
-        <item>Trabalho Manhã</item>
-        <item>Trabalho Tarde</item>
-        <item>Faculdade</item>
-        <item>Aula Inglês</item>
-    </string-array>
 </resources>

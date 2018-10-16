@@ -28,11 +28,4 @@
         android:layout_gravity="center"
         android:text="Resultados" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="183dp"
-        android:layout_height="83dp"
-        android:layout_gravity="center"
-        android:text="Button" />
-
 </LinearLayout>

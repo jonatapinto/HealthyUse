@@ -1,7 +1,5 @@
 package br.com.esucri.healthyUse;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -14,13 +12,11 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.com.esucri.healthyUse.controller.RotinaController;
 import br.com.esucri.healthyUse.model.Rotina;
-import br.com.esucri.healthyUse.utils.BancoDeDados;
 
-public class ListRotinaActivity extends AppCompatActivity {
+public class ListaRotinaActivity extends AppCompatActivity {
 
     ListView lista;
     RotinaController rotinas;
@@ -32,7 +28,7 @@ public class ListRotinaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_rotina);
+        setContentView(R.layout.activity_lista_rotina);
 
         botaoNovo = (Button) findViewById(R.id.botaoNovo);
 
@@ -52,7 +48,7 @@ public class ListRotinaActivity extends AppCompatActivity {
         int[] componentes = {R.id.textView_id, R.id.textViewNome, R.id.textViewHoraInicio, R.id.textViewHoraFinal, R.id.textViewStatus};
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),
-                R.layout.lista_rotinas, cursor, campos, componentes, 0);
+                R.layout.lista_rotina, cursor, campos, componentes, 0);
         ListView lista = (ListView) findViewById(R.id.listViewRotinas);
         lista.setAdapter(adapter);
 
@@ -62,7 +58,7 @@ public class ListRotinaActivity extends AppCompatActivity {
                 cursor.moveToPosition(position);
                 String idRotina = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
 
-                Intent intent = new Intent(ListRotinaActivity.this, RotinaActivity.class);
+                Intent intent = new Intent(ListaRotinaActivity.this, RotinaActivity.class);
                 intent.putExtra("id", idRotina);
 
                 startActivity(intent);
@@ -77,14 +73,14 @@ public class ListRotinaActivity extends AppCompatActivity {
         //    public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
         //        Rotina rotinaEscolhida = (Rotina) adapter.getItemAtPosition(position);
 
-        //        Intent i = new Intent(ListRotinaActivity.this,RotinaActivity.class);
+        //        Intent i = new Intent(ListaRotinaActivity.this,RotinaActivity.class);
         //        i.putExtra("rotina-escolhida",rotinaEscolhida);
         //    }
         //});
     }
 
     //public void carregarRotina() {
-    //    rotinas = new RotinaController(ListRotinaActivity.this);
+    //    rotinas = new RotinaController(ListaRotinaActivity.this);
     //    listview_Rotina = rotinas.getListaRotinas();
     //}
 

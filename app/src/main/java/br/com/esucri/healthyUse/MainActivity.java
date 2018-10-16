@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     Button botaoRotinas;
     Button botaoParametros;
     Button botaoRelatorios;
-    Button button;
+    //Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         botaoRotinas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
+                Intent intent = new Intent(getBaseContext(), ListaRotinaActivity.class);
                 startActivity(intent);
             }
         });
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), ParametroActivity.class);
+                Intent intent = new Intent(getBaseContext(), ListaParametroActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             }
         });
 
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-           @Override
-            public void onClick(View view) {
-                String app = app = getRunningAppPackageName();
-               Toast.makeText(MainActivity.this, app, Toast.LENGTH_SHORT).show();
-            }
-        });
+        //button = (Button) findViewById(R.id.button);
+        //button.setOnClickListener(new View.OnClickListener() {
+        //   @Override
+        //    public void onClick(View view) {
+        //        String app = app = getRunningAppPackageName();
+        //       Toast.makeText(MainActivity.this, app, Toast.LENGTH_SHORT).show();
+        //    }
+        //});
 
         //Execução de Thread
 

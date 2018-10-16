@@ -1,8 +1,6 @@
 package br.com.esucri.healthyUse;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +17,6 @@ import android.widget.Toast;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
-import java.sql.Date;
 import br.com.esucri.healthyUse.controller.RotinaController;
 import br.com.esucri.healthyUse.model.Rotina;
 import br.com.esucri.healthyUse.utils.Parsers;
@@ -129,7 +126,7 @@ public class RotinaActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        startActivity(new Intent(this, ListRotinaActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        startActivity(new Intent(this, ListaRotinaActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
     }
@@ -171,7 +168,7 @@ public class RotinaActivity extends AppCompatActivity {
             limpar();
         }
         //Volta para a tela de listagem de rotinas
-        Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
+        Intent intent = new Intent(getBaseContext(), ListaRotinaActivity.class);
         startActivity(intent);
     }
 
@@ -261,7 +258,7 @@ public class RotinaActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(),"Rotina excluído com sucesso!", Toast.LENGTH_LONG).show();
         }
         //Volta para a tela de listagem de rotinas
-        Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
+        Intent intent = new Intent(getBaseContext(), ListaRotinaActivity.class);
         startActivity(intent);
     }
 
@@ -283,7 +280,7 @@ public class RotinaActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(),"Status da rotina atulizado com sucesso!", Toast.LENGTH_LONG).show();
         }
         //Volta para a tela de listagem de rotinas
-        Intent intent = new Intent(getBaseContext(), ListRotinaActivity.class);
+        Intent intent = new Intent(getBaseContext(), ListaRotinaActivity.class);
         startActivity(intent);
     }
 

@@ -128,6 +128,12 @@ public class RotinaActivity extends AppCompatActivity {
         });
     }
 
+    public void onBackPressed() {
+        startActivity(new Intent(this, ListRotinaActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        return;
+    }
+
     public void salvar(View view) {
         if (!validaCampos()) {
             return;

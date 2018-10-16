@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             }
         });
 
-        botaoRelatorios = (Button) findViewById(R.id.botaoRelatorio);
+        botaoRelatorios = (Button) findViewById(R.id.botaoResultado);
         botaoRelatorios.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), RelatorioActivity.class);
+                Intent intent = new Intent(getBaseContext(), ResultadoActivity.class);
                 startActivity(intent);
             }
         });
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
         //Execução de Thread
 
-        run();
+        //run();
         //System.out.println("Iniciando execução");
         //ThreadRotina t1 = new ThreadRotina();
 

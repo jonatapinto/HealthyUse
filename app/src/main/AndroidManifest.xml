@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RelatorioActivity">
+        <activity android:name=".ResultadoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -19,19 +19,20 @@
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="Parâmetro" />
+        android:text="Parâmetros" />
 
     <Button
-        android:id="@+id/botaoRelatorio"
+        android:id="@+id/botaoResultado"
         android:layout_width="183dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:text="Relatório" />
+        android:text="Resultados" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="183dp"
+        android:layout_height="83dp"
+        android:layout_gravity="center"
         android:text="Button" />
 
 </LinearLayout>

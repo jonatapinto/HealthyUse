@@ -15,9 +15,13 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import br.com.esucri.healthyUse.controller.ParametroController;
 import br.com.esucri.healthyUse.controller.RotinaController;
@@ -29,7 +33,7 @@ import br.com.esucri.healthyUse.utils.Validations;
 public class ParametroActivity extends AppCompatActivity {
     EditText editNomeParametro, editTempoMinimo, editTempoMaximo;
     TextView textViewAplicativo;
-    //Spinner spinnerRotinas;
+    Spinner spinnerRotinas;
     Button botaoGravarParametro, botaoExcluirParametro;
     Parametro editarParametro = new Parametro();
     Parsers parsers = new Parsers();
@@ -46,11 +50,17 @@ public class ParametroActivity extends AppCompatActivity {
         editTempoMinimo = (EditText) findViewById(R.id.editTempoMinimo);
         editTempoMaximo = (EditText) findViewById(R.id.editTempoMaximo);
         textViewAplicativo = (TextView) findViewById(R.id.textViewAplicativo);
+        botaoGravarParametro = (Button) findViewById(R.id.botaoGravarParametro);
+        botaoExcluirParametro = (Button) findViewById(R.id.botaoExcluirParametro);
 
-        //spinnerRotinas = (Spinner) findViewById(R.id.spinnerRotinas);
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.rotinas, android.R.layout.simple_spinner_item);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spinnerRotinas.setAdapter(adapter);
+        try {
+            ArrayList<Rotina> arrayList = new RotinaController(this).getListaRotinas();
+            RotinaAdapter rotinaAdapter = new RotinaAdapter(this);
+            spinnerRotinas = (Spinner) findViewById(R.id.spinnerRotinas);
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayList);
+            spinnerRotinas.setAdapter(arrayAdapter);
+        } catch (Exception ex){
+        }
 
         //Criando mascara para campos
         SimpleMaskFormatter smfTempo = new SimpleMaskFormatter("NN:NN");
@@ -69,7 +79,7 @@ public class ParametroActivity extends AppCompatActivity {
             editNomeParametro.setText(parametro.getNome());
             editTempoMinimo.setText(parametro.getTempoMinimo().toString());
             editTempoMaximo.setText(parametro.getTempoMaximo().toString());
-            //spinnerRotinas.setAdapter(spinnerRotinas.getAdapter());
+            spinnerRotinas.setAdapter(spinnerRotinas.getAdapter());
 
         } else{
             botaoGravarParametro.setText("Gravar");
@@ -92,6 +102,12 @@ public class ParametroActivity extends AppCompatActivity {
         });
     }
 
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        return;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void salvar(View view) {
         if (!validaCampos()) {
@@ -102,7 +118,7 @@ public class ParametroActivity extends AppCompatActivity {
         parametro.setNome(editNomeParametro.getText().toString());
         parametro.setTempoMinimo(parsers.parserStringToTime(editTempoMinimo.getText().toString()));
         parametro.setTempoMaximo(parsers.parserStringToTime(editTempoMaximo.getText().toString()));
-        //parametro.setRotina(spinnerRotinas.getAdapter().toString());
+        parametro.setRotina(spinnerRotinas.getAdapter().toString());
 
         ParametroController crud = new ParametroController(getBaseContext());
 
@@ -197,6 +213,5 @@ public class ParametroActivity extends AppCompatActivity {
         editNomeParametro.setText("");
         editTempoMinimo.setText("");
         editTempoMaximo.setText("");
-        //spinnerRotinas.setAdapter(spinnerRotinas.getAdapter());
     }
 }

@@ -29,7 +29,7 @@ public class RotinaActivity extends AppCompatActivity {
     EditText editNome, editHoraInicio, editHoraFinal;
     CheckBox checkBoxDomingo, checkBoxSegunda, checkBoxTerca, checkBoxQuarta, checkBoxQuinta, checkBoxSexta,
              checkBoxSabado, checkBoxWhatsApp, checkBoxInstagram, checkBoxFacebook;
-    Button botaoGravarRotina, botaoExcluirRotina, botaoAlterarStatusRotina, botaoInicializar, botaoPausar;
+    Button botaoGravarRotina, botaoExcluirRotina, botaoAlterarStatusRotina;
     TextView textViewAplicativos, textViewDiasSemana;
     Rotina editarRotina = new Rotina();
     Parsers parsers = new Parsers();
@@ -59,8 +59,6 @@ public class RotinaActivity extends AppCompatActivity {
         botaoGravarRotina = (Button) findViewById(R.id.botaoGravarRotina);
         botaoExcluirRotina = (Button) findViewById(R.id.botaoExcluirRotina);
         botaoAlterarStatusRotina = (Button) findViewById(R.id.botaoAlterarStatusRotina);
-        botaoInicializar = (Button) findViewById(R.id.botaoInicializarRotina);
-        botaoPausar = (Button) findViewById(R.id.botaoPausarRotina);
         textViewAplicativos = (TextView) findViewById(R.id.textViewAplicativos);
         textViewDiasSemana = (TextView) findViewById(R.id.textViewDiasSemana);
 
@@ -114,13 +112,6 @@ public class RotinaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alterarStatusRotina(v);
-            }
-        });
-
-        botaoInicializar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inicializarThread(v);
             }
         });
     }
@@ -298,13 +289,5 @@ public class RotinaActivity extends AppCompatActivity {
         checkBoxWhatsApp.setChecked(false);
         checkBoxInstagram.setChecked(false);
         checkBoxFacebook.setChecked(false);
-    }
-
-    public void inicializarThread(View v){
-        new Thread(new Runnable() {
-            public void run(){
-                Toast.makeText(RotinaActivity.this, "Teste contador "+contador, Toast.LENGTH_SHORT).show();
-            }
-        }).start();
     }
 }

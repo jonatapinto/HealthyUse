@@ -49,7 +49,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         "  _id integer not null primary key autoincrement," +
                         "  ROTINA text not null," +
                         "  NOME text not null," +
-                        "  TEMPO_MINIMO text not null,"+
+                        "  TEMPO_MINIMO text not null," +
                         "  TEMPO_MAXIMO text not null)";
         db.execSQL(createTableParametro);
     }

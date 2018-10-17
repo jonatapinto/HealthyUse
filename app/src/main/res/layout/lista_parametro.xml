@@ -10,9 +10,8 @@
 
         <TextView
             android:id="@+id/textView_id"
-            android:layout_width="84dp"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_width="120dp"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textViewTituloRotina"
@@ -22,9 +21,9 @@
 
         <TextView
             android:id="@+id/textViewRotina"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"/>
+            android:layout_width="217dp"
+            android:layout_height="wrap_content" />
+
     </TableRow>
 
     <TableLayout
@@ -37,14 +36,15 @@
 
             <TextView
                 android:id="@+id/textViewTituloNome"
-                android:layout_width="84dp"
-                android:layout_height="match_parent"
-                android:text="@string/nome" />
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Nome: " />
 
             <TextView
                 android:id="@+id/textViewNome"
-                android:layout_width="301dp"
+                android:layout_width="265dp"
                 android:layout_height="wrap_content" />
+
         </TableRow>
 
         <TableRow
@@ -53,16 +53,14 @@
 
             <TextView
                 android:id="@+id/textViewTituloTempoMinimo"
-                android:layout_width="80dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Tempo mínimo: " />
 
             <TextView
                 android:id="@+id/textViewTempoMinimo"
                 android:layout_width="33dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content" />
 
         </TableRow>
 
@@ -72,16 +70,14 @@
 
             <TextView
                 android:id="@+id/textViewTituloTempoMaximo"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Tempo máximo: " />
 
             <TextView
                 android:id="@+id/textViewTempoMaximo"
                 android:layout_width="20dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content" />
         </TableRow>
 
     </TableLayout>

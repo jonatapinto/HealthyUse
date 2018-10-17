@@ -164,24 +164,5 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/botaoInicializarRotina"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Inicializar Rotina" />
-
-            <Button
-                android:id="@+id/botaoPausarRotina"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Pausar Rotina" />
-        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

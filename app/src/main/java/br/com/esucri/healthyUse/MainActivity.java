@@ -52,27 +52,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                 startActivity(intent);
             }
         });
-
-        //button = (Button) findViewById(R.id.button);
-        //button.setOnClickListener(new View.OnClickListener() {
-        //   @Override
-        //    public void onClick(View view) {
-        //        String app = app = getRunningAppPackageName();
-        //       Toast.makeText(MainActivity.this, app, Toast.LENGTH_SHORT).show();
-        //    }
-        //});
-
-        //Execução de Thread
-
-        //run();
-        //System.out.println("Iniciando execução");
-        //ThreadRotina t1 = new ThreadRotina();
-
-        //super.runOnUiThread(t1);
-        //ExecutorService threadExecutor = Executors.newCachedThreadPool();
-        //threadExecutor.execute(t1);
-        //threadExecutor.shutdown();
-        //System.out.println("Finalizado");
     }
 
     public String getRunningAppPackageName() {

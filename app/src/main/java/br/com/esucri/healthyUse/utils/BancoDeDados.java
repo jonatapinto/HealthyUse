@@ -14,7 +14,6 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-
         String createTableOficio =
                 "CREATE TABLE ROTINA (" +
                         "  _id integer not null primary key autoincrement," +

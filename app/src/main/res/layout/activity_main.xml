@@ -28,4 +28,18 @@
         android:layout_gravity="center"
         android:text="Resultados" />
 
+    <Button
+        android:id="@+id/botaoIniciar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iniciar"
+        android:onClick="startService"/>
+
+    <Button
+        android:id="@+id/botaoParar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Parar"
+        android:onClick="stopService"/>
+
 </LinearLayout>

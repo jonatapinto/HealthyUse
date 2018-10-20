@@ -1,5 +1,6 @@
 package br.com.esucri.healthyUse;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +12,10 @@ import android.widget.Toast;
 import java.util.Date;
 import java.util.List;
 
+import br.com.esucri.healthyUse.Service.ServicoAplicativos;
 
-public class MainActivity extends AppCompatActivity implements Runnable{
+
+public class MainActivity extends Activity implements Runnable{
 
     Button botaoRotinas;
     Button botaoParametros;
@@ -90,5 +93,16 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
         } while(mudouApp);
         System.out.println("testando treads "+ new Date());
+    }
+
+    public void startService(View view){
+        Intent it = new Intent("SERVICO_INICIAR");
+        it.setPackage(this.getPackageName());
+        startService(it);
+    }
+
+    public void stopService(View view){
+        Intent it = new Intent("SERVICO_INICIAR");
+        stopService(it);
     }
 }

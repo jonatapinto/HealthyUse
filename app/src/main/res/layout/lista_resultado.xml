@@ -2,6 +2,97 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical" >
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView_id"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Código" />
+
+        <TextView
+            android:id="@+id/textViewTituloRotina"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:text="Rotina: " />
+
+        <TextView
+            android:id="@+id/textViewRotina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textViewAplicativo1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="WhatsApp" />
+
+            <TextView
+                android:id="@+id/textViewTempo1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Tempo" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textViewAplicativo2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Instagram" />
+
+            <TextView
+                android:id="@+id/textViewTempo2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Tempo" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textViewAplicativo3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Facebook" />
+
+            <TextView
+                android:id="@+id/textViewTempo3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Tempo" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textViewResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultado" />
+
+    </TableRow>
 
 </LinearLayout>

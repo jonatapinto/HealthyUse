@@ -41,7 +41,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         " DATA_INICIO text not null," +
                         " HORA_INICIO text not null," +
                         " DATA_FINAL text not null," +
-                        " HORA_FINAL time not null)";
+                        " HORA_FINAL text not null)";
         db.execSQL(createTableEstatistica);
 
         String createTableParametro =

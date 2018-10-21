@@ -42,4 +42,9 @@
         android:text="Parar"
         android:onClick="stopService"/>
 
+    <ListView
+        android:id="@+id/listViewProcess"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

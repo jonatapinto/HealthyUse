@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.sql.Time;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -125,6 +126,34 @@ public class RotinaController {
 
         Cursor cursor = instanciaDB.query("ROTINA", campos,
                 null, null,null,null,null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        instanciaDB.close();
+        return cursor;
+    }
+
+    public Cursor retrieveTemposApp(Date dataInicio, Date dataFim) {
+        String sql;
+        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","STATUS"};
+        instanciaDB = db.getReadableDatabase();
+        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
+
+        sql =   "SELECT  TD_EST.APLICATIVO AS APLICATIVO, \n" +
+                "        DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n" +
+                "        SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS\n" +
+                "  FROM \n" +
+                "        (SELECT E.APLICATIVO AS APLICATIVO,\n" +
+                "        E.DATA_HORA_INICIO AS DATA_HORA_INICIO,\n" +
+                "        (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG\n" +
+                "  FROM ESTATISTICA AS E) TD_EST\n" +
+                " WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ''?'' AND \n" +
+                "       DATE(TD_EST.DATA_HORA_INICIO) <= ''?'' \n" +
+                " GROUP BY TD_EST.APLICATIVO, DATA;";
+
+        Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataInicio)});
 
         if (cursor != null) {
             cursor.moveToFirst();

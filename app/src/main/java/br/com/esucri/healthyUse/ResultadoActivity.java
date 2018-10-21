@@ -19,6 +19,7 @@ import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.github.rtoshiro.util.format.text.SimpleMaskTextWatcher;
 
+import br.com.esucri.healthyUse.controller.ParametroController;
 import br.com.esucri.healthyUse.utils.Validations;
 
 public class ResultadoActivity extends AppCompatActivity {
@@ -92,8 +93,8 @@ public class ResultadoActivity extends AppCompatActivity {
             return;
         }
 
-        //ParametroController crud = new ParametroController(getBaseContext());
-        //final Cursor cursor = crud.retrieve();
+        ParametroController crud = new ParametroController(getBaseContext());
+        final Cursor cursor = crud.retrieve();
 
         //String[] campos = {"_id", "ROTINA", "NOME", "TEMPO_MINIMO", "TEMPO_MAXIMO"};
         //int[] componentes = {R.id.textView_id, R.id.textViewRotina, R.id.textViewNome, R.id.textViewTempoMinimo, R.id.textViewTempoMaximo};

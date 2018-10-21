@@ -1,16 +1,13 @@
-package br.com.esucri.healthyUse.Service;
+package br.com.esucri.healthyUse.service;
 
 import android.app.ActivityManager;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import br.com.esucri.healthyUse.MainActivity;
 
 public class ServicoAplicativos extends Service {
     public List<Worker> threads = new ArrayList<Worker>();

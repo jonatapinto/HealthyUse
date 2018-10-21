@@ -1,4 +1,4 @@
-package br.com.esucri.healthyUse.Service;
+package br.com.esucri.healthyUse.service;
 
 import android.app.ActivityManager;
 import android.app.Service;
@@ -8,16 +8,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import static br.com.esucri.healthyuse.Services.ProcessList.COLUMN_PROCESS_COUNT;
-import static br.com.esucri.healthyuse.Services.ProcessList.COLUMN_PROCESS_TIME;
-import br.com.esucri.healthyuse.Services.ProcessList;
-import br.com.esucri.healthyuse.Services.MonitorApp;
+
+import static br.com.esucri.healthyUse.service.ProcessList.COLUMN_PROCESS_COUNT;
+import static br.com.esucri.healthyUse.service.ProcessList.COLUMN_PROCESS_TIME;
 
 public class MonitorService extends Service {
     private boolean initialized = false;
@@ -46,7 +46,7 @@ public class MonitorService extends Service {
     }
 
     public class LocalBinder extends Binder{
-        MonitorService getService(){
+        public MonitorService getService(){
             // Return this instance of the service so clients can call public methods
             return MonitorService.this;
         }

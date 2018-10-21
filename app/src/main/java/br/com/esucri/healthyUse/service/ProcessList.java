@@ -1,4 +1,4 @@
-package br.com.esucri.healthyuse.Services;
+package br.com.esucri.healthyUse.service;
 
 import android.app.ActivityManager;
 import android.content.Context;

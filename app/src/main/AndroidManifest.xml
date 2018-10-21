@@ -26,7 +26,7 @@
         <activity android:name=".ListaParametroActivity"></activity>
         <activity android:name=".ParametroActivity"></activity>
         <activity android:name=".ResultadoActivity"></activity>
-        <service android:label="ServicoAplicativos" android:name=".Service.ServicoAplicativos" android:exported="false" >
+        <service android:label="ServicoAplicativos" android:name=".service.ServicoAplicativos" android:exported="false" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <action android:name="SERVICO_INICIAR"/>
@@ -36,7 +36,6 @@
                 <action android:name="SERVICO_PARAR"/>
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

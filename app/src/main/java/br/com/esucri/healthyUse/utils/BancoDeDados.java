@@ -34,13 +34,11 @@ public class BancoDeDados extends SQLiteOpenHelper {
         db.execSQL(createTableOficio);
 
         String createTableEstatistica =
-                "CREATE TABLE ESTATISTICA (" +
-                        " _id integer not null primary key autoincrement," +
-                        " ID_APLICATIVO integer not null," +
-                        " DATA_INICIO text not null," +
-                        " HORA_INICIO text not null," +
-                        " DATA_FINAL text not null," +
-                        " HORA_FINAL text not null)";
+                "CREATE TABLE ESTATISTICA ("+
+                        "_id              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+                        "APLICATIVO       TEXT    NOT NULL,"+
+                        "DATA_HORA_INICIO REAL    NOT NULL,"+
+                        "DATA_HORA_FIM    REAL    NOT NULL)";
         db.execSQL(createTableEstatistica);
 
         String createTableParametro =

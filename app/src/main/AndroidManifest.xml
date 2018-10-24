@@ -25,7 +25,7 @@
         <activity android:name=".RotinaActivity"></activity>
         <activity android:name=".ListaParametroActivity"></activity>
         <activity android:name=".ParametroActivity"></activity>
-        <activity android:name=".ResultadoActivity"></activity>
+        <activity android:name=".ListaResultadoActivity"></activity>
         <service android:label="ServicoAplicativos" android:name=".service.ServicoAplicativos" android:exported="false" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>

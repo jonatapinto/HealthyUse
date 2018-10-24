@@ -19,10 +19,14 @@ import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.github.rtoshiro.util.format.text.SimpleMaskTextWatcher;
 
-import br.com.esucri.healthyUse.controller.ParametroController;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import br.com.esucri.healthyUse.controller.ResultadoController;
 import br.com.esucri.healthyUse.utils.Validations;
 
-public class ResultadoActivity extends AppCompatActivity {
+public class ListaResultadoActivity extends AppCompatActivity {
     EditText editDataInicio, editDataFinal;
     Button botaoResultados;
     ListView lista;
@@ -37,7 +41,6 @@ public class ResultadoActivity extends AppCompatActivity {
         botaoResultados = (Button) findViewById(R.id.botaoResultados);
 
         botaoResultados.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.O)
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
@@ -52,7 +55,6 @@ public class ResultadoActivity extends AppCompatActivity {
         editDataFinal.addTextChangedListener(mtwDataFinal);
     }
 
-    @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(api = Build.VERSION_CODES.O)
     private boolean validaCampos() {
         Boolean result = true;
@@ -89,12 +91,36 @@ public class ResultadoActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void resultado(View view) {
+        SimpleDateFormat in = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat out = new SimpleDateFormat("yyyy-MM-dd");
+
         if (!validaCampos()) {
             return;
         }
 
-        ParametroController crud = new ParametroController(getBaseContext());
-        final Cursor cursor = crud.retrieve();
+        ResultadoController crud = new ResultadoController(getBaseContext());
+        //passa a data de inicio e fim da tela
+        try {
+            Date dataInicioFormatada = in.parse(editDataInicio.getText().toString());
+            Date dataFimFormatada = in.parse(editDataFinal.getText().toString());
+            ListView lista = (ListView) findViewById(R.id.listViewResultados);
+
+            final Cursor cursor = crud.retrieveTempos(out.parse(out.format(dataInicioFormatada)),
+            out.parse(out.format(dataFimFormatada)));
+
+            int[] componentes = {R.id.textID3, R.id.textViewTempo1, R.id.textViewTempo2,R.id.textViewTempo3};
+            String[] campos = {"_id","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK"};
+
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),
+                    R.layout.lista_resultado, cursor, campos, componentes, 0);
+            lista.setAdapter(adapter);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //ParametroController crud = new ParametroController(getBaseContext());
+        //final Cursor cursor = crud.retrieve();
 
         //String[] campos = {"_id", "ROTINA", "NOME", "TEMPO_MINIMO", "TEMPO_MAXIMO"};
         //int[] componentes = {R.id.textView_id, R.id.textViewRotina, R.id.textViewNome, R.id.textViewTempoMinimo, R.id.textViewTempoMaximo};

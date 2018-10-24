@@ -22,6 +22,7 @@ public class RotinaController {
 
     public RotinaController(Context context) {
         db = new BancoDeDados(context);
+        db.insereDadosSimulados();
     }
 
     public long create(final Rotina rotina){
@@ -150,15 +151,13 @@ public class RotinaController {
               "               (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n" +
               "  FROM ESTATISTICA AS E) TD_EST \n" +
               " WHERE DATE(TD_EST.DATA_HORA_INICIO) BETWEEN ? AND ? \n" +
-              " GROUP BY TD_EST.APLICATIVO, DATA;";
+              " GROUP BY TD_EST.APLICATIVO, DATA";
 
         Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataInicio)});
 
-        List<String[]> resultado = new ArrayList<String[]>();
-        Cursor cursor2;
-
+        List<String[]> resultadoTempos = new ArrayList<String[]>();
         while (cursor.moveToNext()){
-            resultado.add(new String[]{
+            resultadoTempos.add(new String[]{
                     cursor.getColumnName(0),
                     cursor.getColumnName(1),
                     cursor.getColumnName(2)});
@@ -166,6 +165,15 @@ public class RotinaController {
                     ", "+cursor.getColumnName(1)+
                     ", "+cursor.getColumnName(2));
         }
+
+        List<String[]> rotinas = new ArrayList<String[]>();
+        rotinas.add(new String[]{"teADSADASst"});
+
+        for(String[] a : resultadoTempos){
+
+        }
+            
+
         cursor.close();
 
 

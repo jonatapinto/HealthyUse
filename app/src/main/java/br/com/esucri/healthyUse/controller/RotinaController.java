@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import br.com.esucri.healthyUse.model.Rotina;
 import br.com.esucri.healthyUse.utils.BancoDeDados;
@@ -137,23 +138,36 @@ public class RotinaController {
 
     public Cursor retrieveTemposApp(Date dataInicio, Date dataFim) {
         String sql;
-        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","STATUS"};
+        String[] campos = {"APLICATIVO","DATA","TEMPO_EM_SEGUNDOS"};
         instanciaDB = db.getReadableDatabase();
         SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
 
-        sql =   "SELECT  TD_EST.APLICATIVO AS APLICATIVO, \n" +
-                "        DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n" +
-                "        SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS\n" +
-                "  FROM \n" +
-                "        (SELECT E.APLICATIVO AS APLICATIVO,\n" +
-                "        E.DATA_HORA_INICIO AS DATA_HORA_INICIO,\n" +
-                "        (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG\n" +
-                "  FROM ESTATISTICA AS E) TD_EST\n" +
-                " WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ''?'' AND \n" +
-                "       DATE(TD_EST.DATA_HORA_INICIO) <= ''?'' \n" +
-                " GROUP BY TD_EST.APLICATIVO, DATA;";
+        sql = "SELECT TD_EST.APLICATIVO AS APLICATIVO, \n" +
+              "       DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n" +
+              "       SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n" +
+              "  FROM (SELECT E.APLICATIVO AS APLICATIVO, \n" +
+              "               E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n" +
+              "               (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n" +
+              "  FROM ESTATISTICA AS E) TD_EST \n" +
+              " WHERE DATE(TD_EST.DATA_HORA_INICIO) BETWEEN ? AND ? \n" +
+              " GROUP BY TD_EST.APLICATIVO, DATA;";
 
         Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataInicio)});
+
+        List<String[]> resultado = new ArrayList<String[]>();
+        Cursor cursor2;
+
+        while (cursor.moveToNext()){
+            resultado.add(new String[]{
+                    cursor.getColumnName(0),
+                    cursor.getColumnName(1),
+                    cursor.getColumnName(2)});
+            System.out.println(cursor.getColumnName(0)+
+                    ", "+cursor.getColumnName(1)+
+                    ", "+cursor.getColumnName(2));
+        }
+        cursor.close();
+
 
         if (cursor != null) {
             cursor.moveToFirst();

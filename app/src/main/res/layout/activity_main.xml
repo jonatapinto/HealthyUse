@@ -9,22 +9,22 @@
 
     <Button
         android:id="@+id/botaoRotinas"
-        android:layout_width="183dp"
-        android:layout_height="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Rotinas" />
 
     <Button
         android:id="@+id/botaoParametros"
-        android:layout_width="183dp"
-        android:layout_height="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Parâmetros" />
 
     <Button
         android:id="@+id/botaoResultado"
-        android:layout_width="183dp"
-        android:layout_height="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Resultados" />
 

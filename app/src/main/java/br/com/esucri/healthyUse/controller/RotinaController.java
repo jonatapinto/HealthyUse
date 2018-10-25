@@ -22,7 +22,7 @@ public class RotinaController {
 
     public RotinaController(Context context) {
         db = new BancoDeDados(context);
-        //db.insereDadosSimulados();
+        db.insereDadosSimulados();
     }
 
     public long create(final Rotina rotina){

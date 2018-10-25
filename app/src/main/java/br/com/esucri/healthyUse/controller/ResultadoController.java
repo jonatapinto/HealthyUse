@@ -81,9 +81,12 @@ public class ResultadoController {
                 "               TD_EST.APLICATIVO = 'INSTAGRAM' \n"+
                 "         GROUP BY TD_EST.APLICATIVO) AS TD_INSTAGRAM;";// acrescentar a data
 
+        String sql2 = "SELECT _id, APLICATIVO, DATA_HORA_INICIO, DATA_HORA_FIM FROM ESTATISTICA";
+
         System.out.println("data inicio "+in.format(dataInicio)+"data fim "+ in.format(dataFim));
-        Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataFim)});
-        System.out.println("");
+        //Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataFim)});
+        Cursor cursor = instanciaDB.rawQuery(sql2,null);
+        System.out.println("TESTE PASSOU PELO CURSOR");
 
         //List<String[]> resultadoTempos = new ArrayList<String[]>();
         //while (cursor.moveToNext()){

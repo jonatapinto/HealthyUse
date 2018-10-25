@@ -5,13 +5,23 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.SQLOutput;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import br.com.esucri.healthyUse.controller.EstatisticaController;
+import br.com.esucri.healthyUse.model.Estatistica;
+
 public class BancoDeDados extends SQLiteOpenHelper {
     private static final String DB_NOME = "HEALTHYUSE";
     private static final int DB_VERSAO = 1;
     private SQLiteDatabase instanciaDB;
+    private Context context;
 
     public BancoDeDados(Context context){
         super(context,DB_NOME, null, DB_VERSAO);
+        this.context = context;
     }
 
     @Override
@@ -39,8 +49,8 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 "CREATE TABLE ESTATISTICA ("+
                         "_id              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
                         "APLICATIVO       TEXT    NOT NULL,"+
-                        "DATA_HORA_INICIO REAL    NOT NULL,"+
-                        "DATA_HORA_FIM    REAL    NOT NULL)";
+                        "DATA_HORA_INICIO TEXT    NOT NULL,"+
+                        "DATA_HORA_FIM    TEXT    NOT NULL)";
         db.execSQL(createTableEstatistica);
         System.out.println("TABELA ESTATISTICA "+createTableEstatistica);
         String createTableParametro =
@@ -83,6 +93,23 @@ public class BancoDeDados extends SQLiteOpenHelper {
         //if(cursor.getCount() != 0){
         //    return;
         //}
+
+        SimpleDateFormat out = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Estatistica est1 = new Estatistica();
+        Estatistica est2 = new Estatistica();
+
+        est1.setAplicativo("FACEBOOK");
+        est1.setDataHoraInicio("2018-10-10 10:00:00");
+        est1.setDataHoraFim("2018-10-10 11:00:00");
+
+        est2.setAplicativo("INSTAGRAM");
+        est2.setDataHoraInicio("2018-10-10 11:01:00");
+        est2.setDataHoraFim("2018-10-10 11:30:00");
+
+        EstatisticaController e = new EstatisticaController(this.context);
+
+        e.create(est1);
+        e.create(est2);
 
         System.out.println("PASSANDO PELOS INSERTS");
 
@@ -336,6 +363,8 @@ public class BancoDeDados extends SQLiteOpenHelper {
         instanciaDB.execSQL(inserts);
 
         instanciaDB.close();
+
+        System.out.println("CLOSE DO INSTANCIADB");
     }
 
 }

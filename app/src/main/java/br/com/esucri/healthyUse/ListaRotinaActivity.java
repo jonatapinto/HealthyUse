@@ -11,10 +11,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import br.com.esucri.healthyUse.controller.RotinaController;
 import br.com.esucri.healthyUse.model.Rotina;
+import br.com.esucri.healthyUse.utils.BancoDeDados;
 
 public class ListaRotinaActivity extends AppCompatActivity {
 
@@ -40,6 +42,9 @@ public class ListaRotinaActivity extends AppCompatActivity {
             }
         });
 
+        System.out.println("ANTES DE INSERIR DADOS SIMULADOS");
+        BancoDeDados b = new BancoDeDados(getBaseContext());
+        b.insereDadosSimulados();
         RotinaController crud = new RotinaController(getBaseContext());
         final Cursor cursor = crud.retrieve();
 

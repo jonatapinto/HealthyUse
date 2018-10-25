@@ -5,57 +5,39 @@ import java.util.Date;
 
 public class Estatistica {
     private Integer id;
-    private Integer idAplicativo;
-    private Date dataInicio;
-    private Time horaInicio;
-    private Date dataFinal;
-    private Time horaFinal;
+    private String aplicativo;
+    private String dataHoraInicio;
+    private String dataHoraFim;
 
     public Integer getId() {
         return id;
-    }
-
-    public Integer getIdAplicativo() {
-        return idAplicativo;
-    }
-
-    public Date getDataInicio() {
-        return dataInicio;
-    }
-
-    public Time getHoraInicio() {
-        return horaInicio;
-    }
-
-    public Date getDataFinal() {
-        return dataFinal;
-    }
-
-    public Time getHoraFinal() {
-        return horaFinal;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setIdAplicativo(Integer idAplicativo) {
-        this.idAplicativo = idAplicativo;
+    public String getAplicativo() {
+        return aplicativo;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
+    public void setAplicativo(String aplicativo) {
+        this.aplicativo = aplicativo;
     }
 
-    public void setHoraInicio(Time horaInicio) {
-        this.horaInicio = horaInicio;
+    public String getDataHoraInicio() {
+        return dataHoraInicio;
     }
 
-    public void setDataFinal(Date dataFinal) {
-        this.dataFinal = dataFinal;
+    public void setDataHoraInicio(String dataHoraInicio) {
+        this.dataHoraInicio = dataHoraInicio;
     }
 
-    public void setHoraFinal(Time horaFinal) {
-        this.horaFinal = horaFinal;
+    public String getDataHoraFim() {
+        return dataHoraFim;
+    }
+
+    public void setDataHoraFim(String dataHoraFim) {
+        this.dataHoraFim = dataHoraFim;
     }
 }

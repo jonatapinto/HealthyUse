@@ -83,6 +83,7 @@ public class ResultadoController {
 
         System.out.println("data inicio "+in.format(dataInicio)+"data fim "+ in.format(dataFim));
         Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataFim)});
+        System.out.println("");
 
         //List<String[]> resultadoTempos = new ArrayList<String[]>();
         //while (cursor.moveToNext()){

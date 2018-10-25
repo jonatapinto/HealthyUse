@@ -111,6 +111,8 @@ public class ListaResultadoActivity extends AppCompatActivity{
         final Cursor cursor = crud.retrieveTempos(out.parse(out.format(dataInicioFormatada)),
                 out.parse(out.format(dataFimFormatada)));
 
+        System.out.println("NUMERO DE LINHAS DO CURSOR "+cursor.getCount());
+
         String[] campos = {"_id","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK"};
         int[] componentes = {R.id.textID3, R.id.textViewTempo1, R.id.textViewTempo2, R.id.textViewTempo3};
 

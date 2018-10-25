@@ -42,45 +42,47 @@ public class ResultadoController {
                 "       TD_WHATSAPP.TEMPO_EM_SEGUNDOS AS TEMPO_WHATSAPP, \n"+
                 "       TD_INSTAGRAM.TEMPO_EM_SEGUNDOS AS TEMPO_INSTAGRAM, \n"+
                 "       TD_FACEBOOK.TEMPO_EM_SEGUNDOS AS TEMPO_FACEBOOK \n"+
-                "  FROM \n"+
-                "(SELECT  TD_EST.APLICATIVO, \n"+
-                "         DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n"+
-                "         SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
-                "   FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
-                "                E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
-                "                E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
-                "                (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
-                "           FROM ESTATISTICA AS E) AS TD_EST \n"+
-                "          WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
-                "                DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
-                "                TD_EST.APLICATIVO = 'FACEBOOK' \n"+
+                "  FROM (SELECT  TD_EST.APLICATIVO, \n"+
+                "                DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n"+
+                "                SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
+                "          FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
+                "                       E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
+                "                       E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
+                "                       (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
+                "                  FROM ESTATISTICA AS E) AS TD_EST \n"+
+                "         WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
+                "               DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
+                "               TD_EST.APLICATIVO = 'FACEBOOK' \n"+
                 "          GROUP BY TD_EST.APLICATIVO) AS TD_FACEBOOK, \n"+
-                "(SELECT  TD_EST.APLICATIVO, \n"+
-                "         DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n"+
-                "         SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
-                "   FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
-                "                E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
-                "                E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
-                "                (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
-                "           FROM ESTATISTICA AS E) AS TD_EST \n"+
-                "          WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
-                "                DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
-                "                TD_EST.APLICATIVO = 'WHATSAPP' \n"+
-                "          GROUP BY TD_EST.APLICATIVO) AS TD_WHATSAPP, \n"+
-                "(SELECT  TD_EST.APLICATIVO, \n"+
-                "         DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n"+
-                "         SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
-                "   FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
-                "                E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
-                "                E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
-                "                (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
-                "           FROM ESTATISTICA AS E) AS TD_EST \n"+
-                "  WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
-                "        DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
-                "        TD_EST.APLICATIVO = 'INSTAGRAM' \n"+
-                "  GROUP BY TD_EST.APLICATIVO) AS TD_INSTAGRAM \n";// acrescentar a data
 
-        Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataInicio)});
+                "       (SELECT  TD_EST.APLICATIVO, \n"+
+                "                DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n"+
+                "                SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
+                "          FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
+                "                       E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
+                "                       E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
+                "                       (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
+                "                  FROM ESTATISTICA AS E) AS TD_EST \n"+
+                "         WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
+                "               DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
+                "               TD_EST.APLICATIVO = 'WHATSAPP' \n"+
+                "         GROUP BY TD_EST.APLICATIVO) AS TD_WHATSAPP, \n"+
+
+                "       (SELECT  TD_EST.APLICATIVO, \n"+
+                "                DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n"+
+                "                SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
+                "          FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
+                "                       E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
+                "                       E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
+                "                       (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
+                "                  FROM ESTATISTICA AS E) AS TD_EST \n"+
+                "         WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
+                "               DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
+                "               TD_EST.APLICATIVO = 'INSTAGRAM' \n"+
+                "         GROUP BY TD_EST.APLICATIVO) AS TD_INSTAGRAM;";// acrescentar a data
+
+        System.out.println("data inicio "+in.format(dataInicio)+"data fim "+ in.format(dataFim));
+        Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataFim)});
 
         //List<String[]> resultadoTempos = new ArrayList<String[]>();
         //while (cursor.moveToNext()){

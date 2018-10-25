@@ -26,9 +26,9 @@ import java.text.SimpleDateFormat;
 import br.com.esucri.healthyUse.controller.ResultadoController;
 import br.com.esucri.healthyUse.utils.Validations;
 
-public class ListaResultadoActivity extends AppCompatActivity {
+public class ListaResultadoActivity extends AppCompatActivity{
     EditText editDataInicio, editDataFinal;
-    Button botaoResultados;
+    Button botaoResult;
     ListView lista;
 
     @Override
@@ -38,13 +38,17 @@ public class ListaResultadoActivity extends AppCompatActivity {
 
         editDataInicio = (EditText) findViewById(R.id.editDataInicio);
         editDataFinal = (EditText) findViewById(R.id.editDataFinal);
-        botaoResultados = (Button) findViewById(R.id.botaoResultados);
+        botaoResult = (Button) findViewById(R.id.botaoResult);
 
-        botaoResultados.setOnClickListener(new View.OnClickListener() {
+        botaoResult.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                resultado(v);
+                try {
+                    resultado(v);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -90,7 +94,7 @@ public class ListaResultadoActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void resultado(View view) {
+    public void resultado(View view)  throws ParseException{
         SimpleDateFormat in = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat out = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -100,24 +104,22 @@ public class ListaResultadoActivity extends AppCompatActivity {
 
         ResultadoController crud = new ResultadoController(getBaseContext());
         //passa a data de inicio e fim da tela
-        try {
-            Date dataInicioFormatada = in.parse(editDataInicio.getText().toString());
-            Date dataFimFormatada = in.parse(editDataFinal.getText().toString());
-            ListView lista = (ListView) findViewById(R.id.listViewResultados);
+        System.out.println("ENTROU NO TRY");
+        Date dataInicioFormatada = in.parse(editDataInicio.getText().toString());
+        Date dataFimFormatada = in.parse(editDataFinal.getText().toString());
 
-            final Cursor cursor = crud.retrieveTempos(out.parse(out.format(dataInicioFormatada)),
-            out.parse(out.format(dataFimFormatada)));
+        final Cursor cursor = crud.retrieveTempos(out.parse(out.format(dataInicioFormatada)),
+                out.parse(out.format(dataFimFormatada)));
 
-            int[] componentes = {R.id.textID3, R.id.textViewTempo1, R.id.textViewTempo2,R.id.textViewTempo3};
-            String[] campos = {"_id","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK"};
+        String[] campos = {"_id","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK"};
+        int[] componentes = {R.id.textID3, R.id.textViewTempo1, R.id.textViewTempo2, R.id.textViewTempo3};
 
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),
-                    R.layout.lista_resultado, cursor, campos, componentes, 0);
-            lista.setAdapter(adapter);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),
+                R.layout.lista_resultado, cursor, campos, componentes, 0);
+        ListView lista = (ListView) findViewById(R.id.listViewResultados);
+        lista.setAdapter(adapter);
+        System.out.println("PASSOU O ADAPTER");
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         //ParametroController crud = new ParametroController(getBaseContext());
         //final Cursor cursor = crud.retrieve();

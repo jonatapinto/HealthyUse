@@ -28,9 +28,9 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         "  QUA integer not null,"+
                         "  QUI integer not null,"+
                         "  SEX integer not null,"+
-                        "  SAB integer not null," +
-                        "  INSTAGRAM integer not null," +
-                        "  FACEBOOK integer not null," +
+                        "  SAB integer not null,"+
+                        "  INSTAGRAM integer not null,"+
+                        "  FACEBOOK integer not null,"+
                         "  WHATSAPP integer not null,"+
                         "  STATUS integer not null)";
         db.execSQL(createTableOficio);
@@ -42,7 +42,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         "DATA_HORA_INICIO REAL    NOT NULL,"+
                         "DATA_HORA_FIM    REAL    NOT NULL)";
         db.execSQL(createTableEstatistica);
-
+        System.out.println("TABELA ESTATISTICA "+createTableEstatistica);
         String createTableParametro =
                 "CREATE TABLE PARAMETRO (" +
                         "  _id integer not null primary key autoincrement," +
@@ -83,6 +83,8 @@ public class BancoDeDados extends SQLiteOpenHelper {
         //if(cursor.getCount() != 0){
         //    return;
         //}
+
+        System.out.println("PASSANDO PELOS INSERTS");
 
         inserts = "INSERT INTO ESTATISTICA (_id,APLICATIVO,DATA_HORA_INICIO,DATA_HORA_FIM) VALUES ((SELECT MAX(_id)+1 FROM ESTATISTICA),'WHATSAPP','2018-09-10 07:40:00','2018-09-10 07:43:00');";
         instanciaDB.execSQL(inserts);

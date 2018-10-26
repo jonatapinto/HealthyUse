@@ -31,7 +31,6 @@ public class ListaParametroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_parametro);
 
         botaoNovo = (Button) findViewById(R.id.botaoNovo);
-
         botaoNovo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -29,6 +29,10 @@
         <activity android:name=".ListaParametroActivity"></activity>
         <activity android:name=".ParametroActivity"></activity>
         <activity android:name=".ListaResultadoActivity"></activity>
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

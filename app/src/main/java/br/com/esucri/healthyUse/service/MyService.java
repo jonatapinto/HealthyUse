@@ -44,23 +44,23 @@ public class MyService extends Service
     {
         public void run()
         {
-            //switch (getForegroundApp()){
-            //    case "com.whatsapp":
-            //        //--Salva WhatsApp
-            //    case "com.facebook":
-            //        //--Salva Facebook
-            //    case "com.instagram":
-            //        //--Salva Instagram
-            //}
+            switch (getForegroundApp()) {
+                case "com.whatsapp":
+                    //--Salva WhatsApp
+                case "com.instagram.android":
+                    //--Salva Instagram
+                case "com.facebook":
+                    //--Salva Facebook
+            }
 
-            //Date currentTime = Calendar.getInstance().getTime();
+            Date currentTime = Calendar.getInstance().getTime();
 
-            //DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-            //formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-            //String dateFormatted = formatter.format(currentTime);
+            String dateFormatted = formatter.format(currentTime);
 
-            Log.w("Saymon", getForegroundApp());
+            Log.w("Atividade", getForegroundApp());
         }
     }
 

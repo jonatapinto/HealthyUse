@@ -4,13 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.ArrayAdapter;
 
 import java.sql.Time;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import br.com.esucri.healthyUse.R;
 import br.com.esucri.healthyUse.model.Parametro;
 import br.com.esucri.healthyUse.utils.BancoDeDados;
 import br.com.esucri.healthyUse.utils.Parsers;

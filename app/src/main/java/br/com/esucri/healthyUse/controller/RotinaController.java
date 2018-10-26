@@ -1,6 +1,5 @@
 package br.com.esucri.healthyUse.controller;
 
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -170,12 +169,9 @@ public class RotinaController {
         rotinas.add(new String[]{"teADSADASst"});
 
         for(String[] a : resultadoTempos){
-
         }
-            
 
         cursor.close();
-
 
         if (cursor != null) {
             cursor.moveToFirst();

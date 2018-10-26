@@ -6,7 +6,10 @@
     <uses-permission
         android:name="android.permission.BATTERY_STATS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -26,16 +29,6 @@
         <activity android:name=".ListaParametroActivity"></activity>
         <activity android:name=".ParametroActivity"></activity>
         <activity android:name=".ListaResultadoActivity"></activity>
-        <service android:label="ServicoAplicativos" android:name=".service.ServicoAplicativos" android:exported="false" >
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="SERVICO_INICIAR"/>
-            </intent-filter>
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="SERVICO_PARAR"/>
-            </intent-filter>
-        </service>
     </application>
 
 </manifest>

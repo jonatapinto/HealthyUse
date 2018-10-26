@@ -19,9 +19,13 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import br.com.esucri.healthyUse.model.Estatistica;
 
-public class MyService extends Service
-{
+
+public class MyService extends Service {
+
+    Integer cont = 0;
+
     private static Timer timer = new Timer();
 
     public IBinder onBind(Intent arg0)
@@ -42,32 +46,51 @@ public class MyService extends Service
 
     private class mainTask extends TimerTask
     {
+
         public void run()
         {
-            switch (getForegroundApp()) {
-                case "com.whatsapp":
-                    //--Salva WhatsApp
-                case "com.instagram.android":
-                    //--Salva Instagram
-                case "com.facebook":
-                    //--Salva Facebook
-            }
-
             Date currentTime = Calendar.getInstance().getTime();
 
-            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
             String dateFormatted = formatter.format(currentTime);
 
-            Log.w("Atividade", getForegroundApp());
+            switch (getForegroundApp()){
+                case "com.whatsapp": {
+                    Estatistica estatistica = new Estatistica();
+                    estatistica.setAplicativo("WHATSAPP");
+                    if (cont == 0) {
+                        estatistica.setDataHoraInicio(dateFormatted);
+                        estatistica.setDataHoraFim(dateFormatted);
+                        Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted);
+                    }
+                    if (cont > 0){
+                        estatistica.setDataHoraFim(dateFormatted);
+                        Log.w("AtividadeGravandoFim", getForegroundApp()+ " " + dateFormatted);
+                    }
+                    Log.w("AtividadeEWhats", getForegroundApp());
+                    cont = cont + 1;
+                    break;
+                }
+                case "com.instagram.android": {
+                    Log.w("AtividadeEInsta", getForegroundApp());
+                    break;
+                }
+                case "com.facebook.katana": {
+                    Log.w("AtividadeEFace", getForegroundApp());
+                    break;
+                }
+            }
+
+            Log.w("Atividade", getForegroundApp() + " " + dateFormatted);
         }
     }
 
     public void onDestroy()
     {
         super.onDestroy();
-        Toast.makeText(this, "Service Stopped ...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Serviço Terminado", Toast.LENGTH_SHORT).show();
     }
 
     private final Handler toastHandler = new Handler()

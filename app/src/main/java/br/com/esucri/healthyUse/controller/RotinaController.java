@@ -136,51 +136,6 @@ public class RotinaController {
         return cursor;
     }
 
-    public Cursor retrieveTemposApp(Date dataInicio, Date dataFim) {
-        String sql;
-        String[] campos = {"APLICATIVO","DATA","TEMPO_EM_SEGUNDOS"};
-        instanciaDB = db.getReadableDatabase();
-        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
-
-        sql = "SELECT TD_EST.APLICATIVO AS APLICATIVO, \n" +
-              "       DATE(TD_EST.DATA_HORA_INICIO) AS DATA, \n" +
-              "       SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n" +
-              "  FROM (SELECT E.APLICATIVO AS APLICATIVO, \n" +
-              "               E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n" +
-              "               (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n" +
-              "  FROM ESTATISTICA AS E) TD_EST \n" +
-              " WHERE DATE(TD_EST.DATA_HORA_INICIO) BETWEEN ? AND ? \n" +
-              " GROUP BY TD_EST.APLICATIVO, DATA";
-
-        Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataInicio)});
-
-        List<String[]> resultadoTempos = new ArrayList<String[]>();
-        while (cursor.moveToNext()){
-            resultadoTempos.add(new String[]{
-                    cursor.getColumnName(0),
-                    cursor.getColumnName(1),
-                    cursor.getColumnName(2)});
-            System.out.println(cursor.getColumnName(0)+
-                    ", "+cursor.getColumnName(1)+
-                    ", "+cursor.getColumnName(2));
-        }
-
-        List<String[]> rotinas = new ArrayList<String[]>();
-        rotinas.add(new String[]{"teADSADASst"});
-
-        for(String[] a : resultadoTempos){
-        }
-
-        cursor.close();
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-
-        instanciaDB.close();
-        return cursor;
-    }
-
     public Rotina getById(int id) {
         String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP","STATUS"};
         String where = "_id = " + id;

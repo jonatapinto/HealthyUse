@@ -19,12 +19,14 @@ import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import br.com.esucri.healthyUse.controller.EstatisticaController;
 import br.com.esucri.healthyUse.model.Estatistica;
 
 
 public class MyService extends Service {
 
     Integer cont = 0;
+    int _idCorrente; //Utilizado para pegar sempre o maior _id da estatistica
 
     private static Timer timer = new Timer();
 
@@ -46,10 +48,11 @@ public class MyService extends Service {
 
     private class mainTask extends TimerTask
     {
-
+        EstatisticaController controller = new EstatisticaController(getBaseContext());
         public void run()
         {
             Date currentTime = Calendar.getInstance().getTime();
+
 
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -63,27 +66,32 @@ public class MyService extends Service {
                     if (cont == 0) {
                         estatistica.setDataHoraInicio(dateFormatted);
                         estatistica.setDataHoraFim(dateFormatted);
-                        Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted);
+                        controller.create(estatistica);
+                        //chamar uma função que deve ser criado no controller que busque o MAX(_id)
+                        _idCorrente = controller.retrieveId();
+                        Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont + " _id " + _idCorrente);
                     }
                     if (cont > 0){
                         estatistica.setDataHoraFim(dateFormatted);
-                        Log.w("AtividadeGravandoFim", getForegroundApp()+ " " + dateFormatted);
+                        estatistica.setId(_idCorrente);
+                        controller.update(estatistica);
+                        Log.w("AtividadeGravandoFim", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont + " _id " + _idCorrente);
                     }
                     Log.w("AtividadeEWhats", getForegroundApp());
                     cont = cont + 1;
                     break;
                 }
                 case "com.instagram.android": {
-                    Log.w("AtividadeEInsta", getForegroundApp());
+                    Log.w("AtividadeEInsta", getForegroundApp()+ " CONTADOR: "+cont + " _id " + _idCorrente);
                     break;
                 }
                 case "com.facebook.katana": {
-                    Log.w("AtividadeEFace", getForegroundApp());
+                    Log.w("AtividadeEFace", getForegroundApp()+ " CONTADOR: "+cont + " _id " + _idCorrente);
                     break;
                 }
             }
 
-            Log.w("Atividade", getForegroundApp() + " " + dateFormatted);
+            Log.w("Atividade", getForegroundApp() + " " + dateFormatted + " CONTADOR: "+cont + " _id " + _idCorrente);
         }
     }
 

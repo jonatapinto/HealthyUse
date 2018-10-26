@@ -96,6 +96,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
         Estatistica est1 = new Estatistica();
         Estatistica est2 = new Estatistica();
+        Estatistica est3 = new Estatistica();
 
         est1.setAplicativo("FACEBOOK");
         est1.setDataHoraInicio("2018-10-10 10:00:00");
@@ -103,11 +104,16 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
         est2.setAplicativo("INSTAGRAM");
         est2.setDataHoraInicio("2018-10-10 11:01:00");
-        est2.setDataHoraFim("2018-10-10 11:30:00");
+        est2.setDataHoraFim("2018-10-10 11:03:00");
+
+        est3.setAplicativo("WHATSAPP");
+        est3.setDataHoraInicio("2018-10-10 11:31:00");
+        est3.setDataHoraFim("2018-10-10 12:15:00");
 
         EstatisticaController e = new EstatisticaController(this.context);
 
         e.create(est1);
+        e.create(est2);
         e.create(est2);
 
         System.out.println("PASSANDO PELOS INSERTS");

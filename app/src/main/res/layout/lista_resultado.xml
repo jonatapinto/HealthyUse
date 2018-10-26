@@ -44,13 +44,14 @@
                 android:id="@+id/textViewTempo1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Tempo" />
+                android:text="Tempo"/>
 
             <TextView
                 android:id="@+id/textID1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -74,7 +75,8 @@
                 android:id="@+id/textID2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:visibility="invisible" />
 
         </TableRow>
 
@@ -98,7 +100,8 @@
                 android:id="@+id/textID3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:visibility="invisible" />
         </TableRow>
 
     </TableLayout>

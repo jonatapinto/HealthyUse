@@ -83,9 +83,48 @@ public class ResultadoController {
 
         String sql2 = "SELECT _id, APLICATIVO, DATA_HORA_INICIO, DATA_HORA_FIM FROM ESTATISTICA";
 
+        String sql3 =
+                "SELECT 1 as _id, \n"+
+                "       TD_WHATSAPP.TEMPO_EM_SEGUNDOS AS TEMPO_WHATSAPP, \n"+
+                "       TD_INSTAGRAM.TEMPO_EM_SEGUNDOS AS TEMPO_INSTAGRAM, \n"+
+                "       TD_FACEBOOK.TEMPO_EM_SEGUNDOS AS TEMPO_FACEBOOK \n"+
+                "  FROM (SELECT SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
+                "          FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
+                "                       E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
+                "                       E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
+                "                       (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
+                "                  FROM ESTATISTICA AS E) AS TD_EST \n"+
+                "         WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
+                "               DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
+                "               TD_EST.APLICATIVO = 'INSTAGRAM') AS TD_INSTAGRAM," +
+
+                "       (SELECT SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
+                "          FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
+                "                       E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
+                "                      E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
+                "                      (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
+                "                  FROM ESTATISTICA AS E) AS TD_EST \n"+
+                "         WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
+                "               DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
+                "               TD_EST.APLICATIVO = 'FACEBOOK') AS TD_FACEBOOK," +
+
+                "       (SELECT SUM(TD_EST.DIF_SEG) AS TEMPO_EM_SEGUNDOS \n"+
+                "          FROM (SELECT E.APLICATIVO AS APLICATIVO, \n"+
+                "                       E.DATA_HORA_INICIO AS DATA_HORA_INICIO, \n"+
+                "                      E.DATA_HORA_FIM AS DATA_HORA_FIM, \n"+
+                "                      (strftime('%s',E.DATA_HORA_FIM) - strftime('%s',E.DATA_HORA_INICIO)) AS DIF_SEG \n"+
+                "                  FROM ESTATISTICA AS E) AS TD_EST \n"+
+                "         WHERE DATE(TD_EST.DATA_HORA_INICIO) >= ? AND \n"+
+                "               DATE(TD_EST.DATA_HORA_FIM) <= ? AND \n"+
+                "               TD_EST.APLICATIVO = 'WHATSAPP') AS TD_WHATSAPP;";
+
+
+        //String sql4 = "";
+
         System.out.println("data inicio "+in.format(dataInicio)+"data fim "+ in.format(dataFim));
-        //Cursor cursor = instanciaDB.rawQuery(sql,new String[] {in.format(dataInicio),in.format(dataFim)});
-        Cursor cursor = instanciaDB.rawQuery(sql2,null);
+        Cursor cursor = instanciaDB.rawQuery(sql3,new String[] {in.format(dataInicio),in.format(dataFim)});
+        //Cursor cursor = instanciaDB.rawQuery(sql2,null);
+        System.out.println("CURSOR LINHAS: "+cursor.getCount());
         System.out.println("TESTE PASSOU PELO CURSOR");
 
         //List<String[]> resultadoTempos = new ArrayList<String[]>();

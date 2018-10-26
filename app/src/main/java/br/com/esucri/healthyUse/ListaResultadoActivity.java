@@ -113,9 +113,11 @@ public class ListaResultadoActivity extends AppCompatActivity{
 
         System.out.println("NUMERO DE LINHAS DO CURSOR "+cursor.getCount());
 
-        //String[] campos = {"_id","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK"};
-        String[] campos = {"_id","APLICATIVO","DATA_HORA_INICIO","DATA_HORA_FIM"};
+        String[] campos = {"_id","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK"};
+        //String[] campos = {"_id","APLICATIVO","DATA_HORA_INICIO","DATA_HORA_FIM"};
+        //String[] campos = {"_id","TEMPO_EM_SEGUNDOS"};
         int[] componentes = {R.id.textID3, R.id.textViewTempo1, R.id.textViewTempo2, R.id.textViewTempo3};
+        //int[] componentes = {R.id.textID3, R.id.textViewTempo3};
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),
                 R.layout.lista_resultado, cursor, campos, componentes, 0);

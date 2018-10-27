@@ -8,6 +8,16 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/botaoPermissao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/fundocoluna"
+        android:textColor="@color/branco"
+        android:layout_marginTop="2dp"
+        android:text="Permissão"/>
+
+    <Button
         android:id="@+id/botaoRotinas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,14 +46,4 @@
         android:textColor="@color/branco"
         android:layout_marginTop="2dp"
         android:text="Resultados" />
-
-    <Button
-        android:id="@+id/botaoPermissao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/fundocoluna"
-        android:textColor="@color/branco"
-        android:layout_marginTop="2dp"
-        android:text="Permissão"/>
 </LinearLayout>

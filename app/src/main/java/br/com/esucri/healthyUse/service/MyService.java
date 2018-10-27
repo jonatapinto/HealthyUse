@@ -27,6 +27,8 @@ import br.com.esucri.healthyUse.model.Estatistica;
 public class MyService extends Service {
 
     Integer cont = 0;
+    Integer cont2 = 0;
+
     String nome_aplicativo = "";
     String data_hora_inicial = "";
 
@@ -43,17 +45,25 @@ public class MyService extends Service {
         startService();
     }
 
+    public boolean gravar (String nome_aplicativo, String data_hora_inicial, String data_hora_fim){
+        EstatisticaController controller = new EstatisticaController(getBaseContext());
+        Estatistica estatistica = new Estatistica();
+        estatistica.setAplicativo(nome_aplicativo);
+        estatistica.setDataHoraInicio(data_hora_inicial);
+        estatistica.setDataHoraFim(data_hora_fim);
+        controller.create(estatistica);
+        Log.w("AtividadeGravada",getForegroundApp()+ " " + data_hora_fim + " CONTADOR: "+cont);
+        return true;
+    }
+
     private void startService()
     {
         timer.scheduleAtFixedRate(new mainTask(), 0, 1000);
     }
 
-    private class mainTask extends TimerTask
-    {
-        EstatisticaController controller = new EstatisticaController(getBaseContext());
-        public void run()
-        {   Estatistica estatistica = new Estatistica();
+    private class mainTask extends TimerTask {
 
+        public void run() {
             Date currentTime = Calendar.getInstance().getTime();
 
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -62,88 +72,44 @@ public class MyService extends Service {
             String dateFormatted = formatter.format(currentTime);
 
             KeyguardManager myKM = (KeyguardManager) getBaseContext().getSystemService(getBaseContext().KEYGUARD_SERVICE);
-            if( myKM.inKeyguardRestrictedInputMode()) {
-                estatistica.setAplicativo(nome_aplicativo);
-                estatistica.setDataHoraInicio(data_hora_inicial);
-                estatistica.setDataHoraFim(dateFormatted);
-                controller.create(estatistica);
-                nome_aplicativo = getForegroundApp();
-                Log.w("AtividadeGravada",getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
-                Log.w("AtividadeTelaBloqueada", getForegroundApp());
-            } else {
-                switch (getForegroundApp()){
-                    case "com.whatsapp": {
-                        if (cont == 0) {
-                            nome_aplicativo = "com.whatsapp";
-                            data_hora_inicial = dateFormatted;
-                            Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
-                        }
-                        if (!getForegroundApp().equals(nome_aplicativo)){ //mudou o app
-                            //grava registro
-                            estatistica.setAplicativo(nome_aplicativo);
-                            estatistica.setDataHoraInicio(data_hora_inicial);
-                            estatistica.setDataHoraFim(dateFormatted);
-                            controller.create(estatistica);
-                            nome_aplicativo = getForegroundApp();
-                            Log.w("AtividadeGravada",getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
-                        }
-                        cont = cont + 1;
-                        Log.w("AtividadeEWhats", getForegroundApp());
-                        break;
+            if( myKM.inKeyguardRestrictedInputMode()) {//tela bloqueada
+                if ((getForegroundApp().equals("com.whatsapp")) ||
+                        (getForegroundApp().equals("com.instagram.android")) ||
+                        (getForegroundApp().equals("com.facebook.katana"))){
+                    if (cont2 == 0){
+                        gravar(nome_aplicativo,data_hora_inicial,dateFormatted);
+                        cont = 0;
                     }
-                    case "com.instagram.android": {
-                        if (cont == 0) {
-                            nome_aplicativo = "com.instagram.android";
-                            data_hora_inicial = dateFormatted;
-                            Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
-                        }
-                        if (!getForegroundApp().equals(nome_aplicativo)){ //mudou o app
-                            //grava registro
-                            estatistica.setAplicativo(nome_aplicativo);
-                            estatistica.setDataHoraInicio(data_hora_inicial);
-                            estatistica.setDataHoraFim(dateFormatted);
-                            controller.create(estatistica);
-                            nome_aplicativo = getForegroundApp();
-                            Log.w("AtividadeGravada",getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
-                        }
-                        cont = cont + 1;
-                        Log.w("AtividadeEInsta", getForegroundApp());
-                        break;
-                    }
-                    case "com.facebook.katana": {
-                        if (cont == 0) {
-                            nome_aplicativo = "com.facebook.katana";
-                            data_hora_inicial = dateFormatted;
-                            Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
-                        }
-                        if (!getForegroundApp().equals(nome_aplicativo)){ //mudou o app
-                            //grava registro
-                            estatistica.setAplicativo(nome_aplicativo);
-                            estatistica.setDataHoraInicio(data_hora_inicial);
-                            estatistica.setDataHoraFim(dateFormatted);
-                            controller.create(estatistica);
-                            nome_aplicativo = getForegroundApp();
-                            Log.w("AtividadeGravada",getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
-                        }
-                        cont = cont + 1;
-                        Log.w("AtividadeEFace", getForegroundApp());
-                        break;
-                    }
-                    default:
-                        if (!getForegroundApp().equals(nome_aplicativo)){
-                            if (cont != 0) { //grava registro
-                                estatistica.setAplicativo(nome_aplicativo);
-                                estatistica.setDataHoraInicio(data_hora_inicial);
-                                estatistica.setDataHoraFim(dateFormatted);
-                                controller.create(estatistica);
-                                Log.w("AtividadeGravada",getForegroundApp() + dateFormatted + " CONTADOR: "+cont);
-                            }
-                            //nome_aplicativo = getForegroundApp();
-                            cont = 0;
-                            break;
-                        }
+                    cont2 = cont2 + 1;
+                }else {
+                    cont2 = 0;
+                    Log.w("AtividadeTelaBloqueada", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont + " CONTADOR2: "+cont2);
                 }
-                Log.w("Atividade", getForegroundApp() + " " + dateFormatted);
+            } else { //tela desbloqueada
+                if ((getForegroundApp().equals("com.whatsapp")) ||
+                    (getForegroundApp().equals("com.instagram.android")) ||
+                    (getForegroundApp().equals("com.facebook.katana"))){
+                    if (cont == 0) {
+                        nome_aplicativo = getForegroundApp();
+                        data_hora_inicial = dateFormatted;
+                        Log.w("AtividadeGravandoInicio", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                    }
+                    if (!getForegroundApp().equals(nome_aplicativo)){
+                        if (cont != 0){
+                            gravar(nome_aplicativo,data_hora_inicial,dateFormatted);
+                        }
+                    }
+                    cont = cont + 1;
+                    Log.w("Atividade: ", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                }else{
+                    if (!getForegroundApp().equals(nome_aplicativo)) {
+                        if (cont != 0) {
+                            gravar(nome_aplicativo, data_hora_inicial, dateFormatted);
+                        }
+                        cont = 0;
+                    }
+                    Log.w("Atividade",  getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                }
             }
         }
     }

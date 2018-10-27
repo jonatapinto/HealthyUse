@@ -6,10 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.sql.Time;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import br.com.esucri.healthyUse.model.Rotina;
 import br.com.esucri.healthyUse.utils.BancoDeDados;
@@ -31,7 +28,7 @@ public class RotinaController {
         instanciaDB = db.getWritableDatabase();
         dados.put("NOME", rotina.getNome());
         dados.put("HORA_INICIO", rotina.getHoraInicio().toString());
-        dados.put("HORA_FINAL", rotina.getHoraFinal().toString());
+        dados.put("HORA_FIM", rotina.getHoraFim().toString());
         dados.put("DOM", rotina.getDom());
         dados.put("SEG", rotina.getSeg());
         dados.put("TER", rotina.getTer());
@@ -51,7 +48,7 @@ public class RotinaController {
     }
 
     public ArrayList<Rotina> getListaRotinas() throws ParseException {
-        String [] columns = {"_id","NOME","HORA_INICIO","HORA_FINAL","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP"};
+        String [] columns = {"_id","NOME","HORA_INICIO","HORA_FIM","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP"};
         instanciaDB = db.getWritableDatabase();
         Cursor cursor = instanciaDB.query("ROTINA",columns,null,null,null,null,null);
         ArrayList<Rotina> rotinas = new ArrayList<Rotina>();
@@ -62,7 +59,7 @@ public class RotinaController {
             rotina.setId(cursor.getInt(0));
             rotina.setNome(cursor.getString(1));
             rotina.setHoraInicio(parsers.parserStringToTime(cursor.getString(2)));
-            rotina.setHoraFinal(parsers.parserStringToTime(cursor.getString(3)));
+            rotina.setHoraFim(parsers.parserStringToTime(cursor.getString(3)));
             rotina.setDom(cursor.getInt(4));
             rotina.setSeg(cursor.getInt(5));
             rotina.setTer(cursor.getInt(6));
@@ -86,7 +83,7 @@ public class RotinaController {
         instanciaDB = db.getWritableDatabase();
         dados.put("NOME", rotina.getNome());
         dados.put("HORA_INICIO", rotina.getHoraInicio().toString());
-        dados.put("HORA_FINAL", rotina.getHoraFinal().toString());
+        dados.put("HORA_FIM", rotina.getHoraFim().toString());
         dados.put("DOM", rotina.getDom());
         dados.put("SEG", rotina.getSeg());
         dados.put("TER", rotina.getTer());
@@ -122,7 +119,7 @@ public class RotinaController {
 
     public Cursor retrieve() {
 
-        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","STATUS"};
+        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FIM","STATUS"};
         instanciaDB = db.getReadableDatabase();
 
         Cursor cursor = instanciaDB.query("ROTINA", campos,
@@ -137,7 +134,7 @@ public class RotinaController {
     }
 
     public Rotina getById(int id) {
-        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP","STATUS"};
+        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FIM","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP","STATUS"};
         String where = "_id = " + id;
         instanciaDB = db.getReadableDatabase();
 
@@ -160,8 +157,8 @@ public class RotinaController {
 
         timeAux = parsers.parserStringToTime(cursor.getString(cursor.getColumnIndexOrThrow("HORA_INICIO")));
         rotina.setHoraInicio(timeAux);
-        timeAux = parsers.parserStringToTime(cursor.getString(cursor.getColumnIndexOrThrow("HORA_FINAL")));
-        rotina.setHoraFinal(timeAux);
+        timeAux = parsers.parserStringToTime(cursor.getString(cursor.getColumnIndexOrThrow("HORA_FIM")));
+        rotina.setHoraFim(timeAux);
 
         rotina.setDom(cursor.getInt(cursor.getColumnIndexOrThrow("DOM")));
         rotina.setSeg(cursor.getInt(cursor.getColumnIndexOrThrow("SEG")));

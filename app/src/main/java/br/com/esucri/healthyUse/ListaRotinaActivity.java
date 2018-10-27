@@ -42,14 +42,14 @@ public class ListaRotinaActivity extends AppCompatActivity {
             }
         });
 
-        System.out.println("ANTES DE INSERIR DADOS SIMULADOS");
-        BancoDeDados b = new BancoDeDados(getBaseContext());
-        b.insereDadosSimulados();
+        //System.out.println("ANTES DE INSERIR DADOS SIMULADOS");
+        //BancoDeDados b = new BancoDeDados(getBaseContext());
+        //b.insereDadosSimulados();
         RotinaController crud = new RotinaController(getBaseContext());
         final Cursor cursor = crud.retrieve();
 
 
-        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FINAL","STATUS"};
+        String[] campos = {"_id","NOME","HORA_INICIO","HORA_FIM","STATUS"};
         int[] componentes = {R.id.textView_id, R.id.textViewNome, R.id.textViewHoraInicio, R.id.textViewHoraFinal, R.id.textViewStatus};
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),

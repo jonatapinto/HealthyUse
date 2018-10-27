@@ -140,11 +140,17 @@
             android:background="@color/fundo">
 
             <TextView
-                android:id="@+id/textViewResultado"
+                android:id="@+id/textViewColunaResultado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/preto"
-                android:text="Resultado" />
+                android:text="Classificação: " />
+
+            <TextView
+                android:id="@+id/textViewResultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/preto" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

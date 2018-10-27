@@ -78,7 +78,7 @@ public class RotinaActivity extends AppCompatActivity {
 
             editNome.setText(rotina.getNome());
             editHoraInicio.setText(rotina.getHoraInicio().toString());
-            editHoraFinal.setText(rotina.getHoraFinal().toString());
+            editHoraFinal.setText(rotina.getHoraFim().toString());
             checkBoxDomingo.setChecked(rotina.getDom() == 1?true:false);
             checkBoxSegunda.setChecked(rotina.getSeg() == 1?true:false);
             checkBoxTerca.setChecked(rotina.getTer() == 1?true:false);
@@ -130,7 +130,7 @@ public class RotinaActivity extends AppCompatActivity {
         Rotina rotina = new Rotina();
         rotina.setNome(editNome.getText().toString());
         rotina.setHoraInicio(parsers.parserStringToTime(editHoraInicio.getText().toString()));
-        rotina.setHoraFinal(parsers.parserStringToTime(editHoraFinal.getText().toString()));
+        rotina.setHoraFim(parsers.parserStringToTime(editHoraFinal.getText().toString()));
         rotina.setDom(checkBoxDomingo.isChecked()?1:0);
         rotina.setSeg(checkBoxSegunda.isChecked()?1:0);
         rotina.setTer(checkBoxTerca.isChecked()?1:0);

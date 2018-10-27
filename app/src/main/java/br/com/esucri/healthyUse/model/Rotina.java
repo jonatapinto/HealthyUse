@@ -1,18 +1,13 @@
 package br.com.esucri.healthyUse.model;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Rotina implements Serializable{
     private Integer id;
     private String nome;
     private Time horaInicio;
-    private Time horaFinal;
+    private Time horaFim;
     private Integer dom;
     private Integer seg;
     private Integer ter;
@@ -65,8 +60,8 @@ public class Rotina implements Serializable{
 
     public Integer getWhatsapp() { return whatsapp; }
 
-    public Time getHoraFinal() {
-        return horaFinal;
+    public Time getHoraFim() {
+        return horaFim;
     }
 
     public Time getHoraInicio() {
@@ -123,8 +118,8 @@ public class Rotina implements Serializable{
         this.horaInicio = horaInicio;
     }
 
-    public void setHoraFinal(Time horaFinal) {
-        this.horaFinal = horaFinal;
+    public void setHoraFim(Time horaFim) {
+        this.horaFim = horaFim;
     }
 
     public void setStatus(Integer status) {

@@ -31,7 +31,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         "  _id integer not null primary key autoincrement," +
                         "  NOME text not null," +
                         "  HORA_INICIO text not null,"+
-                        "  HORA_FINAL text not null,"+
+                        "  HORA_FIM text not null,"+
                         "  DOM integer not null,"+
                         "  SEG integer not null,"+
                         "  TER integer not null,"+
@@ -61,6 +61,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                         "  TEMPO_MINIMO text not null," +
                         "  TEMPO_MAXIMO text not null)";
         db.execSQL(createTableParametro);
+        System.out.println("Passou o create do banco");
     }
 
     @Override

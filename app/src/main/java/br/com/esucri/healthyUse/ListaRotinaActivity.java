@@ -42,9 +42,6 @@ public class ListaRotinaActivity extends AppCompatActivity {
             }
         });
 
-        //System.out.println("ANTES DE INSERIR DADOS SIMULADOS");
-        //BancoDeDados b = new BancoDeDados(getBaseContext());
-        //b.insereDadosSimulados();
         RotinaController crud = new RotinaController(getBaseContext());
         final Cursor cursor = crud.retrieve();
 

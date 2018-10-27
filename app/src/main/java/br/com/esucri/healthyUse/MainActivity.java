@@ -23,10 +23,20 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //primeira chamada startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        // primeira chamada
+        // startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
 
+        // chamar sempre menos na primeira vez
         Intent intent = new Intent(MainActivity.this, MyService.class);
         startService(intent);
+
+        botaoPermissao = (Button) findViewById(R.id.botaoPermissao);
+        botaoPermissao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+            }
+        });
 
         botaoRotinas = (Button) findViewById(R.id.botaoRotinas);
         botaoRotinas.setOnClickListener(new View.OnClickListener(){
@@ -54,14 +64,6 @@ public class MainActivity extends Activity {
             public void onClick(View view){
                 Intent intent = new Intent(getBaseContext(), ListaResultadoActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        botaoPermissao = (Button) findViewById(R.id.botaoPermissao);
-        botaoPermissao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
             }
         });
     }

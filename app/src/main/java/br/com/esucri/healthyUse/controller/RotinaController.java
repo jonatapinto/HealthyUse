@@ -133,6 +133,22 @@ public class RotinaController {
         return cursor;
     }
 
+    public Cursor retrieveRotinaCadastrada(String nome) {
+
+        String[] campos = {"NOME"};
+        instanciaDB = db.getReadableDatabase();
+        String sql = "SELECT NOME FROM ROTINA WHERE NOME = ?";
+
+        Cursor cursor = instanciaDB.rawQuery(sql, new String[]{nome});
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        instanciaDB.close();
+        return cursor;
+    }
+
     public Rotina getById(int id) {
         String[] campos = {"_id","NOME","HORA_INICIO","HORA_FIM","DOM","SEG","TER","QUA","QUI","SEX","SAB","INSTAGRAM","FACEBOOK","WHATSAPP","STATUS"};
         String where = "_id = " + id;

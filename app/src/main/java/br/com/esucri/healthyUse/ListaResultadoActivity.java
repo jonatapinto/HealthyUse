@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import br.com.esucri.healthyUse.controller.ResultadoController;
+import br.com.esucri.healthyUse.utils.Parsers;
 import br.com.esucri.healthyUse.utils.Validations;
 
 public class ListaResultadoActivity extends AppCompatActivity{
@@ -62,11 +63,11 @@ public class ListaResultadoActivity extends AppCompatActivity{
     @RequiresApi(api = Build.VERSION_CODES.O)
     private boolean validaCampos() {
         Boolean result = true;
-        String textoDescricao;
         Validations validacao = new Validations();
+        Parsers parsers = new Parsers();
 
-        textoDescricao = editDataInicio.getText().toString().trim();
-        if (TextUtils.isEmpty(textoDescricao)) {
+        String dataInicio = editDataInicio.getText().toString().trim();
+        if (TextUtils.isEmpty(dataInicio)) {
             editDataInicio.requestFocus();
             editDataInicio.setError("Campo obrigatório!");
             return false;
@@ -78,8 +79,8 @@ public class ListaResultadoActivity extends AppCompatActivity{
             }
         }
 
-        textoDescricao = editDataFinal.getText().toString().trim();
-        if (TextUtils.isEmpty(textoDescricao)) {
+        String dataFim = editDataFinal.getText().toString().trim();
+        if (TextUtils.isEmpty(dataFim)) {
             editDataFinal.requestFocus();
             editDataFinal.setError("Campo obrigatório!");
             return false;
@@ -90,6 +91,18 @@ public class ListaResultadoActivity extends AppCompatActivity{
                 return false;
             }
         }
+
+        System.out.println("dataMinima: "+dataInicio);
+        System.out.println("dataMaxima: "+dataFim);
+        Date dataInicioFormatada = parsers.parserStringToDate(dataInicio);
+        Date dataFimFormatada = parsers.parserStringToDate(dataFim);
+
+        if(dataInicioFormatada.after(dataFimFormatada) || (dataInicioFormatada.equals(dataFimFormatada))){
+            editDataInicio.requestFocus();
+            editDataInicio.setError("Data inicial não pode ser maior que a data final!");
+            return false;
+        };
+
         return result;
     }
 

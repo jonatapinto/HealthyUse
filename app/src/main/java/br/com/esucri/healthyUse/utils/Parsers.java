@@ -13,7 +13,7 @@ import java.util.Date;
 public class Parsers {
 
     public Time parserStringToTime(String time) {
-        SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat formatador = new SimpleDateFormat("HH:mm:ss");
         Date dataAux = null;
         try {
             dataAux = formatador.parse(time);

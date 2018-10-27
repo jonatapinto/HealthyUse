@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,7 +22,10 @@ import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import br.com.esucri.healthyUse.controller.ParametroController;
 import br.com.esucri.healthyUse.controller.RotinaController;
@@ -47,6 +51,7 @@ public class ParametroActivity extends AppCompatActivity {
 
         //Buscar valores da activity por ID
         editNomeParametro = (EditText) findViewById(R.id.editNomeParametro);
+        editNomeParametro.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         editTempoMinimo = (EditText) findViewById(R.id.editTempoMinimo);
         editTempoMaximo = (EditText) findViewById(R.id.editTempoMaximo);
         textViewRotinas = (TextView) findViewById(R.id.textViewRotinas);
@@ -62,7 +67,7 @@ public class ParametroActivity extends AppCompatActivity {
         botaoExcluirParametro = (Button) findViewById(R.id.botaoExcluirParametro);
 
         //Criando mascara para campos
-        SimpleMaskFormatter smfTempo = new SimpleMaskFormatter("NN:NN");
+        SimpleMaskFormatter smfTempo = new SimpleMaskFormatter("NN:NN:NN");
         MaskTextWatcher mtwTempoMinimo = new MaskTextWatcher(editTempoMinimo, smfTempo);
         editTempoMinimo.addTextChangedListener(mtwTempoMinimo);
         MaskTextWatcher mtwTempoMaximo = new MaskTextWatcher(editTempoMaximo, smfTempo);
@@ -108,8 +113,12 @@ public class ParametroActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void salvar(View view) {
-        if (!validaCampos()) {
-            return;
+        try {
+            if (!validaCampos()) {
+                return;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         Parametro parametro = new Parametro();
@@ -122,6 +131,11 @@ public class ParametroActivity extends AppCompatActivity {
 
         long retorno;
         if (TextUtils.isEmpty(idParametro)) {
+            if (crud.retrieveParametroCadastrado(parametro.getTempoMinimo().toString(),parametro.getTempoMaximo().toString()).getCount() > 0){
+                editTempoMinimo.requestFocus();
+                editTempoMinimo.setError("Intervalo de tempo já cadastrado!");
+                return;
+            }
             retorno = crud.create(parametro);
         } else {
             parametro.setId(Integer.parseInt(idParametro));
@@ -141,10 +155,12 @@ public class ParametroActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private boolean validaCampos() {
+    private boolean validaCampos() throws ParseException {
         Boolean result = true;
         String textoDescricao;
         Validations validacao = new Validations();
+        SimpleDateFormat in = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat out = new SimpleDateFormat("HH:mm:SS");
 
         textoDescricao = editNomeParametro.getText().toString().trim();
         if (TextUtils.isEmpty(textoDescricao)) {
@@ -153,7 +169,7 @@ public class ParametroActivity extends AppCompatActivity {
             return false;
         }
 
-        textoDescricao = editTempoMinimo.getText().toString().trim();
+        String dataMinima = editTempoMinimo.getText().toString().trim();
         if (TextUtils.isEmpty(textoDescricao)) {
             editTempoMinimo.requestFocus();
             editTempoMinimo.setError("Campo obrigatório!");
@@ -166,18 +182,31 @@ public class ParametroActivity extends AppCompatActivity {
             }
         }
 
-        textoDescricao = editTempoMaximo.getText().toString().trim();
+        String dataMaxima  = editTempoMaximo.getText().toString().trim();
         if (TextUtils.isEmpty(textoDescricao)) {
             editTempoMaximo.requestFocus();
             editTempoMaximo.setError("Campo obrigatório!");
             return false;
-        } else {
-            if(!validacao.isTimeValid(editTempoMaximo.getText().toString())){
-                editTempoMaximo.requestFocus();
-                editTempoMaximo.setError("Tempo máximo inválido!");
-                return false;
-            }
-        }
+        }//else {
+         //  if(!validacao.isTimeValid(editTempoMaximo.getText().toString())){
+         //      editTempoMaximo.requestFocus();
+         //      editTempoMaximo.setError("Tempo máximo inválido!");
+         //      return false;
+         //  }
+        //}
+
+        System.out.println("dataMinima: "+dataMinima);
+        System.out.println("dataMaxima: "+dataMaxima);
+        Date dataMininaFormatada = out.parse(dataMinima);
+        Date dataMaximaFormatada = out.parse(dataMaxima);
+
+        if(dataMininaFormatada.after(dataMaximaFormatada) || (dataMininaFormatada.equals(dataMaximaFormatada))){
+            editTempoMinimo.requestFocus();
+            editTempoMinimo.setError("Tempo mínimo deve ter menor que o tempo máximo!");
+            return false;
+        };
+
+
 
         return result;
     }
@@ -206,6 +235,10 @@ public class ParametroActivity extends AppCompatActivity {
         startActivity(intent);
 
         finishAffinity();
+    }
+
+    public void validacao(){
+
     }
 
     private void limpar() {

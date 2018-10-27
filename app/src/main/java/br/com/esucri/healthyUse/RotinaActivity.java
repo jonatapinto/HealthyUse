@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,7 @@ public class RotinaActivity extends AppCompatActivity {
 
         //Buscar valores da activity por ID
         editNome = (EditText) findViewById(R.id.editNome);
+        editNome.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         editHoraInicio = (EditText) findViewById(R.id.editHoraInicio);
         editHoraFinal = (EditText) findViewById(R.id.editHoraFinal);
         checkBoxDomingo = (CheckBox) findViewById(R.id.checkBoxDomingo);
@@ -63,7 +65,7 @@ public class RotinaActivity extends AppCompatActivity {
         textViewDiasSemana = (TextView) findViewById(R.id.textViewDiasSemana);
 
         //Criando mascara para campos
-        SimpleMaskFormatter smfHora = new SimpleMaskFormatter("NN:NN");
+        SimpleMaskFormatter smfHora = new SimpleMaskFormatter("NN:NN:NN");
         MaskTextWatcher mtwHoraInicio = new MaskTextWatcher(editHoraInicio, smfHora);
         editHoraInicio.addTextChangedListener(mtwHoraInicio);
         MaskTextWatcher mtwHoraFinal = new MaskTextWatcher(editHoraFinal, smfHora);
@@ -122,9 +124,9 @@ public class RotinaActivity extends AppCompatActivity {
         return;
     }
 
-    public void salvar(View view) {
+    public Boolean salvar(View view) {
         if (!validaCampos()) {
-            return;
+            return false;
         }
 
         Rotina rotina = new Rotina();
@@ -138,6 +140,7 @@ public class RotinaActivity extends AppCompatActivity {
         rotina.setQui(checkBoxQuinta.isChecked()?1:0);
         rotina.setSex(checkBoxSexta.isChecked()?1:0);
         rotina.setSab(checkBoxSabado.isChecked()?1:0);
+        rotina.setSab(checkBoxSabado.isChecked()?1:0);
         rotina.setWhatsapp(checkBoxWhatsApp.isChecked()?1:0);
         rotina.setFacebook(checkBoxFacebook.isChecked()?1:0);
         rotina.setInstagram(checkBoxInstagram.isChecked()?1:0);
@@ -146,6 +149,12 @@ public class RotinaActivity extends AppCompatActivity {
 
         long retorno;
         if (TextUtils.isEmpty(idRotina)) {
+            if (crud.retrieveRotinaCadastrada(rotina.getNome()).getCount() > 0){
+                editNome.requestFocus();
+                editNome.setError("Rotina já cadastrada!");
+                return false;
+            }
+            System.out.println("TESTE: "+rotina.getId()+" - "+rotina.getNome());
             retorno = crud.create(rotina);
         } else {
             rotina.setId(Integer.parseInt(idRotina));
@@ -161,6 +170,8 @@ public class RotinaActivity extends AppCompatActivity {
         //Volta para a tela de listagem de rotinas
         Intent intent = new Intent(getBaseContext(), ListaRotinaActivity.class);
         startActivity(intent);
+
+        return true;
     }
 
     @TargetApi(Build.VERSION_CODES.O)

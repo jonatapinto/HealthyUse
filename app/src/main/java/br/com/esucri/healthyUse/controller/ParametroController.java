@@ -89,6 +89,22 @@ public class ParametroController {
         return cursor;
     }
 
+    public Cursor retrieveParametroCadastrado(String tempoMinima, String tempoMaxima) {
+
+        String[] campos = {"TEMPO_MINIMO","TEMPO_MAXIMO"};
+        instanciaDB = db.getReadableDatabase();
+        String sql = "SELECT TEMPO_MAXIMO, TEMPO_MINIMO FROM PARAMETRO WHERE TEMPO_MINIMO = ? AND TEMPO_MAXIMO = ?";
+
+        Cursor cursor = instanciaDB.rawQuery(sql, new String[]{tempoMinima,tempoMaxima});
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        instanciaDB.close();
+        return cursor;
+    }
+
     public Parametro getById(int id) {
         String[] campos = {"_id","ROTINA","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
         String where = "_id = " + id;

@@ -23,6 +23,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //primeira chamada startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+
         Intent intent = new Intent(MainActivity.this, MyService.class);
         startService(intent);
 

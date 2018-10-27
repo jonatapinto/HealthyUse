@@ -11,18 +11,21 @@
         <TextView
             android:id="@+id/textView_id"
             android:layout_width="120dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/preto"/>
 
         <TextView
             android:id="@+id/textViewTituloRotina"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/preto"
             android:text="Rotina: " />
 
         <TextView
             android:id="@+id/textViewRotina"
             android:layout_width="217dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/preto"/>
 
     </TableRow>
 
@@ -32,18 +35,21 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:background="@color/fundo" >
 
             <TextView
                 android:id="@+id/textViewTituloNome"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:text="Nome: " />
+                android:textColor="@color/preto"
+                android:text="Classificação: " />
 
             <TextView
                 android:id="@+id/textViewNome"
                 android:layout_width="265dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/preto"/>
 
         </TableRow>
 
@@ -55,29 +61,34 @@
                 android:id="@+id/textViewTituloTempoMinimo"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/preto"
                 android:text="Tempo mínimo: " />
 
             <TextView
                 android:id="@+id/textViewTempoMinimo"
                 android:layout_width="33dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/preto"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:background="@color/fundo" >
 
             <TextView
                 android:id="@+id/textViewTituloTempoMaximo"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/preto"
                 android:text="Tempo máximo: " />
 
             <TextView
                 android:id="@+id/textViewTempoMaximo"
                 android:layout_width="20dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/preto"/>
         </TableRow>
 
     </TableLayout>

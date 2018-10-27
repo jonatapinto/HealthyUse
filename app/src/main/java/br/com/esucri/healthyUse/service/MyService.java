@@ -1,5 +1,6 @@
 package br.com.esucri.healthyUse.service;
 
+import android.app.KeyguardManager;
 import android.app.Service;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageStatsManager;
@@ -29,8 +30,6 @@ public class MyService extends Service {
     String nome_aplicativo = "";
     String data_hora_inicial = "";
 
-    int _idCorrente; //Utilizado para pegar sempre o maior _id da estatistica
-
     private static Timer timer = new Timer();
 
     public IBinder onBind(Intent arg0)
@@ -54,57 +53,93 @@ public class MyService extends Service {
         EstatisticaController controller = new EstatisticaController(getBaseContext());
         public void run()
         {
-            Date currentTime = Calendar.getInstance().getTime();
+            KeyguardManager myKM = (KeyguardManager) getBaseContext().getSystemService(getBaseContext().KEYGUARD_SERVICE);
+            if( myKM.inKeyguardRestrictedInputMode()) {
+                Log.w("AtividadeTelaBloqueada", getForegroundApp());
+            } else {
+                Date currentTime = Calendar.getInstance().getTime();
 
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-            String dateFormatted = formatter.format(currentTime);
+                String dateFormatted = formatter.format(currentTime);
 
-            Estatistica estatistica = new Estatistica();
+                Estatistica estatistica = new Estatistica();
 
-            switch (getForegroundApp()){
-                case "com.whatsapp": {
-                    if (cont == 0) {
-                        nome_aplicativo = "com.whatsapp";
-                        data_hora_inicial = dateFormatted;
-                        Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                switch (getForegroundApp()){
+                    case "com.whatsapp": {
+                        if (cont == 0) {
+                            nome_aplicativo = "com.whatsapp";
+                            data_hora_inicial = dateFormatted;
+                            Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                        }
+                        if (!getForegroundApp().equals(nome_aplicativo)){ //mudou o app
+                            //grava registro
+                            estatistica.setAplicativo(nome_aplicativo);
+                            estatistica.setDataHoraInicio(data_hora_inicial);
+                            estatistica.setDataHoraFim(dateFormatted);
+                            controller.create(estatistica);
+                            nome_aplicativo = getForegroundApp();
+                            Log.w("AtividadeGravada",getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                        }
+                        cont = cont + 1;
+                        Log.w("AtividadeEWhats", getForegroundApp());
+                        break;
                     }
-                    //mudou o app
-                    if (!getForegroundApp().equals(nome_aplicativo)){
-                        //grava registro
-                        estatistica.setAplicativo(nome_aplicativo);
-                        estatistica.setDataHoraInicio(data_hora_inicial);
-                        estatistica.setDataHoraFim(dateFormatted);
-                        controller.create(estatistica);
-                        nome_aplicativo = getForegroundApp();
-                        Log.w("AtividadeGravada",getForegroundApp() + dateFormatted + " CONTADOR: "+cont);
+                    case "com.instagram.android": {
+                        if (cont == 0) {
+                            nome_aplicativo = "com.instagram.android";
+                            data_hora_inicial = dateFormatted;
+                            Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                        }
+                        if (!getForegroundApp().equals(nome_aplicativo)){ //mudou o app
+                            //grava registro
+                            estatistica.setAplicativo(nome_aplicativo);
+                            estatistica.setDataHoraInicio(data_hora_inicial);
+                            estatistica.setDataHoraFim(dateFormatted);
+                            controller.create(estatistica);
+                            nome_aplicativo = getForegroundApp();
+                            Log.w("AtividadeGravada",getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                        }
+                        cont = cont + 1;
+                        Log.w("AtividadeEInsta", getForegroundApp());
+                        break;
                     }
-                    cont = cont + 1;
-                    Log.w("AtividadeEWhats", getForegroundApp());
-                    break;
-                }
-                case "com.instagram.android": {
-                    Log.w("AtividadeEInsta", getForegroundApp());
-                    break;
-                }
-                case "com.facebook.katana": {
-                    Log.w("AtividadeEFace", getForegroundApp());
-                    break;
-                }
-                default:
-                    if (!getForegroundApp().equals(nome_aplicativo)){
-                        //grava registro
-                        estatistica.setAplicativo(nome_aplicativo);
-                        estatistica.setDataHoraInicio(data_hora_inicial);
-                        estatistica.setDataHoraFim(dateFormatted);
-                        controller.create(estatistica);
-                        //nome_aplicativo = getForegroundApp();
-                        Log.w("AtividadeGravada",getForegroundApp() + dateFormatted + " CONTADOR: "+cont);
+                    case "com.facebook.katana": {
+                        if (cont == 0) {
+                            nome_aplicativo = "com.facebook.katana";
+                            data_hora_inicial = dateFormatted;
+                            Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                        }
+                        if (!getForegroundApp().equals(nome_aplicativo)){ //mudou o app
+                            //grava registro
+                            estatistica.setAplicativo(nome_aplicativo);
+                            estatistica.setDataHoraInicio(data_hora_inicial);
+                            estatistica.setDataHoraFim(dateFormatted);
+                            controller.create(estatistica);
+                            nome_aplicativo = getForegroundApp();
+                            Log.w("AtividadeGravada",getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                        }
+                        cont = cont + 1;
+                        Log.w("AtividadeEFace", getForegroundApp());
+                        break;
                     }
+                    default:
+                        if (!getForegroundApp().equals(nome_aplicativo)){
+                            if (cont != 0) { //grava registro
+                                estatistica.setAplicativo(nome_aplicativo);
+                                estatistica.setDataHoraInicio(data_hora_inicial);
+                                estatistica.setDataHoraFim(dateFormatted);
+                                controller.create(estatistica);
+                                Log.w("AtividadeGravada",getForegroundApp() + dateFormatted + " CONTADOR: "+cont);
+                            }
+                            //nome_aplicativo = getForegroundApp();
+                            cont = 0;
+                            break;
+                        }
+                }
+                Log.w("Atividade", getForegroundApp() + " " + dateFormatted);
             }
-
-            Log.w("Atividade", getForegroundApp() + " " + dateFormatted);
         }
     }
 

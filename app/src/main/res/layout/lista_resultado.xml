@@ -6,49 +6,74 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView_id"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Código" />
+            android:textColor="@color/preto"
+            android:text="Código Rotina" />
 
         <TextView
             android:id="@+id/textViewTituloRotina"
             android:layout_width="45dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/preto"
             android:text="Rotina: " />
 
         <TextView
-            android:id="@+id/textViewRotina"
+            android:id="@+id/nomeRotina"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/preto"
+            android:text="Nome da Rotina"/>
     </TableRow>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/fundocoluna">
+
+            <TextView
+                android:id="@+id/colunaAplicativo"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/branco"
+                android:text="Aplicativo" />
+
+            <TextView
+                android:id="@+id/ColunaTempo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/branco"
+                android:text="Tempo em Segundos"/>
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textViewAplicativo1"
+                android:id="@+id/textViewWhatsApp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/preto"
                 android:text="WhatsApp" />
 
             <TextView
-                android:id="@+id/textViewTempo1"
+                android:id="@+id/tempoWhatsApp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/preto"
                 android:text="Tempo"/>
 
             <TextView
-                android:id="@+id/textID1"
-                android:layout_width="wrap_content"
+                android:id="@+id/textIDWhatsApp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:visibility="invisible" />
@@ -57,23 +82,26 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:background="@color/fundo">
 
             <TextView
-                android:id="@+id/textViewAplicativo2"
+                android:id="@+id/textViewInstagram"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/preto"
                 android:text="Instagram" />
 
             <TextView
-                android:id="@+id/textViewTempo2"
+                android:id="@+id/tempoInstagram"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/preto"
                 android:text="Tempo" />
 
             <TextView
-                android:id="@+id/textID2"
-                android:layout_width="wrap_content"
+                android:id="@+id/textIDInstagram"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:visibility="invisible" />
@@ -85,37 +113,38 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/textViewAplicativo3"
+                android:id="@+id/textViewFacebook"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/preto"
                 android:text="Facebook" />
 
             <TextView
-                android:id="@+id/textViewTempo3"
+                android:id="@+id/tempoFacebook"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/preto"
                 android:text="Tempo" />
 
             <TextView
-                android:id="@+id/textID3"
-                android:layout_width="wrap_content"
+                android:id="@+id/textIDFacebook"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:visibility="invisible" />
         </TableRow>
 
-    </TableLayout>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <TextView
-            android:id="@+id/textViewResultado"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Resultado" />
+            android:layout_height="match_parent"
+            android:background="@color/fundo">
 
-    </TableRow>
-
+            <TextView
+                android:id="@+id/textViewResultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/preto"
+                android:text="Resultado" />
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

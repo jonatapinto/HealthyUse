@@ -5,9 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import br.com.esucri.healthyUse.utils.BancoDeDados;
 
@@ -19,19 +17,19 @@ public class ResultadoController {
         db = new BancoDeDados(context);
     }
 
-    public Cursor retrieve() {
-        String[] campos = {"_id","ROTINA","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
-        instanciaDB = db.getReadableDatabase();
+    //public Cursor retrieve() {
+    //    String[] campos = {"_id","ROTINA","NOME","TEMPO_MINIMO","TEMPO_MAXIMO"};
+    //    instanciaDB = db.getReadableDatabase();
 
-        Cursor cursor = instanciaDB.query("PARAMETRO", campos, null, null,null,null,null);
+    //    Cursor cursor = instanciaDB.query("PARAMETRO", campos, null, null,null,null,null);
 
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
+    //    if (cursor != null) {
+    //        cursor.moveToFirst();
+    //    }
 
-        instanciaDB.close();
-        return cursor;
-    }
+    //    instanciaDB.close();
+    //    return cursor;
+    //}
 
     public Cursor retrieveTempos(Date dataInicio, Date dataFim) {
         String sql;
@@ -121,8 +119,8 @@ public class ResultadoController {
 
         //String sql4 = "";
 
-        System.out.println("data inicio "+in.format(dataInicio)+"data fim "+ in.format(dataFim));
-        Cursor cursor = instanciaDB.rawQuery(sql3,new String[] {in.format(dataInicio),in.format(dataFim)});
+        System.out.println("Data início: "+in.format(dataInicio)+"Data fim: "+ in.format(dataFim));
+        Cursor cursor = instanciaDB.rawQuery(sql3,new String[] {in.format(dataInicio),in.format(dataFim),in.format(dataInicio),in.format(dataFim),in.format(dataInicio),in.format(dataFim)});
         //Cursor cursor = instanciaDB.rawQuery(sql2,null);
         System.out.println("CURSOR LINHAS: "+cursor.getCount());
         System.out.println("TESTE PASSOU PELO CURSOR");

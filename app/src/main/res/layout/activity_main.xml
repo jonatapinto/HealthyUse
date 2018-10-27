@@ -12,6 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@color/fundocoluna"
+        android:textColor="@color/branco"
+        android:layout_marginTop="2dp"
         android:text="Rotinas" />
 
     <Button
@@ -19,6 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@color/fundocoluna"
+        android:textColor="@color/branco"
+        android:layout_marginTop="2dp"
         android:text="Parâmetros" />
 
     <Button
@@ -26,6 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@color/fundocoluna"
+        android:textColor="@color/branco"
+        android:layout_marginTop="2dp"
         android:text="Resultados" />
 
     <Button
@@ -33,12 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@color/fundocoluna"
+        android:textColor="@color/branco"
+        android:layout_marginTop="2dp"
         android:text="Permissão"/>
-
-
-    <ListView
-        android:id="@+id/listViewProcess"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 </LinearLayout>

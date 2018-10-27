@@ -115,44 +115,14 @@ public class ListaResultadoActivity extends AppCompatActivity{
 
         String[] campos = {"_id","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK"};
         //String[] campos = {"_id", "NOME_ROTINA" ,"TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK"};
-        //String[] campos = {"_id","APLICATIVO","DATA_HORA_INICIO","DATA_HORA_FIM"};
-        //String[] campos = {"_id","TEMPO_EM_SEGUNDOS"};
-        int[] componentes = {R.id.textView_id, R.id.textViewTempo1, R.id.textViewTempo2, R.id.textViewTempo3};
+        int[] componentes = {R.id.textIDWhatsApp, R.id.tempoWhatsApp, R.id.tempoInstagram, R.id.tempoFacebook};
         //int[] componentes = {R.id.textView_id, R.id.textViewRotina, R.id.textViewTempo1, R.id.textViewTempo2, R.id.textViewTempo3};
-        //int[] componentes = {R.id.textID3, R.id.textViewTempo3};
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),
                 R.layout.lista_resultado, cursor, campos, componentes, 0);
         ListView lista = (ListView) findViewById(R.id.listViewResultados);
         lista.setAdapter(adapter);
         System.out.println("PASSOU O ADAPTER");
-
-
-        //ParametroController crud = new ParametroController(getBaseContext());
-        //final Cursor cursor = crud.retrieve();
-
-        //String[] campos = {"_id", "ROTINA", "NOME", "TEMPO_MINIMO", "TEMPO_MAXIMO"};
-        //int[] componentes = {R.id.textView_id, R.id.textViewRotina, R.id.textViewNome, R.id.textViewTempoMinimo, R.id.textViewTempoMaximo};
-
-        //SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),
-        //        R.layout.lista_parametro, cursor, campos, componentes, 0);
-        //ListView lista = (ListView) findViewById(R.id.listViewParametros);
-        //lista.setAdapter(adapter);
-
-        //lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        //   @Override
-        //   public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //       cursor.moveToPosition(position);
-        //       String idParametro = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
-
-        //        Intent intent = new Intent(ListaParametroActivity.this, ParametroActivity.class);
-        //        intent.putExtra("id", idParametro);
-
-        //        startActivity(intent);
-        //        finish();
-        //    }
-        //});
-
     }
 
     public void onBackPressed() {

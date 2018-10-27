@@ -11,18 +11,21 @@
         <TextView
             android:id="@+id/textView_id"
             android:layout_width="84dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/preto"/>
 
         <TextView
             android:id="@+id/textViewTituloStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/preto"
             android:text="Status: " />
 
         <TextView
             android:id="@+id/textViewStatus"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/preto"/>
     </TableRow>
 
     <TableLayout
@@ -31,18 +34,21 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:background="@color/fundo">
 
             <TextView
                 android:id="@+id/textViewTituloNome"
                 android:layout_width="84dp"
                 android:layout_height="match_parent"
-                android:text="@string/nome" />
+                android:textColor="@color/preto"
+                android:text="Nome" />
 
             <TextView
                 android:id="@+id/textViewNome"
                 android:layout_width="301dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/preto"/>
         </TableRow>
 
         <TableRow
@@ -53,29 +59,34 @@
                 android:id="@+id/textViewTituloHoraInicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hora_final" />
+                android:textColor="@color/preto"
+                android:text="Hora Início: " />
 
             <TextView
                 android:id="@+id/textViewHoraInicio"
                 android:layout_width="33dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/preto"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:background="@color/fundo" >
 
             <TextView
                 android:id="@+id/textViewTituloHoraFinal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hora_final" />
+                android:textColor="@color/preto"
+                android:text="Hora Final" />
 
             <TextView
                 android:id="@+id/textViewHoraFinal"
                 android:layout_width="33dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/preto"/>
         </TableRow>
 
     </TableLayout>

@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">Healthy Use</string>
-    <string name="novo">Novo</string>
-    <string name="nome">Nome: </string>
-    <string name="hora_inicio">Hora Início:</string>
-    <string name="hora_final">Hora Final:</string>
 </resources>

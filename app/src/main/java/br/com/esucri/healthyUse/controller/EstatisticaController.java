@@ -2,13 +2,9 @@ package br.com.esucri.healthyUse.controller;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.sql.SQLOutput;
-
 import br.com.esucri.healthyUse.model.Estatistica;
-import br.com.esucri.healthyUse.model.Rotina;
 import br.com.esucri.healthyUse.utils.BancoDeDados;
 
 public class EstatisticaController {
@@ -40,9 +36,9 @@ public class EstatisticaController {
         long resutado;
 
         instanciaDB = db.getWritableDatabase();
-        //dados.put("APLICATIVO", estatistica.getAplicativo());
-        //dados.put("DATA_HORA_INICIO", estatistica.getDataHoraInicio().toString());
-        dados.put("DATA_HORA_FIM", estatistica.getDataHoraFim().toString());
+        dados.put("APLICATIVO", estatistica.getAplicativo());
+        dados.put("DATA_HORA_INICIO", estatistica.getDataHoraInicio());
+        dados.put("DATA_HORA_FIM", estatistica.getDataHoraFim());
 
         String where = "_id = " + estatistica.getId();
 
@@ -52,18 +48,18 @@ public class EstatisticaController {
         return resutado;
     }
 
-    public int retrieveId(){
-        instanciaDB = db.getReadableDatabase();
-        String sql = "SELECT MAX(_id) AS MAIOR FROM ESTATISTICA";
-        Cursor cursor = instanciaDB.rawQuery(sql,null);
-
-        int maiorId = 0;
-        cursor.moveToFirst();
-        while(cursor.moveToNext()){
-            maiorId = cursor.getInt(cursor.getColumnIndex("MAIOR"));
-            System.out.println("MAIOR ID: "+maiorId);
-        }
-
-        return maiorId;
-    }
+    //public int retrieveId(){
+    //    instanciaDB = db.getReadableDatabase();
+    //    String sql = "SELECT MAX(_id) AS MAIOR FROM ESTATISTICA";
+    //    Cursor cursor = instanciaDB.rawQuery(sql,null);
+//
+    //    int maiorId = 0;
+    //    cursor.moveToFirst();
+    //    while(cursor.moveToNext()){
+    //        maiorId = cursor.getInt(cursor.getColumnIndex("MAIOR"));
+    //        System.out.println("MAIOR ID: "+maiorId);
+    //    }
+//
+    //    return maiorId;
+    //}
 }

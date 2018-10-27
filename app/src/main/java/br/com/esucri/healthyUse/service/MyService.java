@@ -26,6 +26,9 @@ import br.com.esucri.healthyUse.model.Estatistica;
 public class MyService extends Service {
 
     Integer cont = 0;
+    String nome_aplicativo = "";
+    String data_hora_inicial = "";
+
     int _idCorrente; //Utilizado para pegar sempre o maior _id da estatistica
 
     private static Timer timer = new Timer();
@@ -53,45 +56,55 @@ public class MyService extends Service {
         {
             Date currentTime = Calendar.getInstance().getTime();
 
-
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
             String dateFormatted = formatter.format(currentTime);
 
+            Estatistica estatistica = new Estatistica();
+
             switch (getForegroundApp()){
                 case "com.whatsapp": {
-                    Estatistica estatistica = new Estatistica();
-                    estatistica.setAplicativo("WHATSAPP");
                     if (cont == 0) {
-                        estatistica.setDataHoraInicio(dateFormatted);
+                        nome_aplicativo = "com.whatsapp";
+                        data_hora_inicial = dateFormatted;
+                        Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont);
+                    }
+                    //mudou o app
+                    if (!getForegroundApp().equals(nome_aplicativo)){
+                        //grava registro
+                        estatistica.setAplicativo(nome_aplicativo);
+                        estatistica.setDataHoraInicio(data_hora_inicial);
                         estatistica.setDataHoraFim(dateFormatted);
                         controller.create(estatistica);
-                        //chamar uma função que deve ser criado no controller que busque o MAX(_id)
-                        _idCorrente = controller.retrieveId();
-                        Log.w("AtividadeGravandoIni", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont + " _id " + _idCorrente);
+                        nome_aplicativo = getForegroundApp();
+                        Log.w("AtividadeGravada",getForegroundApp() + dateFormatted + " CONTADOR: "+cont);
                     }
-                    if (cont > 0){
-                        estatistica.setDataHoraFim(dateFormatted);
-                        estatistica.setId(_idCorrente);
-                        controller.update(estatistica);
-                        Log.w("AtividadeGravandoFim", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont + " _id " + _idCorrente);
-                    }
-                    Log.w("AtividadeEWhats", getForegroundApp());
                     cont = cont + 1;
+                    Log.w("AtividadeEWhats", getForegroundApp());
                     break;
                 }
                 case "com.instagram.android": {
-                    Log.w("AtividadeEInsta", getForegroundApp()+ " CONTADOR: "+cont + " _id " + _idCorrente);
+                    Log.w("AtividadeEInsta", getForegroundApp());
                     break;
                 }
                 case "com.facebook.katana": {
-                    Log.w("AtividadeEFace", getForegroundApp()+ " CONTADOR: "+cont + " _id " + _idCorrente);
+                    Log.w("AtividadeEFace", getForegroundApp());
                     break;
                 }
+                default:
+                    if (!getForegroundApp().equals(nome_aplicativo)){
+                        //grava registro
+                        estatistica.setAplicativo(nome_aplicativo);
+                        estatistica.setDataHoraInicio(data_hora_inicial);
+                        estatistica.setDataHoraFim(dateFormatted);
+                        controller.create(estatistica);
+                        //nome_aplicativo = getForegroundApp();
+                        Log.w("AtividadeGravada",getForegroundApp() + dateFormatted + " CONTADOR: "+cont);
+                    }
             }
 
-            Log.w("Atividade", getForegroundApp() + " " + dateFormatted + " CONTADOR: "+cont + " _id " + _idCorrente);
+            Log.w("Atividade", getForegroundApp() + " " + dateFormatted);
         }
     }
 

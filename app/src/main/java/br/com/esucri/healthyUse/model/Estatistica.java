@@ -25,19 +25,11 @@ public class Estatistica {
         this.aplicativo = aplicativo;
     }
 
-    public String getDataHoraInicio() {
-        return dataHoraInicio;
-    }
+    public String getDataHoraInicio() { return dataHoraInicio; }
 
-    public void setDataHoraInicio(String dataHoraInicio) {
-        this.dataHoraInicio = dataHoraInicio;
-    }
+    public void setDataHoraInicio(String dataHoraInicio) { this.dataHoraInicio = dataHoraInicio; }
 
-    public String getDataHoraFim() {
-        return dataHoraFim;
-    }
+    public String getDataHoraFim() { return dataHoraFim; }
 
-    public void setDataHoraFim(String dataHoraFim) {
-        this.dataHoraFim = dataHoraFim;
-    }
+    public void setDataHoraFim(String dataHoraFim) { this.dataHoraFim = dataHoraFim; }
 }

@@ -47,12 +47,12 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
         String createTableEstatistica =
                 "CREATE TABLE ESTATISTICA ("+
-                        "_id              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-                        "APLICATIVO       TEXT    NOT NULL,"+
-                        "DATA_HORA_INICIO TEXT    NOT NULL,"+
-                        "DATA_HORA_FIM    TEXT    NOT NULL)";
+                        "_id integer not null primary key autoincrement,"+
+                        "APLICATIVO text not null,"+
+                        "DATA_HORA_INICIO text not null," +
+                        "DATA_HORA_FIM text not null)";
         db.execSQL(createTableEstatistica);
-        System.out.println("TABELA ESTATISTICA "+createTableEstatistica);
+
         String createTableParametro =
                 "CREATE TABLE PARAMETRO (" +
                         "  _id integer not null primary key autoincrement," +
@@ -86,35 +86,31 @@ public class BancoDeDados extends SQLiteOpenHelper {
     }
 
     public void insereDadosSimulados(){
-        String inserts;
         instanciaDB = getWritableDatabase();
-        Cursor cursor = instanciaDB.rawQuery("SELECT COUNT() FROM ESTATISTICA",null);
-
-        //if(cursor.getCount() != 0){
-        //    return;
-        //}
+        //Cursor cursor = instanciaDB.rawQuery("SELECT COUNT() FROM ESTATISTICA",null);
 
         Estatistica est1 = new Estatistica();
         Estatistica est2 = new Estatistica();
         Estatistica est3 = new Estatistica();
 
-        est1.setAplicativo("FACEBOOK");
-        est1.setDataHoraInicio("2018-10-10 10:00:00");
+        est1.setAplicativo("com.whatsapp");
+        est1.setDataHoraInicio("2018-10-10 10:00:01");
         est1.setDataHoraFim("2018-10-10 11:00:00");
+        //inserts = "INSERT INTO ESTATISTICA (_id,APLICATIVO,DATA_HORA_INICIO,DATA_HORA_FIM) VALUES ((SELECT MAX(_id)+1 FROM ESTATISTICA),'com.whatsapp','2018-10-10 10:00:01','2018-10-10 11:00:00');";
 
-        est2.setAplicativo("INSTAGRAM");
-        est2.setDataHoraInicio("2018-10-10 11:01:00");
-        est2.setDataHoraFim("2018-10-10 11:03:00");
+        est2.setAplicativo("com.instagram.android");
+        est2.setDataHoraInicio("2018-10-10 11:00:01");
+        est2.setDataHoraFim("2018-10-10 11:30:00");
 
-        est3.setAplicativo("WHATSAPP");
-        est3.setDataHoraInicio("2018-10-10 11:31:00");
-        est3.setDataHoraFim("2018-10-10 12:15:00");
+        est3.setAplicativo("com.facebook.katana");
+        est3.setDataHoraInicio("2018-10-10 12:00:00");
+        est3.setDataHoraFim("2018-10-10 12:20:00");
 
         EstatisticaController e = new EstatisticaController(this.context);
 
         e.create(est1);
         e.create(est2);
-        e.create(est2);
+        e.create(est3);
 
         System.out.println("PASSANDO PELOS INSERTS");
 

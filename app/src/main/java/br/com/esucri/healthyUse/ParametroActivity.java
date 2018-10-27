@@ -116,7 +116,7 @@ public class ParametroActivity extends AppCompatActivity {
         parametro.setNome(editNomeParametro.getText().toString());
         parametro.setTempoMinimo(parsers.parserStringToTime(editTempoMinimo.getText().toString()));
         parametro.setTempoMaximo(parsers.parserStringToTime(editTempoMaximo.getText().toString()));
-        parametro.setRotina(spinnerRotinas.getAdapter().toString());
+        parametro.setRotina(spinnerRotinas.getSelectedItem().toString());
 
         ParametroController crud = new ParametroController(getBaseContext());
 

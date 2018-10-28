@@ -32,11 +32,9 @@ public class RotinaActivity extends AppCompatActivity {
              checkBoxSabado, checkBoxWhatsApp, checkBoxInstagram, checkBoxFacebook;
     Button botaoGravarRotina, botaoExcluirRotina, botaoAlterarStatusRotina;
     TextView textViewAplicativos, textViewDiasSemana;
-    Rotina editarRotina = new Rotina();
     Parsers parsers = new Parsers();
     String idRotina;
     Rotina rotina;
-    Integer contador = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +86,9 @@ public class RotinaActivity extends AppCompatActivity {
             checkBoxQuinta.setChecked(rotina.getQui() == 1?true:false);
             checkBoxSexta.setChecked(rotina.getSex() == 1?true:false);
             checkBoxSabado.setChecked(rotina.getSab() == 1?true:false);
-            checkBoxWhatsApp.setChecked(rotina.getInstagram() == 1?true:false);
-            checkBoxInstagram.setChecked(rotina.getFacebook() == 1?true:false);
-            checkBoxFacebook.setChecked(rotina.getWhatsapp() == 1?true:false);
+            checkBoxWhatsApp.setChecked(rotina.getWhatsapp() == 1?true:false);
+            checkBoxInstagram.setChecked(rotina.getInstagram() == 1?true:false);
+            checkBoxFacebook.setChecked(rotina.getFacebook() == 1?true:false);
             botaoAlterarStatusRotina.setText(rotina.getStatus() == 0?"Ativar Rotina":"Desativar Rotina");
         } else{
             botaoGravarRotina.setText("Gravar");
@@ -230,9 +228,9 @@ public class RotinaActivity extends AppCompatActivity {
         }
 
         //Verifica se algum dos aplicativos foi selecionados
-        if (!checkBoxFacebook.isChecked() &&
-                !checkBoxWhatsApp.isChecked() &&
-                !checkBoxInstagram.isChecked()){
+        if (!checkBoxWhatsApp.isChecked() &&
+                !checkBoxInstagram.isChecked() &&
+                !checkBoxFacebook.isChecked()){
             Toast.makeText(RotinaActivity.this, "Favor selecionar algum aplicativo!", Toast.LENGTH_LONG).show();
             textViewAplicativos.setError("Opção obrigatória!");
             return false;

@@ -13,15 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,7 +36,6 @@ public class ParametroActivity extends AppCompatActivity {
     TextView textViewRotinas;
     Spinner spinnerRotinas;
     Button botaoGravarParametro, botaoExcluirParametro;
-    Parametro editarParametro = new Parametro();
     Parsers parsers = new Parsers();
     String idParametro;
     Parametro parametro;
@@ -127,6 +123,7 @@ public class ParametroActivity extends AppCompatActivity {
         parametro.setTempoMaximo(parsers.parserStringToTime(editTempoMaximo.getText().toString()));
         parametro.setRotina(spinnerRotinas.getSelectedItem().toString());
 
+
         ParametroController crud = new ParametroController(getBaseContext());
 
         long retorno;
@@ -162,13 +159,7 @@ public class ParametroActivity extends AppCompatActivity {
         SimpleDateFormat in = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat out = new SimpleDateFormat("HH:mm:SS");
 
-        textoDescricao = editNomeParametro.getText().toString().trim();
-        if (TextUtils.isEmpty(textoDescricao)) {
-            editNomeParametro.requestFocus();
-            editNomeParametro.setError("Campo obrigatório!");
-            return false;
-        }
-
+        textoDescricao = editTempoMinimo.getText().toString().trim();
         String dataMinima = editTempoMinimo.getText().toString().trim();
         if (TextUtils.isEmpty(textoDescricao)) {
             editTempoMinimo.requestFocus();
@@ -182,31 +173,36 @@ public class ParametroActivity extends AppCompatActivity {
             }
         }
 
-        String dataMaxima  = editTempoMaximo.getText().toString().trim();
+        String dataMaxima = editTempoMaximo.getText().toString().trim();
         if (TextUtils.isEmpty(textoDescricao)) {
             editTempoMaximo.requestFocus();
             editTempoMaximo.setError("Campo obrigatório!");
             return false;
-        }//else {
-         //  if(!validacao.isTimeValid(editTempoMaximo.getText().toString())){
-         //      editTempoMaximo.requestFocus();
-         //      editTempoMaximo.setError("Tempo máximo inválido!");
-         //      return false;
-         //  }
-        //}
+        }else {
+            if (!validacao.isTimeValid(editTempoMaximo.getText().toString())) {
+                editTempoMaximo.requestFocus();
+                editTempoMaximo.setError("Tempo máximo inválido!");
+                return false;
+            }
+        }
 
         System.out.println("dataMinima: "+dataMinima);
         System.out.println("dataMaxima: "+dataMaxima);
         Date dataMininaFormatada = out.parse(dataMinima);
         Date dataMaximaFormatada = out.parse(dataMaxima);
 
-        if(dataMininaFormatada.after(dataMaximaFormatada) || (dataMininaFormatada.equals(dataMaximaFormatada))){
+        if(dataMininaFormatada.after(dataMaximaFormatada)){
             editTempoMinimo.requestFocus();
-            editTempoMinimo.setError("Tempo mínimo deve ter menor que o tempo máximo!");
+            editTempoMinimo.setError("Tempo mínimo deve ser menor que o tempo máximo!");
             return false;
         };
 
-
+        textoDescricao = editNomeParametro.getText().toString().trim();
+        if (TextUtils.isEmpty(textoDescricao)) {
+            editNomeParametro.requestFocus();
+            editNomeParametro.setError("Campo obrigatório!");
+            return false;
+        }
 
         return result;
     }
@@ -235,10 +231,6 @@ public class ParametroActivity extends AppCompatActivity {
         startActivity(intent);
 
         finishAffinity();
-    }
-
-    public void validacao(){
-
     }
 
     private void limpar() {

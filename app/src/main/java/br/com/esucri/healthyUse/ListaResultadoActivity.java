@@ -1,6 +1,5 @@
 package br.com.esucri.healthyUse;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
@@ -9,7 +8,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,7 +28,28 @@ import br.com.esucri.healthyUse.utils.Validations;
 public class ListaResultadoActivity extends AppCompatActivity{
     EditText editDataInicio, editDataFinal;
     Button botaoResult;
-    ListView lista;
+
+    //public String formataTempo(String xis){
+    //    int elapsed = 0;
+//
+    //    try {
+    //        elapsed = Integer.parseInt(xis);
+    //    } catch (NumberFormatException e) {
+    //        System.out.println("Numero com formato errado!");
+    //    }
+//
+    //    int ss = elapsed % 60;
+    //    elapsed /= 60;
+    //    int min = elapsed % 60;
+    //    elapsed /= 60;
+    //    int hh = elapsed % 24;
+    //    return strzero(hh) + ":" + strzero(min) + ":" + strzero(ss);
+    //}
+    //private String strzero(int n){
+    //    if(n < 10)
+    //        return "0" + String.valueOf(n);
+    //    return String.valueOf(n);
+    //}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +116,7 @@ public class ListaResultadoActivity extends AppCompatActivity{
         Date dataInicioFormatada = parsers.parserStringToDate(dataInicio);
         Date dataFimFormatada = parsers.parserStringToDate(dataFim);
 
-        if(dataInicioFormatada.after(dataFimFormatada) || (dataInicioFormatada.equals(dataFimFormatada))){
+        if(dataInicioFormatada.after(dataFimFormatada)){
             editDataInicio.requestFocus();
             editDataInicio.setError("Data inicial não pode ser maior que a data final!");
             return false;
@@ -126,7 +145,7 @@ public class ListaResultadoActivity extends AppCompatActivity{
 
         System.out.println("NUMERO DE LINHAS DO CURSOR "+cursor.getCount());
 
-        String[] campos = {"_id","CODIGO","NOME","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK","RESULTADO"}; //,"TOTAL_ROTINA"
+        String[] campos = {"_id","CODIGO","NOME","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK","RESULTADO"};
         int[] componentes = {R.id.textIDWhatsApp, R.id.textView_id, R.id.nomeRotina, R.id.tempoWhatsApp, R.id.tempoInstagram, R.id.tempoFacebook, R.id.textViewResultado};
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getBaseContext(),

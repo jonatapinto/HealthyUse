@@ -43,6 +43,7 @@ public class MyService extends Service {
     {
         super.onCreate();
         startService();
+        Toast.makeText(getApplicationContext(), "Serviço Iniciado", Toast.LENGTH_SHORT).show();
     }
 
     public boolean gravar (String nome_aplicativo, String data_hora_inicial, String data_hora_fim){
@@ -76,15 +77,14 @@ public class MyService extends Service {
                 if ((getForegroundApp().equals("com.whatsapp")) ||
                         (getForegroundApp().equals("com.instagram.android")) ||
                         (getForegroundApp().equals("com.facebook.katana"))){
-                    if (cont2 == 0){
+                    if ((cont2 == 0) && (cont != 0)) {
                         gravar(nome_aplicativo,data_hora_inicial,dateFormatted);
                         cont = 0;
                     }
-                    cont2 = cont2 + 1;
-                }else {
+                }else{
                     cont2 = 0;
-                    Log.w("AtividadeTelaBloqueada", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont + " CONTADOR2: "+cont2);
                 }
+                Log.w("AtividadeTelaBloqueada", getForegroundApp()+ " " + dateFormatted + " CONTADOR: "+cont + " CONTADOR2: "+cont2);
             } else { //tela desbloqueada
                 if ((getForegroundApp().equals("com.whatsapp")) ||
                     (getForegroundApp().equals("com.instagram.android")) ||

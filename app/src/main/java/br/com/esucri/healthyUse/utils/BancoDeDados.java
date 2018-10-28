@@ -1,17 +1,8 @@
 package br.com.esucri.healthyUse.utils;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.sql.SQLOutput;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import br.com.esucri.healthyUse.controller.EstatisticaController;
-import br.com.esucri.healthyUse.model.Estatistica;
 
 public class BancoDeDados extends SQLiteOpenHelper {
     private static final String DB_NOME = "HEALTHYUSE";

@@ -11,12 +11,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import br.com.esucri.healthyUse.controller.RotinaController;
 import br.com.esucri.healthyUse.model.Rotina;
-import br.com.esucri.healthyUse.utils.BancoDeDados;
 
 public class ListaRotinaActivity extends AppCompatActivity {
 
@@ -67,24 +65,7 @@ public class ListaRotinaActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        //Listar rotinas já gravadas para poder alterar
-        //lista = (ListView) findViewById(R.id.listViewRotinas);
-        //lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        //    @Override
-        //    public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-        //        Rotina rotinaEscolhida = (Rotina) adapter.getItemAtPosition(position);
-
-        //        Intent i = new Intent(ListaRotinaActivity.this,RotinaActivity.class);
-        //        i.putExtra("rotina-escolhida",rotinaEscolhida);
-        //    }
-        //});
     }
-
-    //public void carregarRotina() {
-    //    rotinas = new RotinaController(ListaRotinaActivity.this);
-    //    listview_Rotina = rotinas.getListaRotinas();
-    //}
 
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)

@@ -1,8 +1,5 @@
 package br.com.esucri.healthyUse.model;
 
-import java.sql.Time;
-import java.util.Date;
-
 public class Estatistica {
     private Integer id;
     private String aplicativo;

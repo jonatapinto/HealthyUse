@@ -34,7 +34,7 @@ public class Validations {
     }
 
     public boolean isTimeValid(String hora){
-        SimpleDateFormat sdf  = new SimpleDateFormat( "HH:mm" );
+        SimpleDateFormat sdf  = new SimpleDateFormat( "HH:mm:ss" );
         //Não soma a data para o dia seguinte quando informado 25:00 por exemplo.
         sdf.setLenient(false);
         try {

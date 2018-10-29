@@ -57,8 +57,7 @@ public class ParametroActivity extends AppCompatActivity {
             spinnerRotinas = (Spinner) findViewById(R.id.spinnerRotinas);
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayList);
             spinnerRotinas.setAdapter(arrayAdapter);
-        } catch (Exception ex){
-        }
+
         botaoGravarParametro = (Button) findViewById(R.id.botaoGravarParametro);
         botaoExcluirParametro = (Button) findViewById(R.id.botaoExcluirParametro);
 
@@ -80,7 +79,8 @@ public class ParametroActivity extends AppCompatActivity {
             editTempoMinimo.setText(parametro.getTempoMinimo().toString());
             editTempoMaximo.setText(parametro.getTempoMaximo().toString());
             spinnerRotinas.setAdapter(spinnerRotinas.getAdapter());
-
+            //AVALIAR UMA FORMA DE SETAR O ITEM DO SPINNER ATRAVES DO NOME DA ROTINA
+            //spinnerRotinas.setSelection(arrayAdapter.getPosition(parametro.getRotina()));
         } else{
             botaoGravarParametro.setText("Gravar");
         }
@@ -99,6 +99,8 @@ public class ParametroActivity extends AppCompatActivity {
                 excluir(v);
             }
         });
+        } catch (Exception ex){
+        }
     }
 
     public void onBackPressed() {
@@ -128,7 +130,9 @@ public class ParametroActivity extends AppCompatActivity {
 
         long retorno;
         if (TextUtils.isEmpty(idParametro)) {
-            if (crud.retrieveParametroCadastrado(parametro.getTempoMinimo().toString(),parametro.getTempoMaximo().toString()).getCount() > 0){
+            if (crud.retrieveParametroCadastrado(parametro.getTempoMinimo().toString(),
+                                                 parametro.getTempoMaximo().toString(),
+                                                 parametro.getRotina()).getCount() > 0){
                 editTempoMinimo.requestFocus();
                 editTempoMinimo.setError("Intervalo de tempo já cadastrado!");
                 return;
@@ -156,7 +160,6 @@ public class ParametroActivity extends AppCompatActivity {
         Boolean result = true;
         String textoDescricao;
         Validations validacao = new Validations();
-        SimpleDateFormat in = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat out = new SimpleDateFormat("HH:mm:SS");
 
         textoDescricao = editTempoMinimo.getText().toString().trim();
@@ -186,6 +189,13 @@ public class ParametroActivity extends AppCompatActivity {
             }
         }
 
+        textoDescricao = editNomeParametro.getText().toString().trim();
+        if (TextUtils.isEmpty(textoDescricao)) {
+            editNomeParametro.requestFocus();
+            editNomeParametro.setError("Campo obrigatório!");
+            return false;
+        }
+
         System.out.println("dataMinima: "+dataMinima);
         System.out.println("dataMaxima: "+dataMaxima);
         Date dataMininaFormatada = out.parse(dataMinima);
@@ -196,13 +206,6 @@ public class ParametroActivity extends AppCompatActivity {
             editTempoMinimo.setError("Tempo mínimo deve ser menor que o tempo máximo!");
             return false;
         };
-
-        textoDescricao = editNomeParametro.getText().toString().trim();
-        if (TextUtils.isEmpty(textoDescricao)) {
-            editNomeParametro.requestFocus();
-            editNomeParametro.setError("Campo obrigatório!");
-            return false;
-        }
 
         return result;
     }

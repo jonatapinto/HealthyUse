@@ -29,28 +29,6 @@ public class ListaResultadoActivity extends AppCompatActivity{
     EditText editDataInicio, editDataFinal;
     Button botaoResult;
 
-    //public String formataTempo(String xis){
-    //    int elapsed = 0;
-//
-    //    try {
-    //        elapsed = Integer.parseInt(xis);
-    //    } catch (NumberFormatException e) {
-    //        System.out.println("Numero com formato errado!");
-    //    }
-//
-    //    int ss = elapsed % 60;
-    //    elapsed /= 60;
-    //    int min = elapsed % 60;
-    //    elapsed /= 60;
-    //    int hh = elapsed % 24;
-    //    return strzero(hh) + ":" + strzero(min) + ":" + strzero(ss);
-    //}
-    //private String strzero(int n){
-    //    if(n < 10)
-    //        return "0" + String.valueOf(n);
-    //    return String.valueOf(n);
-    //}
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +122,8 @@ public class ListaResultadoActivity extends AppCompatActivity{
                 out.parse(out.format(dataFimFormatada)));
 
         System.out.println("NUMERO DE LINHAS DO CURSOR "+cursor.getCount());
+
+
 
         String[] campos = {"_id","CODIGO","NOME","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK","RESULTADO"};
         int[] componentes = {R.id.textIDWhatsApp, R.id.textView_id, R.id.nomeRotina, R.id.tempoWhatsApp, R.id.tempoInstagram, R.id.tempoFacebook, R.id.textViewResultado};

@@ -18,6 +18,10 @@ import android.widget.Toast;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import br.com.esucri.healthyUse.controller.RotinaController;
 import br.com.esucri.healthyUse.model.Rotina;
 import br.com.esucri.healthyUse.utils.Parsers;
@@ -123,8 +127,12 @@ public class RotinaActivity extends AppCompatActivity {
     }
 
     public Boolean salvar(View view) {
-        if (!validaCampos()) {
-            return false;
+        try {
+            if (!validaCampos()) {
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         Rotina rotina = new Rotina();
@@ -174,10 +182,11 @@ public class RotinaActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private boolean validaCampos() {
+    private boolean validaCampos() throws ParseException {
         Boolean result = true;
         String textoDescricao;
         Validations validacao = new Validations();
+        SimpleDateFormat out = new SimpleDateFormat("HH:mm:SS");
 
         textoDescricao = editNome.getText().toString().trim();
         if (TextUtils.isEmpty(textoDescricao)) {
@@ -235,6 +244,20 @@ public class RotinaActivity extends AppCompatActivity {
             textViewAplicativos.setError("Opção obrigatória!");
             return false;
         }
+
+        String horaInicio = editHoraInicio.getText().toString();
+        String horaFim = editHoraFinal.getText().toString();
+
+        System.out.println("horaInicio: "+horaInicio);
+        System.out.println("horaFim: "+horaFim);
+        Date dataMininaFormatada = out.parse(horaInicio);
+        Date dataMaximaFormatada = out.parse(horaFim);
+
+        if(dataMininaFormatada.after(dataMaximaFormatada)){
+            editHoraInicio.requestFocus();
+            editHoraInicio.setError("Tempo mínimo deve ser menor que o tempo máximo!");
+            return false;
+        };
 
         return result;
     }

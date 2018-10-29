@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import br.com.esucri.healthyUse.utils.BancoDeDados;
 
@@ -136,7 +138,39 @@ public class ResultadoController {
             cursor.moveToFirst();
         }
 
+        List<String[]> tempos = new ArrayList<String[]>();
+        //AJUSTAR OS SEGUNDOS DE WHATS, INSTA E FACEBOOK PARA HH:MM:SS USANDO FUNCAO formataTempo ABAIXO
+        //int cont = 0;
+        //do{
+        //    cont = cont + 1;
+        //    tempos.add(new String[]{cursor.getString(2),cursor.getString(3),cursor.getString(4)});
+        //    tempos.get(cont).
+        //}while(cursor.moveToNext());
+
         instanciaDB.close();
         return cursor;
+    }
+
+    public String formataTempo(String xis){
+        int elapsed = 0;
+
+        try {
+            elapsed = Integer.parseInt(xis);
+        } catch (NumberFormatException e) {
+            System.out.println("Numero com formato errado!");
+        }
+
+        int ss = elapsed % 60;
+        elapsed /= 60;
+        int min = elapsed % 60;
+        elapsed /= 60;
+        int hh = elapsed % 24;
+        return strzero(hh) + ":" + strzero(min) + ":" + strzero(ss);
+    }
+
+    private String strzero(int n){
+        if(n < 10)
+            return "0" + String.valueOf(n);
+        return String.valueOf(n);
     }
 }

@@ -223,6 +223,20 @@ public class RotinaActivity extends AppCompatActivity {
             }
         }
 
+        String horaInicio = editHoraInicio.getText().toString();
+        String horaFim = editHoraFinal.getText().toString();
+
+        System.out.println("horaInicio: "+horaInicio);
+        System.out.println("horaFim: "+horaFim);
+        Date dataMininaFormatada = out.parse(horaInicio);
+        Date dataMaximaFormatada = out.parse(horaFim);
+
+        if(dataMininaFormatada.after(dataMaximaFormatada)){
+            editHoraInicio.requestFocus();
+            editHoraInicio.setError("Hora início deve ser menor que a hora final!");
+            return false;
+        };
+
         //Verifica se algum dia foi selecionado
         if(!checkBoxDomingo.isChecked() &&
             !checkBoxSegunda.isChecked() &&
@@ -244,20 +258,6 @@ public class RotinaActivity extends AppCompatActivity {
             textViewAplicativos.setError("Opção obrigatória!");
             return false;
         }
-
-        String horaInicio = editHoraInicio.getText().toString();
-        String horaFim = editHoraFinal.getText().toString();
-
-        System.out.println("horaInicio: "+horaInicio);
-        System.out.println("horaFim: "+horaFim);
-        Date dataMininaFormatada = out.parse(horaInicio);
-        Date dataMaximaFormatada = out.parse(horaFim);
-
-        if(dataMininaFormatada.after(dataMaximaFormatada)){
-            editHoraInicio.requestFocus();
-            editHoraInicio.setError("Tempo mínimo deve ser menor que o tempo máximo!");
-            return false;
-        };
 
         return result;
     }

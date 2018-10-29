@@ -189,13 +189,6 @@ public class ParametroActivity extends AppCompatActivity {
             }
         }
 
-        textoDescricao = editNomeParametro.getText().toString().trim();
-        if (TextUtils.isEmpty(textoDescricao)) {
-            editNomeParametro.requestFocus();
-            editNomeParametro.setError("Campo obrigatório!");
-            return false;
-        }
-
         System.out.println("dataMinima: "+dataMinima);
         System.out.println("dataMaxima: "+dataMaxima);
         Date dataMininaFormatada = out.parse(dataMinima);
@@ -206,6 +199,13 @@ public class ParametroActivity extends AppCompatActivity {
             editTempoMinimo.setError("Tempo mínimo deve ser menor que o tempo máximo!");
             return false;
         };
+
+        textoDescricao = editNomeParametro.getText().toString().trim();
+        if (TextUtils.isEmpty(textoDescricao)) {
+            editNomeParametro.requestFocus();
+            editNomeParametro.setError("Campo obrigatório!");
+            return false;
+        }
 
         return result;
     }

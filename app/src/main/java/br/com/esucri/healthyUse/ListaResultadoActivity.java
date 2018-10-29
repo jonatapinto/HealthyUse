@@ -17,11 +17,15 @@ import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.github.rtoshiro.util.format.text.SimpleMaskTextWatcher;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import br.com.esucri.healthyUse.controller.ResultadoController;
+import br.com.esucri.healthyUse.service.MyService;
 import br.com.esucri.healthyUse.utils.Parsers;
 import br.com.esucri.healthyUse.utils.Validations;
 
@@ -55,6 +59,16 @@ public class ListaResultadoActivity extends AppCompatActivity{
         editDataInicio.addTextChangedListener(mtwDataInicio);
         MaskTextWatcher mtwDataFinal = new SimpleMaskTextWatcher(editDataFinal, smfData);
         editDataFinal.addTextChangedListener(mtwDataFinal);
+
+        Date currentTime = Calendar.getInstance().getTime();
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        formatter.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
+
+        String dateFormatted = formatter.format(currentTime);
+
+        editDataInicio.setText(dateFormatted);
+        editDataFinal.setText(dateFormatted);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -122,8 +136,6 @@ public class ListaResultadoActivity extends AppCompatActivity{
                 out.parse(out.format(dataFimFormatada)));
 
         System.out.println("NUMERO DE LINHAS DO CURSOR "+cursor.getCount());
-
-
 
         String[] campos = {"_id","CODIGO","NOME","TEMPO_WHATSAPP","TEMPO_INSTAGRAM","TEMPO_FACEBOOK","RESULTADO"};
         int[] componentes = {R.id.textIDWhatsApp, R.id.textView_id, R.id.nomeRotina, R.id.tempoWhatsApp, R.id.tempoInstagram, R.id.tempoFacebook, R.id.textViewResultado};

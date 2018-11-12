@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         // primeira chamada
-        // startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        //startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
 
         // chamar sempre menos na primeira vez
         Intent intent = new Intent(MainActivity.this, MyService.class);

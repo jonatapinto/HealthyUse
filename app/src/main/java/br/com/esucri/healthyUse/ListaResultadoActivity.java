@@ -83,11 +83,11 @@ public class ListaResultadoActivity extends AppCompatActivity{
             editDataInicio.setError("Campo obrigatório!");
             return false;
         } else {
-            if(!validacao.isDateValid(editDataInicio.getText().toString())){
-                editDataInicio.requestFocus();
-                editDataInicio.setError("Data inicial inválida!");
-                return false;
-            }
+            //if(!validacao.isDateValid(editDataInicio.getText().toString())){
+            //    editDataInicio.requestFocus();
+            //    editDataInicio.setError("Data inicial inválida!");
+            //    return false;
+            //}
         }
 
         String dataFim = editDataFinal.getText().toString().trim();
@@ -96,11 +96,11 @@ public class ListaResultadoActivity extends AppCompatActivity{
             editDataFinal.setError("Campo obrigatório!");
             return false;
         } else {
-            if(!validacao.isDateValid(editDataFinal.getText().toString())){
-                editDataFinal.requestFocus();
-                editDataFinal.setError("Data final inválida!");
-                return false;
-            }
+            //if(!validacao.isDateValid(editDataFinal.getText().toString())){
+            //    editDataFinal.requestFocus();
+            //    editDataFinal.setError("Data final inválida!");
+            //    return false;
+            //}
         }
 
         System.out.println("dataMinima: "+dataInicio);

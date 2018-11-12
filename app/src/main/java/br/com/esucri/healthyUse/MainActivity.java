@@ -7,6 +7,8 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 
+import br.com.esucri.healthyUse.controller.EstatisticaController;
+import br.com.esucri.healthyUse.model.Estatistica;
 import br.com.esucri.healthyUse.service.MyService;
 import br.com.esucri.healthyUse.utils.BancoDeDados;
 
@@ -25,6 +27,28 @@ public class MainActivity extends Activity {
 
         // primeira chamada
         //startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        EstatisticaController controller = new EstatisticaController(getBaseContext());
+
+        Estatistica est1 = new Estatistica();
+        est1.setAplicativo("WHATSAPP");
+        est1.setDataHoraInicio("2018-11-12 08:00:00");
+        est1.setDataHoraFim("2018-11-12 10:02:37");
+        controller.create(est1);
+        System.out.println("est1");
+
+        Estatistica est2 = new Estatistica();
+        est2.setAplicativo("INSTAGRAM");
+        est2.setDataHoraInicio("2018-11-12 14:00:00");
+        est2.setDataHoraFim("2018-11-12 15:37:42");
+        controller.create(est2);
+        System.out.println("est2");
+
+        Estatistica est3 = new Estatistica();
+        est3.setAplicativo("FACEBOOK");
+        est3.setDataHoraInicio("2018-11-12 10:30:00");
+        est3.setDataHoraFim("2018-11-12 11:07:23");
+        controller.create(est3);
+        System.out.println("est3");
 
         // chamar sempre menos na primeira vez
         Intent intent = new Intent(MainActivity.this, MyService.class);
